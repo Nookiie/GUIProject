@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -150,6 +151,14 @@ namespace Draw
             // grfx.TranslateTransform(-(float)rectangle.Width / 2, -(float)rectangle.Height / 2);
             // grfx.DrawRectangleOrShape.....   
         }
+
+        public virtual GraphicsPath GetPath(Rectangle bounds)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            return path;
+        }
+
         #endregion
     }
 }

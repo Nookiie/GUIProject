@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -13,11 +14,16 @@ namespace Draw
 
         public EllipseShape(RectangleF rect) : base(rect)
         {
-
+                
         }
         public EllipseShape(EllipseShape rectangle) : base(rectangle)
         {
-    
+           
+        }
+
+        public EllipseShape(Pen pen, float centerX,float centerY,float radius) 
+        {
+                
         }
 
         #endregion
@@ -34,13 +40,16 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
-            if (base.Contains(point))
-                // Проверка дали е в обекта само, ако точката е в обхващащия правоъгълник.
-                // В случая на правоъгълник - директно връщаме true
-                return true; /// <-----
+            float radiusX = Rectangle.Width / 2;
+            float radiusY = Rectangle.Height / 2;
+
+            // double ResultFormula = (Math.Pow(radiusY,2) * Math.Pow(point.X,2)) + (Math.Pow(radiusX,2) * Math.Pow(point.Y,2)) - (Math.Pow(radiusX,2) * Math.Pow(radiusY,2));
+
+            if (point.X*point.X*radiusY*radiusY + point.Y*radiusX*radiusX <= radiusX*radiusX*radiusY*radiusY) // Something similiar needed for the algorithm
+                return true;    
             else
-                // Ако не е в обхващащия правоъгълник, то неможе да е в обекта и => false
-                return false;
+                return false;  
+
         }
 
         /// <summary>
@@ -49,9 +58,9 @@ namespace Draw
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
-
+            
             grfx.FillEllipse(new SolidBrush(FillColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-            grfx.DrawEllipse(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);  
+            grfx.DrawEllipse(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
         }
 
         public override void Remove(Graphics grfx)
@@ -62,6 +71,14 @@ namespace Draw
         public override void Rotate(Graphics grfx)
         {
             base.Rotate(grfx);
+        }
+
+        public override GraphicsPath GetPath(Rectangle bounds)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddEllipse(bounds);
+            return path;
         }
         #endregion
     }

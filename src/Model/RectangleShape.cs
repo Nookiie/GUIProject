@@ -12,6 +12,7 @@ namespace Draw
 		
 		public RectangleShape(RectangleF rect) : base(rect)
 		{
+
 		}
 		
 		public RectangleShape(RectangleShape rectangle) : base(rectangle)
@@ -46,7 +47,7 @@ namespace Draw
 		public override void DrawSelf(Graphics grfx)
 		{
 		    // base.DrawSelf(grfx)
-            
+
 			grfx.FillRectangle(new SolidBrush(FillColor),Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 			grfx.DrawRectangle(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor),Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 		}

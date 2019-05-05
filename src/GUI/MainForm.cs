@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -84,7 +85,6 @@ namespace Draw
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-
             dialogProcessor.AddRandomEllipse();
 
             statusBar.Items[0].Text = "Последно действие: Добавяне на елипса";
@@ -248,7 +248,7 @@ namespace Draw
 
         private void viewPort_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         #region MenuColors

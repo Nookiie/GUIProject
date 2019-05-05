@@ -54,7 +54,6 @@ namespace Draw
 
             grfx.DrawLine(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), pt1, pt2, pt1, pt2); // Needs work
         }
-
         #endregion
     }
 }   

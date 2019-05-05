@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Draw
@@ -96,12 +97,14 @@ namespace Draw
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
-            int y = rnd.Next(100, 600);
+            int y = rnd.Next(100, 600); 
 
-            EllipseShape ellipse = new EllipseShape(new Rectangle(x, y, 200, 100));
+            EllipseShape ellipse = new EllipseShape(new Rectangle(x, y, 200, 200));
+
             ellipse.FillColor = ColorFill;
             ellipse.Rotation = Rotation;
             ellipse.BorderColor = ColorBorder;
+            GraphicsPath path = new GraphicsPath();
 
             ShapeList.Add(ellipse);
         }
