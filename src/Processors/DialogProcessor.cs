@@ -10,7 +10,7 @@ namespace Draw
 	/// </summary>
 	public class DialogProcessor : DisplayProcessor
 	{
-     
+
         #region Constructor
 
         public DialogProcessor()
@@ -43,6 +43,20 @@ namespace Draw
         public Color FillColor{
             get { return ColorFill; }
             set { ColorFill = value; }
+        }
+
+        private PointF pt1;
+        public PointF PointStart
+        {
+           get { return pt1; }
+           set { pt1 = value; }
+        }
+
+        private PointF pt2;
+        public PointF PointEnd
+        {
+            get { return pt2; }
+            set { pt2 = value; }
         }
 
         private float rotation;
@@ -104,18 +118,16 @@ namespace Draw
             ellipse.FillColor = ColorFill;
             ellipse.Rotation = Rotation;
             ellipse.BorderColor = ColorBorder;
-            GraphicsPath path = new GraphicsPath();
 
             ShapeList.Add(ellipse);
         }
 
         public void AddRandomLine()
         {
-            Random rnd = new Random();
-            int x = rnd.Next(100, 1000);
-            int y = rnd.Next(100, 600);
+            // Random rnd = new Random();
 
-            LineShape line = new LineShape(new PointF());
+            LineShape line = new LineShape(PointStart, PointEnd);
+
             line.BorderColor = ColorBorder;
 
             ShapeList.Add(line);
@@ -183,7 +195,6 @@ namespace Draw
 			for(int i = ShapeList.Count - 1; i >= 0; i--){
 				if (ShapeList[i].Contains(point)){
 					// ShapeList[i].FillColor = Color.Red; 
-
 					return ShapeList[i];
 				}	
 			}

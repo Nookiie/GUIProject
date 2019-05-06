@@ -8,8 +8,7 @@ using System.Text;
 namespace Draw.src.Model
 {
     public class TriangleShape : Shape
-    {
-       
+    {   
         #region Constructor
        
         public TriangleShape(RectangleShape rectangle) : base(rectangle)
@@ -36,6 +35,20 @@ namespace Draw.src.Model
             left
             });
             return path;
+        }
+
+        public override bool Contains(PointF point)
+        {
+            return base.Contains(point);
+        }
+
+        public override void Rotate(Graphics grfx)
+        {
+            base.Rotate(grfx);
+        }
+
+        public override void DrawSelf(Graphics grfx)
+        {
         }
         #endregion
     }

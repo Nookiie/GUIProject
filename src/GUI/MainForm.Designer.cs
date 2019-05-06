@@ -49,6 +49,9 @@
             this.degreesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.resizeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lastShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,9 +84,6 @@
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
-            this.lastShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -260,6 +260,26 @@
             this.removeSelectedShapeToolStripMenuItem.Text = "Remove";
             this.removeSelectedShapeToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedShapeToolStripMenuItem_Click);
             // 
+            // lastShapeToolStripMenuItem
+            // 
+            this.lastShapeToolStripMenuItem.Name = "lastShapeToolStripMenuItem";
+            this.lastShapeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.lastShapeToolStripMenuItem.Text = "Last Shape";
+            this.lastShapeToolStripMenuItem.Click += new System.EventHandler(this.lastShapeToolStripMenuItem_Click);
+            // 
+            // allShapesToolStripMenuItem
+            // 
+            this.allShapesToolStripMenuItem.Name = "allShapesToolStripMenuItem";
+            this.allShapesToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.allShapesToolStripMenuItem.Text = "All Shapes";
+            this.allShapesToolStripMenuItem.Click += new System.EventHandler(this.allShapesToolStripMenuItem_Click);
+            // 
+            // selectedShapeToolStripMenuItem
+            // 
+            this.selectedShapeToolStripMenuItem.Name = "selectedShapeToolStripMenuItem";
+            this.selectedShapeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.selectedShapeToolStripMenuItem.Text = "Selected Shape";
+            // 
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -338,6 +358,7 @@
             // 
             // lineButton
             // 
+            this.lineButton.CheckOnClick = true;
             this.lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.lineButton.Image = ((System.Drawing.Image)(resources.GetObject("lineButton.Image")));
             this.lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -542,26 +563,6 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // lastShapeToolStripMenuItem
-            // 
-            this.lastShapeToolStripMenuItem.Name = "lastShapeToolStripMenuItem";
-            this.lastShapeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.lastShapeToolStripMenuItem.Text = "Last Shape";
-            this.lastShapeToolStripMenuItem.Click += new System.EventHandler(this.lastShapeToolStripMenuItem_Click);
-            // 
-            // selectedShapeToolStripMenuItem
-            // 
-            this.selectedShapeToolStripMenuItem.Name = "selectedShapeToolStripMenuItem";
-            this.selectedShapeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.selectedShapeToolStripMenuItem.Text = "Selected Shape";
-            // 
-            // allShapesToolStripMenuItem
-            // 
-            this.allShapesToolStripMenuItem.Name = "allShapesToolStripMenuItem";
-            this.allShapesToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.allShapesToolStripMenuItem.Text = "All Shapes";
-            this.allShapesToolStripMenuItem.Click += new System.EventHandler(this.allShapesToolStripMenuItem_Click);
             // 
             // viewPort
             // 

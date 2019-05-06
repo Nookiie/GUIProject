@@ -23,6 +23,8 @@ namespace Draw
             int y = -1;
             bool isMoving = false;
             Pen pen;
+
+        int generalCounter = 1;
         
 		/// <summary>
 		/// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
@@ -95,8 +97,6 @@ namespace Draw
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomLine();
-
             statusBar.Items[0].Text = "Последно действие: Добавяне на линия";
 
             viewPort.Invalidate();
@@ -208,6 +208,25 @@ namespace Draw
                 {
                     dialogProcessor.RemoveSelected(dialogProcessor.Selection);
                 }
+            }
+            if(lineButton.Checked)
+            {
+                generalCounter++;
+
+                System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Hand;
+                if (generalCounter % 2 == 0)
+                {
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Cross;
+                    dialogProcessor.PointStart = e.Location;
+                }
+                else
+                {
+                    dialogProcessor.PointEnd = e.Location;
+                    dialogProcessor.AddRandomLine();
+
+                    viewPort.Invalidate();
+                }
+                    
             }
         }
         

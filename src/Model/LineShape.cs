@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Draw
@@ -9,16 +10,20 @@ namespace Draw
     public class LineShape : Shape
     {
         #region Constructor
-
-        public LineShape(PointF pt) : base(pt)
+        
+        public LineShape(PointF pt1,PointF pt2) : base(pt1,pt2)
         {
             
         }
+
         public LineShape(LineShape line) : base(line)
         {
 
         }
 
+        #endregion
+
+        #region Properties
         #endregion
 
         #region Methods
@@ -33,26 +38,17 @@ namespace Draw
         public override bool Contains(PointF point)
         {
             if (base.Contains(point))
-                // Проверка дали е в обекта само, ако точката е в обхващащия правоъгълник.
-                // В случая на правоъгълник - директно връщаме true
                 return true; /// <-----
             else
-                // Ако не е в обхващащия правоъгълник, то неможе да е в обекта и => false
                 return false;
         }
 
         /// <summary>
         /// Частта, визуализираща конкретния примитив.
         /// </summary>
-        public override void DrawSelf(Graphics grfx)
+        public override void DrawSelf(Graphics grfx,PointF pt1, PointF pt2)
         {
-            base.DrawSelf(grfx);
-
-            PointF point = new PointF();
-            float pt1 = point.X;
-            float pt2 = point.Y;
-
-            grfx.DrawLine(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), pt1, pt2, pt1, pt2); // Needs work
+            base.DrawSelf(grfx,pt1,pt2);
         }
         #endregion
     }

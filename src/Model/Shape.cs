@@ -4,39 +4,40 @@ using System.Drawing.Drawing2D;
 
 namespace Draw
 {
-	/// <summary>
-	/// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
-	/// </summary>
-	public abstract class Shape
-	{
-		#region Constructors
-		
-		public Shape()
-		{
+    /// <summary>
+    /// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
+    /// </summary>
+    public abstract class Shape
+    {
+        #region Constructors
 
-		}
-		
-		public Shape(RectangleF rect)
-		{
-			rectangle = rect;
-		}
-
-		public Shape(PointF pt)
+        public Shape()
         {
-            point = pt;
+
         }
 
-		public Shape(Shape shape)
-		{
-			this.Height = shape.Height;
-			this.Width = shape.Width;
-			this.Location = shape.Location;
-			this.rectangle = shape.rectangle;
+        public Shape(RectangleF rect)
+        {
+            rectangle = rect;
+        }
+
+        public Shape(PointF pt1, PointF pt2)
+        {
+            point1 = pt1;
+            point2 = pt2;
+        }
+
+        public Shape(Shape shape)
+        {
+            this.Height = shape.Height;
+            this.Width = shape.Width;
+            this.Location = shape.Location;
+            this.rectangle = shape.rectangle;
             this.Rotation = shape.Rotation;
 
-			this.FillColor =  shape.FillColor;
+            this.FillColor = shape.FillColor;
             this.BorderColor = shape.BorderColor;
-		}
+        }
 
         public Shape(Bitmap image)
         {
@@ -45,63 +46,77 @@ namespace Draw
         }
 
         #endregion
-		
-		#region Properties
-		
-		/// <summary>
-		/// Обхващащ правоъгълник на елемента.
-		/// </summary>
-		private RectangleF rectangle;		
-		public virtual RectangleF Rectangle {
-			get { return rectangle; }
-			set { rectangle = value; }
-		}
 
-        private PointF point;
-        public virtual PointF Point {
-            get { return point; }
-            set { point = value; }
+        #region Properties
+
+        /// <summary>
+        /// Обхващащ правоъгълник на елемента.
+        /// </summary>
+        private RectangleF rectangle;
+        public virtual RectangleF Rectangle
+        {
+            get { return rectangle; }
+            set { rectangle = value; }
         }
-       
-		/// <summary>
-		/// Широчина на елемента.
-		/// </summary>
-		public virtual float Width {
-			get { return Rectangle.Width; }
-			set { rectangle.Width = value; }
-		} 
-		
-		/// <summary>
-		/// Височина на елемента.
-		/// </summary>
-		public virtual float Height {
-			get { return Rectangle.Height; }
-			set { rectangle.Height = value; }
-		}
 
-        public virtual SizeF Size{
+        private PointF point1;
+        public virtual PointF Point1
+        {
+            get { return point1; }
+            set { point1 = value; }
+        }
+
+        private PointF point2;
+        public virtual PointF Point2
+        {
+            get { return point2; }
+            set { point2 = value; }
+        }
+
+        /// <summary>
+        /// Широчина на елемента.
+        /// </summary>
+        public virtual float Width
+        {
+            get { return Rectangle.Width; }
+            set { rectangle.Width = value; }
+        }
+
+        /// <summary>
+        /// Височина на елемента.
+        /// </summary>
+        public virtual float Height
+        {
+            get { return Rectangle.Height; }
+            set { rectangle.Height = value; }
+        }
+
+        public virtual SizeF Size
+        {
             get { return Rectangle.Size; }
             set { rectangle.Size = value; }
         }
-       
+
         public virtual float Rotation { get; set; } // Needs to be set correctly later on
 
-		/// <summary>
-		/// Горен ляв ъгъл на елемента.
-		/// </summary>
-		public virtual PointF Location {
-			get { return Rectangle.Location; }
-			set { rectangle.Location = value; }
-		}
+        /// <summary>
+        /// Горен ляв ъгъл на елемента.
+        /// </summary>
+        public virtual PointF Location
+        {
+            get { return Rectangle.Location; }
+            set { rectangle.Location = value; }
+        }
 
         /// <summary>
         /// Цвят на елемента.
         /// </summary>
-        private Color fillColor;		
-		public virtual Color FillColor {
-			get { return fillColor; }
-			set { fillColor = value; }
-		}
+        private Color fillColor;
+        public virtual Color FillColor
+        {
+            get { return fillColor; }
+            set { fillColor = value; }
+        }
 
         private Color borderColor;
         public virtual Color BorderColor
@@ -121,18 +136,22 @@ namespace Draw
         /// <returns>Връща true, ако точката принадлежи на елемента и
         /// false, ако не пренадлежи</returns>
         public virtual bool Contains(PointF point)
-		{
-			return Rectangle.Contains(point.X, point.Y); // Drawable
-		}
-		
-		/// <summary>
-		/// Визуализира елемента.
-		/// </summary>
-		/// <param name="grfx">Къде да бъде визуализиран елемента.</param>
-		public virtual void DrawSelf(Graphics grfx)
-		{
-             // Rotate(grfx);
+        {
+            return Rectangle.Contains(point.X, point.Y); // Drawable
+        }
+
+        /// <summary>
+        /// Визуализира елемента.
+        /// </summary>
+        /// <param name="grfx">Къде да бъде визуализиран елемента.</param>
+        public virtual void DrawSelf(Graphics grfx)
+        {
             // shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
+        }
+
+        public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)
+        {
+            grfx.DrawLine(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor),pt1,pt2);
         }
 
         /// <summary>
@@ -141,7 +160,7 @@ namespace Draw
         /// <param name="grfx"></param>
         public virtual void Remove(Graphics grfx)
         {
-             grfx.Dispose();
+            grfx.Dispose();
         }
 
         public virtual void Rotate(Graphics grfx)
