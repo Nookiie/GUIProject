@@ -41,38 +41,27 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
-            if (Rectangle.Width == Rectangle.Height) // Формула само и единствено за кръг
-            {
-                float radiusX = Rectangle.Width / 2;
-                float radiusY = Rectangle.Height / 2;
+            float radiusX = Rectangle.Width / 2;
+            float radiusY = Rectangle.Height / 2;
 
-                float centerX = Rectangle.Left + radiusX;
-                float centerY = Rectangle.Top + radiusY;
+            float centerX = Rectangle.Left + radiusX;
+            float centerY = Rectangle.Top + radiusY;
 
-                double compare = Math.Sqrt(Math.Pow((point.X - centerX), 2) + Math.Pow((point.Y - centerY), 2));
+            /*      //For Circle!                              
 
-                // double ResultFormula = (Math.Pow(radiusY,2) * Math.Pow(point.X,2)) + (Math.Pow(radiusX,2) * Math.Pow(point.Y,2)) - (Math.Pow(radiusX,2) * Math.Pow(radiusY,2));
-                /*
-                * 
-                 * geeksforgeeks.org/midpoint-ellipse-drawing-algorithm - Може да ни е от полза
-                 */
-                // if (point.X*point.X*radiusY*radiusY + point.Y*radiusX*radiusX <= radiusX*radiusX*radiusY*radiusY) // Something similiar needed for the algorithm
-                //if (ResultFormula<=0)
-                
-                if (compare <= radiusX)
-                    return true;
-                else
-                    return false;
-            }
-            else if (base.Contains(point))
-            {
-                return true;
-            }
+             double compare=Math.Sqrt(Math.Pow((point.X - centerX), 2)+Math.Pow((point.Y-centerY),2));  //For circle
+
+             if(compare<=radiusX)  //For circle
+            */
+            // (x - h) ^ 2 / a ^ 2 + (y - k) ^ 2 / b ^ 2 <= 1   //Used Formula for ellipse
+            float a = radiusX;
+            float b = radiusY;
+
+            double compare = Math.Pow((point.X - centerX), 2) / Math.Pow(a, 2) + Math.Pow((point.Y - centerY), 2) / Math.Pow(b, 2);
+            if (compare<=1)
+                return true;    
             else
-            {
-                return false;
-            }
-                
+                return false;  
 
         }
 
