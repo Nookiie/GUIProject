@@ -41,22 +41,38 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
-            float radiusX = Rectangle.Width / 2;
-            float radiusY = Rectangle.Height / 2;
+            if (Rectangle.Width == Rectangle.Height) // Формула само и единствено за кръг
+            {
+                float radiusX = Rectangle.Width / 2;
+                float radiusY = Rectangle.Height / 2;
 
-            float centerX = Rectangle.Left + radiusX;
-            float centerY = Rectangle.Bottom + radiusY;
+                float centerX = Rectangle.Left + radiusX;
+                float centerY = Rectangle.Top + radiusY;
 
-            /*
-             * double ResultFormula = (Math.Pow(radiusY,2) * Math.Pow(point.X,2)) + (Math.Pow(radiusX,2) * Math.Pow(point.Y,2)) - (Math.Pow(radiusX,2) * Math.Pow(radiusY,2));
-             * 
-             * geeksforgeeks.org/midpoint-ellipse-drawing-algorithm - Може да ни е от полза
-             */
+                double compare = Math.Sqrt(Math.Pow((point.X - centerX), 2) + Math.Pow((point.Y - centerY), 2));
 
-            if (centerX*radiusY*radiusY + centerY*radiusX*radiusX <= radiusX*radiusX*radiusY*radiusY) // Something similiar needed for the algorithm
-                return true;    
+                // double ResultFormula = (Math.Pow(radiusY,2) * Math.Pow(point.X,2)) + (Math.Pow(radiusX,2) * Math.Pow(point.Y,2)) - (Math.Pow(radiusX,2) * Math.Pow(radiusY,2));
+                /*
+                * 
+                 * geeksforgeeks.org/midpoint-ellipse-drawing-algorithm - Може да ни е от полза
+                 */
+                // if (point.X*point.X*radiusY*radiusY + point.Y*radiusX*radiusX <= radiusX*radiusX*radiusY*radiusY) // Something similiar needed for the algorithm
+                //if (ResultFormula<=0)
+                
+                if (compare <= radiusX)
+                    return true;
+                else
+                    return false;
+            }
+            else if (base.Contains(point))
+            {
+                return true;
+            }
             else
-                return false;  
+            {
+                return false;
+            }
+                
 
         }
 
