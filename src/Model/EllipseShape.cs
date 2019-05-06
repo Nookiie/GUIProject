@@ -52,6 +52,7 @@ namespace Draw
              * 
              * geeksforgeeks.org/midpoint-ellipse-drawing-algorithm - Може да ни е от полза
              */
+
             if (centerX*radiusY*radiusY + centerY*radiusX*radiusX <= radiusX*radiusX*radiusY*radiusY) // Something similiar needed for the algorithm
                 return true;    
             else
