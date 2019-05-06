@@ -58,6 +58,7 @@ namespace Draw
             float b = radiusY;
 
             double compare = Math.Pow((point.X - centerX), 2) / Math.Pow(a, 2) + Math.Pow((point.Y - centerY), 2) / Math.Pow(b, 2);
+
             if (compare<=1)
                 return true;    
             else
