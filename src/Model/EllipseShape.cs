@@ -41,11 +41,11 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
-            float radiusX = Rectangle.Width / 2;
-            float radiusY = Rectangle.Height / 2;
+            float a = Rectangle.Width / 2;
+            float b = Rectangle.Height / 2;
 
-            float centerX = Rectangle.Left + radiusX;
-            float centerY = Rectangle.Top + radiusY;
+            float centerX = Rectangle.Left + a;
+            float centerY = Rectangle.Top + b;
 
             /*      //For Circle!                              
 
@@ -54,12 +54,10 @@ namespace Draw
              if(compare<=radiusX)  //For circle
             */
             // (x - h) ^ 2 / a ^ 2 + (y - k) ^ 2 / b ^ 2 <= 1   //Used Formula for ellipse
-            float a = radiusX;
-            float b = radiusY;
 
             double compare = Math.Pow((point.X - centerX), 2) / Math.Pow(a, 2) + Math.Pow((point.Y - centerY), 2) / Math.Pow(b, 2);
 
-            if (compare<=1)
+            if (compare <= 1)
                 return true;    
             else
                 return false;  
