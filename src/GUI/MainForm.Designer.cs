@@ -44,9 +44,6 @@
             this.addRectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEllipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotateSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.degreesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.degreesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.degreesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.resizeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -212,35 +209,10 @@
             // 
             // rotateSelectedShapeToolStripMenuItem
             // 
-            this.rotateSelectedShapeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.degreesToolStripMenuItem,
-            this.degreesToolStripMenuItem1,
-            this.degreesToolStripMenuItem2});
             this.rotateSelectedShapeToolStripMenuItem.Name = "rotateSelectedShapeToolStripMenuItem";
             this.rotateSelectedShapeToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.rotateSelectedShapeToolStripMenuItem.Text = "Rotate Selected Shape";
             this.rotateSelectedShapeToolStripMenuItem.Click += new System.EventHandler(this.rotateSelectedShapeToolStripMenuItem_Click_1);
-            // 
-            // degreesToolStripMenuItem
-            // 
-            this.degreesToolStripMenuItem.Name = "degreesToolStripMenuItem";
-            this.degreesToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
-            this.degreesToolStripMenuItem.Text = "90 degrees";
-            this.degreesToolStripMenuItem.Click += new System.EventHandler(this.degreesToolStripMenuItem_Click_1);
-            // 
-            // degreesToolStripMenuItem1
-            // 
-            this.degreesToolStripMenuItem1.Name = "degreesToolStripMenuItem1";
-            this.degreesToolStripMenuItem1.Size = new System.Drawing.Size(165, 26);
-            this.degreesToolStripMenuItem1.Text = "180 degrees";
-            this.degreesToolStripMenuItem1.Click += new System.EventHandler(this.degreesToolStripMenuItem1_Click);
-            // 
-            // degreesToolStripMenuItem2
-            // 
-            this.degreesToolStripMenuItem2.Name = "degreesToolStripMenuItem2";
-            this.degreesToolStripMenuItem2.Size = new System.Drawing.Size(165, 26);
-            this.degreesToolStripMenuItem2.Text = "270 degrees";
-            this.degreesToolStripMenuItem2.Click += new System.EventHandler(this.degreesToolStripMenuItem2_Click);
             // 
             // resizeSelectedShapeToolStripMenuItem
             // 
@@ -659,9 +631,6 @@
         private System.Windows.Forms.ToolStripMenuItem borderColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton lineButton;
         private System.Windows.Forms.ToolStripMenuItem rotateSelectedShapeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem degreesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem degreesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem degreesToolStripMenuItem2;
         private System.Windows.Forms.ToolStripButton importImageButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem resizeSelectedShapeToolStripMenuItem;

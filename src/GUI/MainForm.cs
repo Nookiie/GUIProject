@@ -184,20 +184,25 @@ namespace Draw
             {
                 dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
-                string value;
+                if(dialogProcessor.Selection != null)
+                {
+                    string value;
 
-                value = dialogProcessor.ShowDialog("Please input width: ", "Changing Width");
-                int.TryParse(value, out int width);
+                    value = dialogProcessor.ShowDialog("Въведете ширина на примитив: ", "Промяна на размер");
+                    int.TryParse(value, out int width);
 
-                value = dialogProcessor.ShowDialog("Please input height: ", "Changing Height");
-                int.TryParse(value, out int height);
+                    value = dialogProcessor.ShowDialog("Въведете височина на примитив", "Промяна на размер");
+                    int.TryParse(value, out int height);
 
-                if (dialogProcessor.Selection != null)
-                    dialogProcessor.Selection.Size = new Size(width, height);
-                else if (width == 0 || height == 0)
-                    MessageBox.Show("Width AND / OR Height are invalid", "Error");
+                    if (dialogProcessor.Selection != null)
+                        dialogProcessor.Selection.Size = new Size(width, height);
+                    else if (width == 0 || height == 0)
+                        MessageBox.Show("Височина или Ширина имат грешни стойности", "Грешка");
 
-                viewPort.Invalidate();
+                    statusBar.Items[0].Text = "Последно действие: Промяна на размерите на примитив";
+
+                    viewPort.Invalidate();
+                }
             }
             if(removeButton.Checked)
             {
@@ -207,6 +212,8 @@ namespace Draw
                 if(dialogProcessor.Selection != null)
                 {
                     dialogProcessor.RemoveSelected(dialogProcessor.Selection);
+
+                    statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
                 }
             }
             if(lineButton.Checked)
@@ -224,6 +231,7 @@ namespace Draw
                     dialogProcessor.PointEnd = e.Location;
                     dialogProcessor.AddRandomLine();
 
+                    statusBar.Items[0].Text = "Последно действие: Чертане на линия";
                     viewPort.Invalidate();
                 }
                     
@@ -430,7 +438,9 @@ namespace Draw
         {
             if(dialogProcessor.Selection != null)
             {
-                // dialogProcessor.Selection.Rotate(g);
+                float.TryParse(dialogProcessor.ShowDialog("Въведете ъгъл на ротация", "Ротация на примитив"),out float rotation);
+                dialogProcessor.Selection.Rotation = rotation;
+
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
                 viewPort.Invalidate();
             }
