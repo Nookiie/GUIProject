@@ -61,8 +61,8 @@ namespace Draw
         /// </summary>
         void ViewPortPaint(object sender, PaintEventArgs e)
 		{
-			dialogProcessor.ReDraw(sender, e);
             dialogProcessor.ReRotate(sender, e);
+            dialogProcessor.ReDraw(sender, e);
 
             if (removeButton.Checked)
             {
@@ -252,7 +252,7 @@ namespace Draw
         void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			if (dialogProcessor.IsDragging) {
-				if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене";
+				if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
 				dialogProcessor.TranslateTo(e.Location);
 				viewPort.Invalidate();
 			}

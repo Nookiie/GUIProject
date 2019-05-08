@@ -101,8 +101,7 @@ namespace Draw
 		/// <param name="grfx">Къде да се извърши визуализацията.</param>
 		/// <param name="item">Елемент за визуализиране.</param>
 		public virtual void DrawShape(Graphics grfx, Shape item)
-		{
-            item.Rotate(grfx); // Buggy, do not use
+        {
             item.DrawSelf(grfx);
             item.DrawSelf(grfx, item.Point1, item.Point2);
 		}

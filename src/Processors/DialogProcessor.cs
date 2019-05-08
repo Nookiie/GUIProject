@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -16,19 +17,20 @@ namespace Draw
         public DialogProcessor()
 		{
 		}
-		
-		#endregion
-		    
-		#region Properties
-		
-		/// <summary>
-		/// Избран елемент.
-		/// </summary>
-		private Shape selection;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Избран елемент.
+        /// </summary>
+
 
         // public Color BorderColor;
 
-		public Shape Selection {
+        private Shape selection;
+        public Shape Selection {
 			get { return selection; }
 			set { selection = value; }
 		}
@@ -221,7 +223,7 @@ namespace Draw
 
         public void SelectRotation(float rotation)
         {
-                Rotation = rotation;
+            Rotation = rotation;
         }
 
         public string ShowDialog(string text, string caption)
@@ -252,6 +254,15 @@ namespace Draw
                 ColorBorder = color;
             if (color == Color.White)
                 ColorBorder = Color.Black;
+        }
+
+        public override void Draw(Graphics grfx)
+        {
+            base.Draw(grfx);
+            if(selection != null)
+            {
+                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);
+            }
         }
 
         #endregion

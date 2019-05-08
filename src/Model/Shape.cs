@@ -165,10 +165,7 @@ namespace Draw
 
         public virtual void Rotate(Graphics grfx)
         {
-            // grfx.TranslateTransform((float)rectangle.Width / 2, (float)rectangle.Height / 2);
-            grfx.RotateTransform(Rotation);
-            // grfx.TranslateTransform(-(float)rectangle.Width / 2, -(float)rectangle.Height / 2);
-            // grfx.DrawRectangleOrShape.....   
+            grfx.Transform.Rotate(20); // From the Center
         }
 
         public virtual GraphicsPath GetPath(Rectangle bounds)
