@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using Draw.src.Model;
 
 namespace Draw
 {
@@ -29,6 +30,13 @@ namespace Draw
 			get { return shapeList; }
 			set { shapeList = value; }
 		}
+
+        private List<Shape> selectionGroup = new List<Shape>();
+        public List<Shape> SelectionGroup
+        {
+            get { return selectionGroup; }
+            set { selectionGroup = value; }
+        }
 
         public List<Bitmap> imageList = new List<Bitmap>();
         public List<Bitmap> ImageList
@@ -73,10 +81,18 @@ namespace Draw
 				DrawShape(grfx, item);
 			}
 		}
-		
+            
         public virtual void Remove(Graphics grfx, Shape item)
         {
             shapeList.Remove(item);
+        }
+
+        public virtual void ReDrawSelection(Graphics grfx)
+        {
+            foreach(Shape selection in SelectionGroup)
+            {
+                grfx.DrawRectangle(new Pen(selection.BorderColor == Color.Empty ? Color.Black : selection.BorderColor), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);
+            }
         }
 
         public virtual void RemoveLast()
@@ -93,6 +109,11 @@ namespace Draw
         public virtual void RemoveSelected(Shape item)
         {
             shapeList.Remove(item);
+        }
+
+        public virtual void RemoveSelectionSelected(Shape item)
+        {
+            selectionGroup.Remove(item);
         }
 
 		/// <summary>
@@ -113,9 +134,9 @@ namespace Draw
 
         public virtual void Rotate(Graphics grfx)
         {
-            foreach(Shape item in ShapeList)
+            foreach(Shape item in selectionGroup)
             {
-                RotateShape(grfx, item);
+                RotateShape(grfx, item);   
             }
         }
 
@@ -127,6 +148,11 @@ namespace Draw
         public virtual void Paint(Color color, Shape item)
         {
             item.FillColor = color;
+        }
+
+        public virtual void AddGroup(string name)
+        {
+            SelectionGroup group = new SelectionGroup(name);
         }
 		#endregion
 	}

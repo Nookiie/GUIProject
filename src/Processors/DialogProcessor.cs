@@ -11,7 +11,6 @@ namespace Draw
 	/// </summary>
 	public class DialogProcessor : DisplayProcessor
 	{
-
         #region Constructor
 
         public DialogProcessor()
@@ -26,7 +25,6 @@ namespace Draw
         /// Избран елемент.
         /// </summary>
 
-
         // public Color BorderColor;
 
         private Shape selection;
@@ -34,7 +32,7 @@ namespace Draw
 			get { return selection; }
 			set { selection = value; }
 		}
-
+        
         private Color borderColor;
         public Color ColorBorder{
             get { return borderColor; }
@@ -68,7 +66,6 @@ namespace Draw
             set { rotation = value; }
         }
 
-		
 		/// <summary>
 		/// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
 		/// </summary>
@@ -143,6 +140,12 @@ namespace Draw
 
             Bitmap image = new Bitmap(new Bitmap("image.jpg"));
             ImageList.Add(image);
+        }
+
+        public void RemoveFromGroup()
+        {
+            if(selection != null)
+                SelectionGroup.Remove(selection);
         }
 
         public void RotateSelection(Graphics grfx)
@@ -261,8 +264,16 @@ namespace Draw
             base.Draw(grfx);
             if(selection != null)
             {
-                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);
+                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);            
             }
+        }
+
+        public void AddToGroup()
+        {
+            if (selection != null)
+                SelectionGroup.Add(selection);
+            
+            // ReDrawSelection(grfx);
         }
 
         #endregion

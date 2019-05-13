@@ -63,6 +63,7 @@ namespace Draw
 		{
             dialogProcessor.ReRotate(sender, e);
             dialogProcessor.ReDraw(sender, e);
+            dialogProcessor.ReDrawSelection(e.Graphics);
 
             if (removeButton.Checked)
             {
@@ -551,6 +552,20 @@ namespace Draw
         private void allShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dialogProcessor.RemoveAll();
+            viewPort.Invalidate();
+        }
+
+        private void addGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string name = dialogProcessor.ShowDialog("Please enter a name for the selection group", "Group");
+
+            dialogProcessor.AddGroup(name);
+            viewPort.Invalidate();
+        }
+
+        private void removeGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.RemoveFromGroup();
             viewPort.Invalidate();
         }
     }
