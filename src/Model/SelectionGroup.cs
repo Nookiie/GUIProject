@@ -28,7 +28,7 @@ namespace Draw.src.Model
             set { selections = value; }
         }
 
-        public SelectionGroup(string name, List<Shape> selections)
+        public SelectionGroup (string name, List<Shape> selections)
         {
             this.Name = name;
             this.NumberOfShapes = Selections.Count;

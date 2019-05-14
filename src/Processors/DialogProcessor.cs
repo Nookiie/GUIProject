@@ -6,16 +6,16 @@ using System.Windows.Forms;
 
 namespace Draw
 {
-	/// <summary>
-	/// Класът, който ще бъде използван при управляване на диалога.
-	/// </summary>
-	public class DialogProcessor : DisplayProcessor
-	{
+    /// <summary>
+    /// Класът, който ще бъде използван при управляване на диалога.
+    /// </summary>
+    public class DialogProcessor : DisplayProcessor
+    {
         #region Constructor
 
         public DialogProcessor()
-		{
-		}
+        {
+        }
 
         #endregion
 
@@ -28,19 +28,22 @@ namespace Draw
         // public Color BorderColor;
 
         private Shape selection;
-        public Shape Selection {
-			get { return selection; }
-			set { selection = value; }
-		}
-        
+        public Shape Selection
+        {
+            get { return selection; }
+            set { selection = value; }
+        }
+
         private Color borderColor;
-        public Color ColorBorder{
+        public Color ColorBorder
+        {
             get { return borderColor; }
             set { borderColor = value; }
         }
 
         private Color ColorFill;
-        public Color FillColor{
+        public Color FillColor
+        {
             get { return ColorFill; }
             set { ColorFill = value; }
         }
@@ -48,8 +51,8 @@ namespace Draw
         private PointF pt1;
         public PointF PointStart
         {
-           get { return pt1; }
-           set { pt1 = value; }
+            get { return pt1; }
+            set { pt1 = value; }
         }
 
         private PointF pt2;
@@ -66,24 +69,26 @@ namespace Draw
             set { rotation = value; }
         }
 
-		/// <summary>
-		/// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
-		/// </summary>
-		private bool isDragging;
-		public bool IsDragging {
-			get { return isDragging; }
-			set { isDragging = value; }
-		}
-		
-		/// <summary>
-		/// Последна позиция на мишката при "влачене".
-		/// Използва се за определяне на вектора на транслация.
-		/// </summary>
-		private PointF lastLocation;
-		public PointF LastLocation {
-			get { return lastLocation; }
-			set { lastLocation = value; }
-		}
+        /// <summary>
+        /// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
+        /// </summary>
+        private bool isDragging;
+        public bool IsDragging
+        {
+            get { return isDragging; }
+            set { isDragging = value; }
+        }
+
+        /// <summary>
+        /// Последна позиция на мишката при "влачене".
+        /// Използва се за определяне на вектора на транслация.
+        /// </summary>
+        private PointF lastLocation;
+        public PointF LastLocation
+        {
+            get { return lastLocation; }
+            set { lastLocation = value; }
+        }
 
         #endregion
 
@@ -93,24 +98,24 @@ namespace Draw
         /// Добавя примитив - правоъгълник на произволно място върху клиентската област.
         /// </summary>
         public void AddRandomRectangle()
-		{
-			Random rnd = new Random();
-			int x = rnd.Next(100,1000);
-			int y = rnd.Next(100,600);
-			
-			RectangleShape rect = new RectangleShape(new Rectangle(x,y,100,200));
-			rect.FillColor = ColorFill;
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            RectangleShape rect = new RectangleShape(new Rectangle(x, y, 100, 200));
+            rect.FillColor = ColorFill;
             rect.Rotation = Rotation;
             rect.BorderColor = ColorBorder;
 
-			ShapeList.Add(rect);
-		}
+            ShapeList.Add(rect);
+        }
 
         public void AddRandomEllipse()
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
-            int y = rnd.Next(100, 600); 
+            int y = rnd.Next(100, 600);
 
             EllipseShape ellipse = new EllipseShape(new Rectangle(x, y, 200, 200));
 
@@ -144,7 +149,7 @@ namespace Draw
 
         public void RemoveFromGroup()
         {
-            if(selection != null)
+            if (selection != null)
                 SelectionGroup.Remove(selection);
         }
 
@@ -155,7 +160,7 @@ namespace Draw
 
         public void PaintOnAdd()
         {
-            if(selection != null)
+            if (selection != null)
             {
                 selection.FillColor = ColorFill;
                 selection.BorderColor = ColorBorder;
@@ -164,28 +169,18 @@ namespace Draw
         /*
         public void AddRandomTriangle()
         {
-
-
         }
-
         public void Resize()
         {
-
         }
-
         public void Export()
         {
-
         }
-
         public void Save()
         {
-
         }
-
         public void SaveAs()
         {
-
         }
         */
         /// <summary>
@@ -196,31 +191,34 @@ namespace Draw
         /// <param name="point">Указана точка</param>
         /// <returns>Елемента на изображението, на който принадлежи дадената точка.</returns>
         public Shape ContainsPoint(PointF point)
-		{
-			for(int i = ShapeList.Count - 1; i >= 0; i--){
-				if (ShapeList[i].Contains(point)){
-					// ShapeList[i].FillColor = Color.Red; 
-					return ShapeList[i];
-				}	
-			}
-			return null;
-		}
-		
-		/// <summary>
-		/// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
-		/// </summary>
-		/// <param name="p">Вектор на транслация.</param>
-		public void TranslateTo(PointF p)
-		{
-			if (selection != null) {
-				selection.Location = new PointF(selection.Location.X + p.X - lastLocation.X, selection.Location.Y + p.Y - lastLocation.Y);
-				lastLocation = p;
-			}
-		}
+        {
+            for (int i = ShapeList.Count - 1; i >= 0; i--)
+            {
+                if (ShapeList[i].Contains(point))
+                {
+                    // ShapeList[i].FillColor = Color.Red; 
+                    return ShapeList[i];
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
+        /// </summary>
+        /// <param name="p">Вектор на транслация.</param>
+        public void TranslateTo(PointF p)
+        {
+            if (selection != null)
+            {
+                selection.Location = new PointF(selection.Location.X + p.X - lastLocation.X, selection.Location.Y + p.Y - lastLocation.Y);
+                lastLocation = p;
+            }
+        }
 
         public void SelectFillColor(Color color)
         {
-            if(color != null)
+            if (color != null)
                 FillColor = color;
         }
 
@@ -247,7 +245,6 @@ namespace Draw
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(textLabel);
             prompt.AcceptButton = confirmation;
-
             return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
 
@@ -262,9 +259,9 @@ namespace Draw
         public override void Draw(Graphics grfx)
         {
             base.Draw(grfx);
-            if(selection != null)
+            if (selection != null)
             {
-                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);            
+                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);
             }
         }
 
@@ -272,11 +269,9 @@ namespace Draw
         {
             if (selection != null)
                 SelectionGroup.Add(selection);
-            
+
             // ReDrawSelection(grfx);
         }
-
         #endregion
-
     }
 }

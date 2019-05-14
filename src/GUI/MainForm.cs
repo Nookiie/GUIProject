@@ -7,60 +7,60 @@ using System.Drawing.Drawing2D;
 
 namespace Draw
 {
-	/// <summary>
-	/// Върху главната форма е поставен потребителски контрол,
-	/// в който се осъществява визуализацията
-	/// </summary>
-	public partial class MainForm : Form
-	{
+    /// <summary>
+    /// Върху главната форма е поставен потребителски контрол,
+    /// в който се осъществява визуализацията
+    /// </summary>
+    public partial class MainForm : Form
+    {
 
         /// <summary>
         /// Създаване на линии с цветове
         /// </summary>
-            Graphics g;
-            
-            int x = -1;
-            int y = -1;
-            bool isMoving = false;
-            Pen pen;
+        Graphics g;
+
+        int x = -1;
+        int y = -1;
+        bool isMoving = false;
+        Pen pen;
 
         int generalCounter = 1;
-        
-		/// <summary>
-		/// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
-		/// </summary>
-		private DialogProcessor dialogProcessor = new DialogProcessor();
-		
-		public MainForm()
-		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
-			InitializeComponent();
+
+        /// <summary>
+        /// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
+        /// </summary>
+        private DialogProcessor dialogProcessor = new DialogProcessor();
+
+        public MainForm()
+        {
+            //
+            // The InitializeComponent() call is required for Windows Forms designer support.
+            //
+            InitializeComponent();
             // g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             g = panelColor.CreateGraphics();
 
             pen = new Pen(Color.Black, 5);
             pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
-		}
+            //
+            // TODO: Add constructor code after the InitializeComponent() call.
+            //
+        }
 
-		/// <summary>
-		/// Изход от програмата. Затваря главната форма, а с това и програмата.
-		/// </summary>
-		void ExitToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Close();
-		}
+        /// <summary>
+        /// Изход от програмата. Затваря главната форма, а с това и програмата.
+        /// </summary>
+        void ExitToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Close();
+        }
         #region Shapes
         /// <summary>
         /// Събитието, което се прихваща, за да се превизуализира при изменение на модела.
         /// </summary>
         void ViewPortPaint(object sender, PaintEventArgs e)
-		{
+        {
             dialogProcessor.ReRotate(sender, e);
             dialogProcessor.ReDraw(sender, e);
             dialogProcessor.ReDrawSelection(e.Graphics);
@@ -69,22 +69,22 @@ namespace Draw
             {
                 dialogProcessor.Remove(sender, e, dialogProcessor.Selection);
                 statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
-                viewPort.Invalidate(); 
+                viewPort.Invalidate();
             }
-		}
+        }
 
-		/// <summary>
-		/// Бутон, който поставя на произволно място правоъгълник със зададените размери.
-		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
-		/// </summary>
-		void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
-		{
-			dialogProcessor.AddRandomRectangle();
-			
-			statusBar.Items[0].Text = "Последно действие: Добавяне на правоъгълник";
-			
-			viewPort.Invalidate();
-		}
+        /// <summary>
+        /// Бутон, който поставя на произволно място правоъгълник със зададените размери.
+        /// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+        /// </summary>
+        void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomRectangle();
+
+            statusBar.Items[0].Text = "Последно действие: Добавяне на правоъгълник";
+
+            viewPort.Invalidate();
+        }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -185,7 +185,7 @@ namespace Draw
             {
                 dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
-                if(dialogProcessor.Selection != null)
+                if (dialogProcessor.Selection != null)
                 {
                     string value;
 
@@ -205,19 +205,19 @@ namespace Draw
                     viewPort.Invalidate();
                 }
             }
-            if(removeButton.Checked)
+            if (removeButton.Checked)
             {
                 dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
 
-                if(dialogProcessor.Selection != null)
+                if (dialogProcessor.Selection != null)
                 {
                     dialogProcessor.RemoveSelected(dialogProcessor.Selection);
 
                     statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
                 }
             }
-            if(lineButton.Checked)
+            if (lineButton.Checked)
             {
                 generalCounter++;
 
@@ -235,10 +235,10 @@ namespace Draw
                     statusBar.Items[0].Text = "Последно действие: Чертане на линия";
                     viewPort.Invalidate();
                 }
-                    
+
             }
         }
-        
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Made by Viktor Ivanov (Software Engineering) for Computer Graphics and GUI (II Course)");
@@ -251,23 +251,24 @@ namespace Draw
         /// Ако сме в режм на "влачене", то избрания елемент се транслира.
         /// </summary>
         void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			if (dialogProcessor.IsDragging) {
-				if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
-				dialogProcessor.TranslateTo(e.Location);
-				viewPort.Invalidate();
-			}
-		}
-            
+        {
+            if (dialogProcessor.IsDragging)
+            {
+                if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
+                dialogProcessor.TranslateTo(e.Location);
+                viewPort.Invalidate();
+            }
+        }
 
-		/// <summary>
-		/// Прихващане на отпускането на бутона на мишката.
-		/// Излизаме от режим "влачене".
-		/// </summary>
-		void ViewPortMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			dialogProcessor.IsDragging = false;
-		}
+
+        /// <summary>
+        /// Прихващане на отпускането на бутона на мишката.
+        /// Излизаме от режим "влачене".
+        /// </summary>
+        void ViewPortMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            dialogProcessor.IsDragging = false;
+        }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -276,7 +277,7 @@ namespace Draw
 
         private void viewPort_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         #region MenuColors
@@ -370,7 +371,7 @@ namespace Draw
         }
 
         private void pictureAll_Click(object sender, EventArgs e)
-        
+
         {
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
@@ -389,7 +390,7 @@ namespace Draw
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-            if(isMoving && x != -1 && y != -1)
+            if (isMoving && x != -1 && y != -1)
             {
                 g.DrawLine(pen, new Point(x, y), e.Location);
                 x = e.X;
@@ -437,9 +438,9 @@ namespace Draw
 
         private void rotateSelectedShapeToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            if(dialogProcessor.Selection != null)
+            if (dialogProcessor.Selection != null)
             {
-                float.TryParse(dialogProcessor.ShowDialog("Въведете ъгъл на ротация", "Ротация на примитив"),out float rotation);
+                float.TryParse(dialogProcessor.ShowDialog("Въведете ъгъл на ротация", "Ротация на примитив"), out float rotation);
                 dialogProcessor.Selection.Rotation = rotation;
 
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
@@ -455,7 +456,7 @@ namespace Draw
 
         private void degreesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            if(dialogProcessor.Selection != null)
+            if (dialogProcessor.Selection != null)
             {
                 dialogProcessor.Selection.Rotation = 90F;
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
@@ -513,7 +514,7 @@ namespace Draw
             if (dialogProcessor.Selection != null)
                 dialogProcessor.Selection.Size = new Size(width, height);
             else if (width == 0 || height == 0)
-                MessageBox.Show("Width AND / OR Height are invalid","Error");
+                MessageBox.Show("Width AND / OR Height are invalid", "Error");
 
             viewPort.Invalidate();
         }
@@ -535,7 +536,7 @@ namespace Draw
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void removeSelectedShapeToolStripMenuItem_Click(object sender, EventArgs e)
