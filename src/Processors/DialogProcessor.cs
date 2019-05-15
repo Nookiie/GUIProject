@@ -210,18 +210,27 @@ namespace Draw
         /// <param name="p">Вектор на транслация.</param>
         public void TranslateTo(PointF p)
         {
-            foreach(var item in Selection)
+            if(Selection.Count == 1)
             {
-                item.Location = new PointF(item.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
+                Selection[0].Location = new PointF(Selection[0].Location.X + p.X - lastLocation.X, Selection[0].Location.Y + p.Y - lastLocation.Y);
+                lastLocation = p;
             }
-
-            /*if (Selection != null)
+            else
             {
-                foreach(var item in Selection)
-                item.Location = new PointF(item.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
+                foreach (var item in Selection)
+                {
+                    item.Location = new PointF(item.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
+                    lastLocation = p;
+                }
+            }
+            /*
+            if (Selection != null)
+            {
+                Selection.Location = new PointF(Selection.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
                 lastLocation = p;
             }
             */
+
         }
 
         public void SelectFillColor(Color color)
@@ -276,7 +285,7 @@ namespace Draw
 
         public void GroupSelection() // 
         {
-            if (SelectionList.Count < 2)
+            if (Selection.Count < 2)
                 return; // SelectionList replaced by Selection in the whole method
 
             float minX = float.PositiveInfinity;
@@ -285,7 +294,7 @@ namespace Draw
             float maxX = float.NegativeInfinity;
             float maxY = float.NegativeInfinity;
 
-            foreach (var item in SelectionList)
+            foreach (var item in Selection)
             {
                 if (minX > item.Location.X)
                     minX = item.Location.X;
@@ -302,10 +311,10 @@ namespace Draw
 
             GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
 
-            group.SubShapes = SelectionList;
+            group.SubShapes = Selection;
 
-            SelectionList = new List<Shape>();
-            SelectionList.Add(group);
+            Selection = new List<Shape>();
+            Selection.Add(group);
 
             foreach (var item in group.SubShapes)
             {
