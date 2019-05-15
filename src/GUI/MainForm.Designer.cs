@@ -63,6 +63,7 @@
             this.lineButton = new System.Windows.Forms.ToolStripButton();
             this.drawEllipseSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.selectButton = new System.Windows.Forms.ToolStripButton();
+            this.unselectButton = new System.Windows.Forms.ToolStripButton();
             this.paintButton = new System.Windows.Forms.ToolStripButton();
             this.sizeButton = new System.Windows.Forms.ToolStripButton();
             this.importImageButton = new System.Windows.Forms.ToolStripButton();
@@ -84,7 +85,6 @@
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
-            this.unselectButton = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -264,22 +264,23 @@
             // lastShapeToolStripMenuItem
             // 
             this.lastShapeToolStripMenuItem.Name = "lastShapeToolStripMenuItem";
-            this.lastShapeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.lastShapeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.lastShapeToolStripMenuItem.Text = "Last Shape";
             this.lastShapeToolStripMenuItem.Click += new System.EventHandler(this.lastShapeToolStripMenuItem_Click);
             // 
             // allShapesToolStripMenuItem
             // 
             this.allShapesToolStripMenuItem.Name = "allShapesToolStripMenuItem";
-            this.allShapesToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.allShapesToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.allShapesToolStripMenuItem.Text = "All Shapes";
             this.allShapesToolStripMenuItem.Click += new System.EventHandler(this.allShapesToolStripMenuItem_Click);
             // 
             // selectedShapeToolStripMenuItem
             // 
             this.selectedShapeToolStripMenuItem.Name = "selectedShapeToolStripMenuItem";
-            this.selectedShapeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.selectedShapeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.selectedShapeToolStripMenuItem.Text = "Selected Shape";
+            this.selectedShapeToolStripMenuItem.Click += new System.EventHandler(this.selectedShapeToolStripMenuItem_Click);
             // 
             // imageToolStripMenuItem
             // 
@@ -389,6 +390,17 @@
             this.selectButton.Size = new System.Drawing.Size(24, 24);
             this.selectButton.Text = "Select";
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
+            // 
+            // unselectButton
+            // 
+            this.unselectButton.CheckOnClick = true;
+            this.unselectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.unselectButton.Image = ((System.Drawing.Image)(resources.GetObject("unselectButton.Image")));
+            this.unselectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.unselectButton.Name = "unselectButton";
+            this.unselectButton.Size = new System.Drawing.Size(24, 24);
+            this.unselectButton.Text = "Unselect ";
+            this.unselectButton.Click += new System.EventHandler(this.toolStripButton1_Click_2);
             // 
             // paintButton
             // 
@@ -565,17 +577,6 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // unselectButton
-            // 
-            this.unselectButton.CheckOnClick = true;
-            this.unselectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.unselectButton.Image = ((System.Drawing.Image)(resources.GetObject("unselectButton.Image")));
-            this.unselectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.unselectButton.Name = "unselectButton";
-            this.unselectButton.Size = new System.Drawing.Size(24, 24);
-            this.unselectButton.Text = "Unselect ";
-            this.unselectButton.Click += new System.EventHandler(this.toolStripButton1_Click_2);
             // 
             // viewPort
             // 

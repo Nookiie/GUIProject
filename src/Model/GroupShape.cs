@@ -15,7 +15,7 @@ namespace Draw
         {
 
         }
-
+            
         public GroupShape(RectangleShape rectangle) : base(rectangle)
         {
 

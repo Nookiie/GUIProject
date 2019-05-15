@@ -98,21 +98,7 @@ namespace Draw
             }
         }
 
-        public virtual void RemoveLast()
-        {
-            if (shapeList.Count != 0)
-                shapeList.RemoveAt(0);
-        }
-
-        public virtual void RemoveAll()
-        {
-            shapeList.RemoveAll(x => x.Size == x.Size);
-        }
-
-        public virtual void RemoveSelected(Shape item)
-        {
-            shapeList.Remove(item);
-        }
+     
 
         public virtual void RemoveSelectionSelected(Shape item)
         {

@@ -250,6 +250,7 @@ namespace Draw
             }
             if (removeButton.Checked)
             {
+                /*
                 var sel = dialogProcessor.ContainsPoint(e.Location);
                 if (sel == null)
                     return;
@@ -259,14 +260,21 @@ namespace Draw
                 else
                     dialogProcessor.Selection.Add(sel);
 
+    */
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
 
-                if (sel != null)
+                var sel = dialogProcessor.ContainsPoint(e.Location);
+                if(sel != null)
                 {
-                    dialogProcessor.RemoveSelected(sel);
+                    dialogProcessor.RemoveSpecific(dialogProcessor.ContainsPoint(e.Location));
 
                     statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
+
+                    viewPort.Invalidate();
                 }
+                
+                   
+                
             }
             if (lineButton.Checked)
             {
@@ -310,7 +318,6 @@ namespace Draw
                 viewPort.Invalidate();
             }
         }
-
 
         /// <summary>
         /// Прихващане на отпускането на бутона на мишката.
@@ -638,6 +645,13 @@ namespace Draw
         private void toolStripButton1_Click_2(object sender, EventArgs e)
         {
            
+        }
+
+        private void selectedShapeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.RemoveSelected();
+
+            viewPort.Invalidate();
         }
     }
 }

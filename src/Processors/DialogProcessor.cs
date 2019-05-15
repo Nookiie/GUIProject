@@ -34,7 +34,12 @@ namespace Draw
             set { selection = value; }
         }
 
-        public List<Shape> SelectionList { get; set; } // Needs to be replaced by Selection when multi-selection works properly
+        private Dictionary<Shape,Shape> selectionCheck = new Dictionary<Shape, Shape>();
+        public Dictionary<Shape, Shape> SelectionCheck
+        {
+            get { return selectionCheck; }
+            set { selectionCheck = value; }
+        }
 
         private Color borderColor;
         public Color ColorBorder
@@ -282,9 +287,12 @@ namespace Draw
         {
             base.Draw(grfx);
             if (Selection != null)
-            {
+            {                
                 foreach(var item in Selection)
-                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
+                {
+                    grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
+                }
+                 
             }
         }
 
@@ -316,7 +324,7 @@ namespace Draw
 
             GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
 
-            group.SubShapes = Selection;
+            group.SubShapes = Selection;    
 
             Selection = new List<Shape>();
             Selection.Add(group);
@@ -370,6 +378,53 @@ namespace Draw
             ShapeList.Remove(group); // The opposite happends during off selection
 
         }
+
+        public void RemoveLast()
+        {
+            if (ShapeList.Count != 0)
+            {
+                foreach(var item in Selection.ToArray())
+                {
+                    if (item == ShapeList[0])
+                        Selection.Remove(item);
+                }
+                ShapeList.RemoveAt(0);
+            }
+        }
+
+        public void RemoveAll()
+        {
+            if(ShapeList.Count != 0)
+            {
+                Selection.Clear();
+                ShapeList.Clear();
+            }
+        }
+
+        public void RemoveSelected()
+        {
+            if(ShapeList.Count != 0)
+            {
+                foreach(var item in ShapeList.ToArray())
+                {
+                    if(Selection.Contains(item))
+                    {
+                        Selection.Remove(item);
+                        ShapeList.Remove(item);
+                    }
+                }
+            }
+        }
+
+        public void RemoveSpecific(Shape selected)
+        {
+            if(ShapeList.Count != 0)
+            {
+                Selection.RemoveAll(x => x == selected);
+                ShapeList.RemoveAll(x => x == selected);
+            }
+        }
+
         #endregion
     }
 }
