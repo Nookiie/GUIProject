@@ -17,7 +17,7 @@ namespace Draw.src.Model
         }
 
         #endregion
-
+        
         #region Methods
 
         public override GraphicsPath GetPath(Rectangle bounds)

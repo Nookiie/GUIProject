@@ -27,12 +27,14 @@ namespace Draw
 
         // public Color BorderColor;
 
-        private Shape selection;
-        public Shape Selection
+        private List<Shape> selection = new List<Shape>();
+        public List<Shape> Selection
         {
             get { return selection; }
             set { selection = value; }
         }
+
+        public List<Shape> SelectionList { get; set; } // Needs to be replaced by Selection when multi-selection works properly
 
         private Color borderColor;
         public Color ColorBorder
@@ -146,25 +148,24 @@ namespace Draw
             Bitmap image = new Bitmap(new Bitmap("image.jpg"));
             ImageList.Add(image);
         }
-
-        public void RemoveFromGroup()
-        {
-            if (selection != null)
-                SelectionGroup.Remove(selection);
-        }
-
+        
         public void RotateSelection(Graphics grfx)
         {
-            selection.Rotate(grfx);
+            foreach(var item in Selection)
+                item.Rotate(grfx);
         }
 
         public void PaintOnAdd()
         {
-            if (selection != null)
+            if (Selection != null)
             {
-                selection.FillColor = ColorFill;
-                selection.BorderColor = ColorBorder;
+                foreach(var item in Selection)
+                {
+                    item.FillColor = ColorFill;
+                    item.BorderColor = ColorBorder;
+                }
             }
+             
         }
         /*
         public void AddRandomTriangle()
@@ -209,11 +210,18 @@ namespace Draw
         /// <param name="p">Вектор на транслация.</param>
         public void TranslateTo(PointF p)
         {
-            if (selection != null)
+            foreach(var item in Selection)
             {
-                selection.Location = new PointF(selection.Location.X + p.X - lastLocation.X, selection.Location.Y + p.Y - lastLocation.Y);
+                item.Location = new PointF(item.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
+            }
+
+            /*if (Selection != null)
+            {
+                foreach(var item in Selection)
+                item.Location = new PointF(item.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
                 lastLocation = p;
             }
+            */
         }
 
         public void SelectFillColor(Color color)
@@ -259,18 +267,52 @@ namespace Draw
         public override void Draw(Graphics grfx)
         {
             base.Draw(grfx);
-            if (selection != null)
+            if (Selection != null)
             {
-                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);
+                foreach(var item in Selection)
+                grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
             }
         }
 
-        public void AddToGroup()
+        public void GroupSelection() // 
         {
-            if (selection != null)
-                SelectionGroup.Add(selection);
+            if (SelectionList.Count < 2)
+                return; // SelectionList replaced by Selection in the whole method
 
-            // ReDrawSelection(grfx);
+            float minX = float.PositiveInfinity;
+            float minY = float.PositiveInfinity;
+
+            float maxX = float.NegativeInfinity;
+            float maxY = float.NegativeInfinity;
+
+            foreach (var item in SelectionList)
+            {
+                if (minX > item.Location.X)
+                    minX = item.Location.X;
+
+                if (minY > item.Location.Y)
+                    minX = item.Location.Y;
+
+                if (maxX < item.Location.X + item.Width)
+                    maxX = item.Location.X + item.Width;
+
+                if (maxY < item.Location.Y + item.Width)
+                    maxY = item.Location.Y + item.Width;
+            }
+
+            GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
+
+            group.SubShapes = SelectionList;
+
+            SelectionList = new List<Shape>();
+            SelectionList.Add(group);
+
+            foreach (var item in group.SubShapes)
+            {
+                ShapeList.Remove(item);
+            }
+
+            ShapeList.Add(group); // The opposite happends during off selection
         }
         #endregion
     }

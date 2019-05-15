@@ -45,6 +45,9 @@
             this.addEllipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotateSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resizeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,9 +84,6 @@
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
-            this.selectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -224,6 +224,30 @@
             this.resizeSelectedShapeToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.resizeSelectedShapeToolStripMenuItem.Text = "Resize Selected Shape";
             this.resizeSelectedShapeToolStripMenuItem.Click += new System.EventHandler(this.resizeSelectedShapeToolStripMenuItem_Click);
+            // 
+            // selectionToolStripMenuItem
+            // 
+            this.selectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addGroupToolStripMenuItem,
+            this.removeGroupToolStripMenuItem});
+            this.selectionToolStripMenuItem.Name = "selectionToolStripMenuItem";
+            this.selectionToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.selectionToolStripMenuItem.Text = "Selection";
+            this.selectionToolStripMenuItem.Click += new System.EventHandler(this.selectionToolStripMenuItem_Click);
+            // 
+            // addGroupToolStripMenuItem
+            // 
+            this.addGroupToolStripMenuItem.Name = "addGroupToolStripMenuItem";
+            this.addGroupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.addGroupToolStripMenuItem.Text = "Add Group";
+            this.addGroupToolStripMenuItem.Click += new System.EventHandler(this.addGroupToolStripMenuItem_Click);
+            // 
+            // removeGroupToolStripMenuItem
+            // 
+            this.removeGroupToolStripMenuItem.Name = "removeGroupToolStripMenuItem";
+            this.removeGroupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.removeGroupToolStripMenuItem.Text = "Remove Group";
+            this.removeGroupToolStripMenuItem.Click += new System.EventHandler(this.removeGroupToolStripMenuItem_Click);
             // 
             // removeSelectedShapeToolStripMenuItem
             // 
@@ -539,29 +563,6 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // selectionToolStripMenuItem
-            // 
-            this.selectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addGroupToolStripMenuItem,
-            this.removeGroupToolStripMenuItem});
-            this.selectionToolStripMenuItem.Name = "selectionToolStripMenuItem";
-            this.selectionToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
-            this.selectionToolStripMenuItem.Text = "Selection";
-            // 
-            // addGroupToolStripMenuItem
-            // 
-            this.addGroupToolStripMenuItem.Name = "addGroupToolStripMenuItem";
-            this.addGroupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.addGroupToolStripMenuItem.Text = "Add Group";
-            this.addGroupToolStripMenuItem.Click += new System.EventHandler(this.addGroupToolStripMenuItem_Click);
-            // 
-            // removeGroupToolStripMenuItem
-            // 
-            this.removeGroupToolStripMenuItem.Name = "removeGroupToolStripMenuItem";
-            this.removeGroupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.removeGroupToolStripMenuItem.Text = "Remove Group";
-            this.removeGroupToolStripMenuItem.Click += new System.EventHandler(this.removeGroupToolStripMenuItem_Click);
             // 
             // viewPort
             // 

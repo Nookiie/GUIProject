@@ -153,10 +153,6 @@ namespace Draw
             item.FillColor = color;
         }
 
-        public virtual void AddGroup(string name)
-        {
-            SelectionGroup group = new SelectionGroup(name, new List<Shape>());
-        }
         #endregion
     }
 }

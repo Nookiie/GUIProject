@@ -61,13 +61,15 @@ namespace Draw
         /// </summary>
         void ViewPortPaint(object sender, PaintEventArgs e)
         {
-            dialogProcessor.ReRotate(sender, e);
+            // dialogProcessor.ReRotate(sender, e);
             dialogProcessor.ReDraw(sender, e);
-            dialogProcessor.ReDrawSelection(e.Graphics);
+            // dialogProcessor.ReDrawSelection(e.Graphics);
 
             if (removeButton.Checked)
             {
-                dialogProcessor.Remove(sender, e, dialogProcessor.Selection);
+                foreach(var item in dialogProcessor.Selection)
+                    dialogProcessor.Remove(sender, e, item);
+
                 statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
                 viewPort.Invalidate();
             }
@@ -157,7 +159,15 @@ namespace Draw
         {
             if (selectButton.Checked)
             {
-                dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
+                var sel = dialogProcessor.ContainsPoint(e.Location);
+                if (sel == null)
+                    return;
+
+                if (dialogProcessor.Selection.Contains(sel))
+                    dialogProcessor.Selection.Remove(sel);
+                else
+                    dialogProcessor.Selection.Add(sel);
+
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)
                 {
@@ -170,20 +180,40 @@ namespace Draw
             }
             if (paintButton.Checked)
             {
-                dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
+                var sel = dialogProcessor.ContainsPoint(e.Location);
+                if (sel == null)
+                    return;
+
+                if (dialogProcessor.Selection.Contains(sel))
+                    dialogProcessor.Selection.Remove(sel);
+                else
+                    dialogProcessor.Selection.Add(sel);
+
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)
                 {
                     System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Cross;
                     statusBar.Items[0].Text = "Последно действие: Рисуване на примитив";
-                    dialogProcessor.Selection.FillColor = dialogProcessor.FillColor;
-                    dialogProcessor.Selection.BorderColor = dialogProcessor.ColorBorder;
+
+                    foreach(var item in dialogProcessor.Selection)
+                    {
+                        item.FillColor = dialogProcessor.FillColor;
+                        item.BorderColor = dialogProcessor.ColorBorder;
+                    }
                     viewPort.Invalidate();
                 }
             }
             if (sizeButton.Checked)
             {
-                dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
+                var sel = dialogProcessor.ContainsPoint(e.Location);
+                if (sel == null)
+                    return;
+
+                if (dialogProcessor.Selection.Contains(sel))
+                    dialogProcessor.Selection.Remove(sel);
+                else
+                    dialogProcessor.Selection.Add(sel);
+
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)
                 {
@@ -196,7 +226,10 @@ namespace Draw
                     int.TryParse(value, out int height);
 
                     if (dialogProcessor.Selection != null)
-                        dialogProcessor.Selection.Size = new Size(width, height);
+                    {
+                        foreach (var item in dialogProcessor.Selection)
+                            item.Size = new Size(width, height);
+                    }
                     else if (width == 0 || height == 0)
                         MessageBox.Show("Височина или Ширина имат грешни стойности", "Грешка");
 
@@ -207,12 +240,20 @@ namespace Draw
             }
             if (removeButton.Checked)
             {
-                dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
+                var sel = dialogProcessor.ContainsPoint(e.Location);
+                if (sel == null)
+                    return;
+
+                if (dialogProcessor.Selection.Contains(sel))
+                    dialogProcessor.Selection.Remove(sel);
+                else
+                    dialogProcessor.Selection.Add(sel);
+
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
 
-                if (dialogProcessor.Selection != null)
+                if (sel != null)
                 {
-                    dialogProcessor.RemoveSelected(dialogProcessor.Selection);
+                    dialogProcessor.RemoveSelected(sel);
 
                     statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
                 }
@@ -441,7 +482,9 @@ namespace Draw
             if (dialogProcessor.Selection != null)
             {
                 float.TryParse(dialogProcessor.ShowDialog("Въведете ъгъл на ротация", "Ротация на примитив"), out float rotation);
-                dialogProcessor.Selection.Rotation = rotation;
+
+                foreach (var item in dialogProcessor.Selection)
+                    item.Rotation = rotation;
 
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
                 viewPort.Invalidate();
@@ -458,7 +501,9 @@ namespace Draw
         {
             if (dialogProcessor.Selection != null)
             {
-                dialogProcessor.Selection.Rotation = 90F;
+                foreach(var item in dialogProcessor.Selection)
+                    item.Rotation = 90F;
+
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
                 viewPort.Invalidate();
             }
@@ -473,7 +518,9 @@ namespace Draw
         {
             if (dialogProcessor.Selection != null)
             {
-                dialogProcessor.Selection.Rotation = 180F;
+                foreach(var item in dialogProcessor.Selection)
+                    item.Rotation = 180F;
+
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
                 viewPort.Invalidate();
             }
@@ -488,7 +535,9 @@ namespace Draw
         {
             if (dialogProcessor.Selection != null)
             {
-                dialogProcessor.Selection.Rotation = 270F;
+                foreach(var item in dialogProcessor.Selection)
+                    item.Rotation = 270F;
+
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
                 viewPort.Invalidate();
             }
@@ -512,7 +561,9 @@ namespace Draw
             int.TryParse(value, out int height);
 
             if (dialogProcessor.Selection != null)
-                dialogProcessor.Selection.Size = new Size(width, height);
+                foreach(var item in dialogProcessor.Selection)
+                    item.Size = new Size(width, height);
+
             else if (width == 0 || height == 0)
                 MessageBox.Show("Width AND / OR Height are invalid", "Error");
 
@@ -556,18 +607,21 @@ namespace Draw
             viewPort.Invalidate();
         }
 
-        private void addGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        private void removeGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string name = dialogProcessor.ShowDialog("Please enter a name for the selection group", "Group");
-
-            dialogProcessor.AddGroup(name);
             viewPort.Invalidate();
         }
 
-        private void removeGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dialogProcessor.RemoveFromGroup();
+            dialogProcessor.GroupSelection();
+
             viewPort.Invalidate();
+        }
+
+        private void selectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
