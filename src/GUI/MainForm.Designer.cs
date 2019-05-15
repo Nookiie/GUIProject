@@ -84,6 +84,7 @@
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
+            this.unselectButton = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -238,14 +239,14 @@
             // addGroupToolStripMenuItem
             // 
             this.addGroupToolStripMenuItem.Name = "addGroupToolStripMenuItem";
-            this.addGroupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.addGroupToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.addGroupToolStripMenuItem.Text = "Add Group";
             this.addGroupToolStripMenuItem.Click += new System.EventHandler(this.addGroupToolStripMenuItem_Click);
             // 
             // removeGroupToolStripMenuItem
             // 
             this.removeGroupToolStripMenuItem.Name = "removeGroupToolStripMenuItem";
-            this.removeGroupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.removeGroupToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.removeGroupToolStripMenuItem.Text = "Remove Group";
             this.removeGroupToolStripMenuItem.Click += new System.EventHandler(this.removeGroupToolStripMenuItem_Click);
             // 
@@ -335,6 +336,7 @@
             this.lineButton,
             this.drawEllipseSpeedButton,
             this.selectButton,
+            this.unselectButton,
             this.paintButton,
             this.sizeButton,
             this.importImageButton,
@@ -564,6 +566,17 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // unselectButton
+            // 
+            this.unselectButton.CheckOnClick = true;
+            this.unselectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.unselectButton.Image = ((System.Drawing.Image)(resources.GetObject("unselectButton.Image")));
+            this.unselectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.unselectButton.Name = "unselectButton";
+            this.unselectButton.Size = new System.Drawing.Size(24, 24);
+            this.unselectButton.Text = "Unselect ";
+            this.unselectButton.Click += new System.EventHandler(this.toolStripButton1_Click_2);
+            // 
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -673,5 +686,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeGroupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton unselectButton;
     }
 }

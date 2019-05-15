@@ -131,5 +131,6 @@
     <Content Include="src\GUI\Icons\Editing-Line-icon.png" />
     <Content Include="src\GUI\Icons\ellipse.png" />
     <Content Include="src\GUI\Icons\eraser.png" />
+    <Content Include="src\GUI\Icons\unselect.png" />
   </ItemGroup>
 </Project>

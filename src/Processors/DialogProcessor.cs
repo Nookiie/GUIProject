@@ -220,6 +220,11 @@ namespace Draw
                 foreach (var item in Selection)
                 {
                     item.Location = new PointF(item.Location.X + p.X - lastLocation.X, item.Location.Y + p.Y - lastLocation.Y);
+                    // lastLocation = p;
+                }
+
+                if(Selection != null)
+                {
                     lastLocation = p;
                 }
             }
@@ -286,7 +291,7 @@ namespace Draw
         public void GroupSelection() // 
         {
             if (Selection.Count < 2)
-                return; // SelectionList replaced by Selection in the whole method
+                return; 
 
             float minX = float.PositiveInfinity;
             float minY = float.PositiveInfinity;
@@ -321,7 +326,49 @@ namespace Draw
                 ShapeList.Remove(item);
             }
 
-            ShapeList.Add(group); // The opposite happends during off selection
+            ShapeList.Add(group); // The opposite happens during off selection
+        }
+
+        public void GroupDeselection()
+        {
+            if (Selection.Count < 2)
+                Selection.RemoveAt(0);
+
+            float minX = float.PositiveInfinity;
+            float minY = float.PositiveInfinity;
+
+            float maxX = float.NegativeInfinity;
+            float maxY = float.NegativeInfinity;
+
+            foreach (var item in Selection)
+            {
+                if (minX > item.Location.X)
+                    minX = item.Location.X;
+
+                if (minY > item.Location.Y)
+                    minX = item.Location.Y;
+
+                if (maxX < item.Location.X + item.Width)
+                    maxX = item.Location.X + item.Width;
+
+                if (maxY < item.Location.Y + item.Width)
+                    maxY = item.Location.Y + item.Width;
+            }
+
+            GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
+
+            group.SubShapes = Selection;
+
+            Selection = new List<Shape>();
+            Selection.Add(group);
+
+            foreach (var item in group.SubShapes)
+            {
+                ShapeList.Remove(item);
+            }
+
+            ShapeList.Remove(group); // The opposite happends during off selection
+
         }
         #endregion
     }

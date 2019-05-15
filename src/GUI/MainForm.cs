@@ -164,10 +164,20 @@ namespace Draw
                     return;
 
                 if (dialogProcessor.Selection.Contains(sel))
-                    dialogProcessor.Selection.Remove(sel);
-                else
-                    dialogProcessor.Selection.Add(sel);
+                {
+                //    if(dialogProcessor.Selection.Count != 1)
+                //        dialogProcessor.Selection.Remove(sel);
 
+                    if(unselectButton.Checked)
+                    {
+                        dialogProcessor.Selection.Remove(sel);
+                    }
+                }
+                else
+                {
+                    dialogProcessor.Selection.Add(sel);
+                }
+                
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)
                 {
@@ -616,12 +626,18 @@ namespace Draw
         {
             dialogProcessor.GroupSelection();
 
+            statusBar.Items[0].Text = "Последно действие: Създаване на група";
             viewPort.Invalidate();
         }
 
         private void selectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripButton1_Click_2(object sender, EventArgs e)
+        {
+           
         }
     }
 }

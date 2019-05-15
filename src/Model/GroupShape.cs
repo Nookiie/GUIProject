@@ -70,6 +70,7 @@ namespace Draw
                 float dy = value.Y - Location.Y;
 
                 base.Location = value;
+
                 foreach (var item in SubShapes)
                 {
                     item.Location = new PointF(item.Location.X + dx, item.Location.Y + dy);
