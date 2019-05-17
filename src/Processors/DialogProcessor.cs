@@ -313,7 +313,7 @@ namespace Draw
                     minX = item.Location.X;
 
                 if (minY > item.Location.Y)
-                    minX = item.Location.Y;
+                    minY = item.Location.Y;
 
                 if (maxX < item.Location.X + item.Width)
                     maxX = item.Location.X + item.Width;

@@ -147,6 +147,7 @@ namespace Draw
         public virtual void DrawSelf(Graphics grfx)
         {
             // shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
+            grfx.RotateTransform(Rotation); // From the Center)); // From the Center)
         }
 
         public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)
@@ -165,7 +166,7 @@ namespace Draw
 
         public virtual void Rotate(Graphics grfx)
         {
-            grfx.Transform.Rotate(20); // From the Center
+            grfx.Transform.Rotate(Rotation); // From the Center
         }
 
         public virtual GraphicsPath GetPath(Rectangle bounds)

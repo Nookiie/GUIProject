@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
 using System.Drawing.Drawing2D;
+using Draw.src.Processors;
 
 namespace Draw
 {
@@ -30,6 +31,8 @@ namespace Draw
         /// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
         /// </summary>
         private DialogProcessor dialogProcessor = new DialogProcessor();
+
+        private GeometricProcessor geometricProcessor = new GeometricProcessor();
 
         public MainForm()
         {
@@ -63,6 +66,7 @@ namespace Draw
         {
             // dialogProcessor.ReRotate(sender, e);
             dialogProcessor.ReDraw(sender, e);
+            
             // dialogProcessor.ReDrawSelection(e.Graphics);
 
             if (removeButton.Checked)
@@ -501,7 +505,9 @@ namespace Draw
                 float.TryParse(dialogProcessor.ShowDialog("Въведете ъгъл на ротация", "Ротация на примитив"), out float rotation);
 
                 foreach (var item in dialogProcessor.Selection)
+                {
                     item.Rotation = rotation;
+                }
 
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
                 viewPort.Invalidate();
