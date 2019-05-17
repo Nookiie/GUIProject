@@ -339,44 +339,25 @@ namespace Draw
 
         public void GroupDeselection()
         {
-            if (Selection.Count < 2)
-                Selection.RemoveAt(0);
-
-            float minX = float.PositiveInfinity;
-            float minY = float.PositiveInfinity;
-
-            float maxX = float.NegativeInfinity;
-            float maxY = float.NegativeInfinity;
-
-            foreach (var item in Selection)
+            foreach(var item in Selection.ToArray())
             {
-                if (minX > item.Location.X)
-                    minX = item.Location.X;
+                if(item.GetType() == typeof(GroupShape))
+                {
+                    GroupShape group = (GroupShape)item;
+                    if (group.SubShapes.Count <= 1)
+                        return;
 
-                if (minY > item.Location.Y)
-                    minX = item.Location.Y;
+                    foreach (var shape in group.SubShapes)
+                    {
+                        ShapeList.Add(shape);
+                    }
 
-                if (maxX < item.Location.X + item.Width)
-                    maxX = item.Location.X + item.Width;
-
-                if (maxY < item.Location.Y + item.Width)
-                    maxY = item.Location.Y + item.Width;
+                    Selection.Remove(item);
+                    ShapeList.Remove(item);
+                }
             }
 
-            GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
-
-            group.SubShapes = Selection;
-
-            Selection = new List<Shape>();
-            Selection.Add(group);
-
-            foreach (var item in group.SubShapes)
-            {
-                ShapeList.Remove(item);
-            }
-
-            ShapeList.Remove(group); // The opposite happends during off selection
-
+           
         }
 
         public void RemoveLast()

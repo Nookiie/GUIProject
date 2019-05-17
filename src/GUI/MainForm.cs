@@ -632,6 +632,8 @@ namespace Draw
 
         private void removeGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dialogProcessor.GroupDeselection();
+
             viewPort.Invalidate();
         }
 
