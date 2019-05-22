@@ -9,8 +9,6 @@ namespace Draw.src.Model
 {
     class CustomShape : Shape
     {
-   
-       
         #region Constructor
 
         public CustomShape(RectangleF rect) : base(rect)
@@ -75,9 +73,8 @@ namespace Draw.src.Model
              };
             Polygon = curvePoints;
 
-
             grfx.DrawPolygon(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), curvePoints);
-            grfx.FillPolygon(new SolidBrush(FillColor == Color.Empty ? Color.Black : FillColor), curvePoints);
+            grfx.FillPolygon(new SolidBrush(FillColor), curvePoints);
         }
 
         public override void Remove(Graphics grfx)
