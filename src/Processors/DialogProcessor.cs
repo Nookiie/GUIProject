@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Model;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -153,6 +154,18 @@ namespace Draw
             Bitmap image = new Bitmap(new Bitmap("image.jpg"));
             ImageList.Add(image);
         }
+
+        public void AddRandomCustomShape()
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            CustomShape custom = new CustomShape(new Rectangle(x,y,200,100));
+
+            ShapeList.Add(custom);
+
+        }
         
         public void RotateSelection(Graphics grfx)
         {
@@ -201,6 +214,19 @@ namespace Draw
             for (int i = ShapeList.Count - 1; i >= 0; i--)
             {
                 if (ShapeList[i].Contains(point))
+                {
+                    // ShapeList[i].FillColor = Color.Red; 
+                    return ShapeList[i];
+                }
+            }
+            return null;
+        }
+
+        public Shape ContainsPoint(PointF[] polygon, PointF point)
+        {
+            for (int i = ShapeList.Count - 1; i >= 0; i--)
+            {
+                if (ShapeList[i].Contains(polygon, point))
                 {
                     // ShapeList[i].FillColor = Color.Red; 
                     return ShapeList[i];

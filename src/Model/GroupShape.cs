@@ -15,7 +15,7 @@ namespace Draw
         {
 
         }
-            
+
         public GroupShape(RectangleShape rectangle) : base(rectangle)
         {
 
@@ -34,6 +34,20 @@ namespace Draw
                 foreach (var item in SubShapes)
                 {
                     if (item.Contains(point))
+                        return true;
+                }
+                return false;
+            }
+            else
+                return false;
+        }
+        public override bool Contains(PointF[] Polygon, PointF point)
+        {
+            if (base.Contains(Polygon, point))
+            {
+                foreach (var item in SubShapes)
+                {
+                    if (item.Contains(Polygon, point))
                         return true;
                 }
                 return false;

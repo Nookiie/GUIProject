@@ -42,6 +42,7 @@ namespace Draw
             else
                 return false;
         }
+
         /// <summary>
         /// Частта, визуализираща конкретния примитив.
         /// </summary>
@@ -49,6 +50,10 @@ namespace Draw
         {
             base.DrawSelf(grfx, pt1, pt2);
         }
+
+        ///<summary>
+        ///X,Y X1,Y1, X2,Y2 Formula to Select the LineShape comes from the EllipseShape as well as for Rotation
+        ///</summary>
         #endregion
     }
 }

@@ -140,6 +140,20 @@ namespace Draw
             return Rectangle.Contains(point.X, point.Y); // Drawable
         }
 
+        public virtual bool Contains(PointF[] Polygon, PointF point)
+        {
+            bool isInside = false;
+            for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
+            {
+                if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&
+                (point.X < (Polygon[j].X - Polygon[i].X) * (point.Y - Polygon[i].Y) / (Polygon[j].Y - Polygon[i].Y) + Polygon[i].X))
+                {
+                    isInside = !isInside;
+                }
+            }
+            return isInside;
+        }
+
         /// <summary>
         /// Визуализира елемента.
         /// </summary>

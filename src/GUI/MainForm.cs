@@ -661,5 +661,12 @@ namespace Draw
 
             viewPort.Invalidate();
         }
+
+        private void customShapeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomCustomShape();
+
+            viewPort.Invalidate();
+        }
     }
 }

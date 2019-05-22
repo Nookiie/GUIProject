@@ -28,3 +28,13 @@ D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\17013210
 D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\obj\Debug\Draw.csproj.CoreCompileInputs.cache
 D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\obj\Debug\Draw.exe
 D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\obj\Debug\Draw.pdb
+C:\Users\fmi\Downloads\GUIProject-master\bin\Debug\Draw.exe
+C:\Users\fmi\Downloads\GUIProject-master\bin\Debug\Draw.pdb
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.csprojAssemblyReference.cache
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.Properties.Resources.resources
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.DoubleBufferedPanel.resources
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.MainForm.resources
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.csproj.GenerateResource.cache
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.csproj.CoreCompileInputs.cache
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.exe
+C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.pdb
