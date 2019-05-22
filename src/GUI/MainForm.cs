@@ -304,7 +304,7 @@ namespace Draw
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Made by Viktor Ivanov (Software Engineering) for Computer Graphics and GUI (II Course)");
+            MessageBox.Show("Made by Viktor Ivanov and Ivan Dobrev (Software Engineering) for Computer Graphics and GUI (II Course)");
         }
 
         #endregion
