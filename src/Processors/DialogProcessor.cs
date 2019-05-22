@@ -42,6 +42,13 @@ namespace Draw
             set { selectionCheck = value; }
         }
 
+        private PointF[] polygon;
+        public PointF[] Polygon
+        {
+            get { return polygon; }
+            set { polygon = value; }
+        }
+
         private Color borderColor;
         public Color ColorBorder
         {
@@ -158,11 +165,55 @@ namespace Draw
         public void AddRandomCustomShape()
         {
             Random rnd = new Random();
+
             int x = rnd.Next(100, 1000);
             int y = rnd.Next(100, 600);
 
-            CustomShape custom = new CustomShape(new Rectangle(x,y,200,100));
+            float xMax = float.NegativeInfinity;
+            float yMax = float.NegativeInfinity;
 
+            float xMin = float.PositiveInfinity;
+            float yMin = float.PositiveInfinity;
+
+            // Create points that define polygon.
+            PointF point1 = new PointF(x, y);
+            PointF point2 = new PointF(100.0F, 25.0F);
+            PointF point3 = new PointF(200.0F, 5.0F);
+            PointF point4 = new PointF(250.0F, 50.0F);
+            PointF point5 = new PointF(300.0F, 100.0F);
+            PointF point6 = new PointF(350.0F, 200.0F);
+            PointF point7 = new PointF(250.0F, 250.0F);
+            PointF[] curvePoints =
+                     {
+                 point1,
+                 point2,
+                 point3,
+                 point4,
+                 point5,
+                 point6,
+                 point7
+             };
+            Polygon = curvePoints;
+
+            foreach (var p in curvePoints)
+            {
+                if (xMax < p.X)
+                    xMax = p.X;
+
+                if (xMin > p.X)
+                    xMin = p.X;
+
+                if (yMax < p.Y)
+                    yMax = p.Y;
+
+                if (yMin > p.Y)
+                    yMin = p.Y;
+            }
+            int width = (int)(xMax - xMin);
+            int height = (int)(yMax - yMin);
+
+            CustomShape custom = new CustomShape(new Rectangle(x,y,width,height));
+            
             ShapeList.Add(custom);
 
         }

@@ -11,6 +11,8 @@ namespace Draw.src.Model
     {
         #region Constructor
 
+        DialogProcessor dialog = new DialogProcessor();
+
         public CustomShape(RectangleF rect) : base(rect)
         {
 
@@ -40,10 +42,12 @@ namespace Draw.src.Model
         /// дали точката е в обхващащия правоъгълник на елемента (а той съвпада с
         /// елемента в този случай).
         /// </summary>
-        public override bool Contains(PointF[] polygon, PointF point)
+        public override bool Contains(PointF point)
         {
-            polygon = Polygon;
-            return base.Contains(polygon, point);
+            if (Rectangle.Contains(point.X, point.Y))
+                return true;
+
+            return false;
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace Draw.src.Model
             base.DrawSelf(grfx);
 
             // Create points that define polygon.
-            PointF point1 = new PointF(50.0F, 50.0F);
+            PointF point1 = new PointF(20.0F, 15.0F);
             PointF point2 = new PointF(100.0F, 25.0F);
             PointF point3 = new PointF(200.0F, 5.0F);
             PointF point4 = new PointF(250.0F, 50.0F);
