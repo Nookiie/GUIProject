@@ -94,6 +94,7 @@ namespace Draw
         {
             foreach (Shape selection in SelectionGroup)
             {
+                //containing rectangle drawn here
                 grfx.DrawRectangle(new Pen(selection.BorderColor == Color.Empty ? Color.Black : selection.BorderColor), selection.Location.X - 3, selection.Location.Y - 3, selection.Width + 6, selection.Height + 6);
             }
         }
