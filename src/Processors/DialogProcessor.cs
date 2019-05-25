@@ -35,7 +35,7 @@ namespace Draw
             set { selection = value; }
         }
 
-        private Dictionary<Shape,Shape> selectionCheck = new Dictionary<Shape, Shape>();
+        private Dictionary<Shape, Shape> selectionCheck = new Dictionary<Shape, Shape>();
         public Dictionary<Shape, Shape> SelectionCheck
         {
             get { return selectionCheck; }
@@ -69,8 +69,6 @@ namespace Draw
             get { return pt2; }
             set { pt2 = value; }
         }
-        
-
 
         private float rotation;
         public float Rotation
@@ -160,80 +158,76 @@ namespace Draw
         public void AddRandomCustomShape()
         {
             Random rnd = new Random();
-    
-
 
             int x = rnd.Next(100, 1000);    //Generate random position for the rectangle
             int y = rnd.Next(100, 600);
-             float p1x = 0;             //Left most x in the rectangle
-             float p1y = rnd.Next(0, 200);            
+            float p1x = 0;             //Left most x in the rectangle
+            float p1y = rnd.Next(0, 200);
 
-             float p2x = rnd.Next(0, 200);
-             float p2y = 0;             // the top most Y edge of the rectangle
+            float p2x = rnd.Next(0, 200);
+            float p2y = 0;             // the top most Y edge of the rectangle
 
-             float p3x = rnd.Next(0, 200);
-             float p3y = rnd.Next(0, 200);
+            float p3x = rnd.Next(0, 200);
+            float p3y = rnd.Next(0, 200);
 
-             float p4x = rnd.Next(0, 200);
-             float p4y = rnd.Next(0, 200);
+            float p4x = rnd.Next(0, 200);
+            float p4y = rnd.Next(0, 200);
 
-             float p5x = rnd.Next(0, 200);
-             float p5y = rnd.Next(0, 200);
+            float p5x = rnd.Next(0, 200);
+            float p5y = rnd.Next(0, 200);
 
-             float p6x = rnd.Next(0, 200);
-             float p6y = rnd.Next(0, 200);
+            float p6x = rnd.Next(0, 200);
+            float p6y = rnd.Next(0, 200);
 
-             float p7x = rnd.Next(0, 200);
-             float p7y = rnd.Next(0, 200);
-             float[] edges = new float[7];
+            float p7x = rnd.Next(0, 200);
+            float p7y = rnd.Next(0, 200);
+            float[] edges = new float[7];
 
-             edges[0] = p1x;
-             edges[1] = p2x;
-             edges[2] = p3x;
-             edges[3] = p4x;
-             edges[4] = p5x;
-             edges[5] = p6x;
-             edges[6] = p7x;
-             int x1 = 10000;//leftmost x Unused
-             int x2 = 0;//rightmost x
-             for(int i = 0; i < edges.Length; i++)
-             {
-                 if (edges[i] < x1)
-                 {
-                     x1 = (Int32)edges[i];
-                 }
-                 if (edges[i] > x2)
-                 {
-                     x2 = (Int32)edges[i];
-                 }
-             }
+            edges[0] = p1x;
+            edges[1] = p2x;
+            edges[2] = p3x;
+            edges[3] = p4x;
+            edges[4] = p5x;
+            edges[5] = p6x;
+            edges[6] = p7x;
+            int x1 = 10000;//leftmost x Unused
+            int x2 = 0;//rightmost x
+            for (int i = 0; i < edges.Length; i++)
+            {
+                if (edges[i] < x1)
+                {
+                    x1 = (Int32)edges[i];
+                }
+                if (edges[i] > x2)
+                {
+                    x2 = (Int32)edges[i];
+                }
+            }
 
-             edges[0] = p1y;
-             edges[1] = p2y;
-             edges[2] = p3y;
-             edges[3] = p4y;
-             edges[4] = p5y;
-             edges[5] = p6y;
-             edges[6] = p7y;
+            edges[0] = p1y;
+            edges[1] = p2y;
+            edges[2] = p3y;
+            edges[3] = p4y;
+            edges[4] = p5y;
+            edges[5] = p6y;
+            edges[6] = p7y;
 
-             int y1 = 10000;//top y Unused
-             int y2 = 0;//bottom y
-             for (int i = 0; i < edges.Length; i++)
-             {
-                 if (edges[i] < y1)
-                 {
-                     y1 = (Int32)edges[i];
-                 }
-                 if (edges[i] > y2)
-                 {
-                     y2 = (Int32)edges[i];
-                 }
-             }
-
-             
-            CustomShape custom = new CustomShape(new Rectangle(x,y, x2, y2));
-           // custom.edges(point1, point2, point3, point4, point5, point6, point7);
-            custom.edges(p1x, p1y, p2x, p2y, p3x, p3y, p4x,p4y,p5x,p5y,p6x,p6y,p7x,p7y);
+            int y1 = 10000;//top y Unused
+            int y2 = 0;//bottom y
+            for (int i = 0; i < edges.Length; i++)
+            {
+                if (edges[i] < y1)
+                {
+                    y1 = (Int32)edges[i];
+                }
+                if (edges[i] > y2)
+                {
+                    y2 = (Int32)edges[i];
+                }
+            }
+            CustomShape custom = new CustomShape(new Rectangle(x, y, x2, y2));
+            // custom.edges(point1, point2, point3, point4, point5, point6, point7);
+            custom.edges(p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y, p5x, p5y, p6x, p6y, p7x, p7y);
 
             custom.FillColor = ColorFill;
             custom.Rotation = Rotation;
@@ -242,10 +236,10 @@ namespace Draw
             ShapeList.Add(custom);
 
         }
-        
+
         public void RotateSelection(Graphics grfx)
         {
-            foreach(var item in Selection)
+            foreach (var item in Selection)
                 item.Rotate(grfx);
         }
 
@@ -253,13 +247,13 @@ namespace Draw
         {
             if (Selection != null)
             {
-                foreach(var item in Selection)
+                foreach (var item in Selection)
                 {
                     item.FillColor = ColorFill;
                     item.BorderColor = ColorBorder;
                 }
             }
-             
+
         }
         /*
         public void AddRandomTriangle()
@@ -298,19 +292,19 @@ namespace Draw
             return null;
         }
 
-       /* public Shape ContainsPoint(PointF[] polygon, PointF point)
-        {
-            for (int i = ShapeList.Count - 1; i >= 0; i--)
-            {
-                if (ShapeList[i].Contains(polygon, point))
-                {
-                    // ShapeList[i].FillColor = Color.Red; 
-                    return ShapeList[i];
-                }
-            }
-            return null;
-        }
-        */
+        /* public Shape ContainsPoint(PointF[] polygon, PointF point)
+         {
+             for (int i = ShapeList.Count - 1; i >= 0; i--)
+             {
+                 if (ShapeList[i].Contains(polygon, point))
+                 {
+                     // ShapeList[i].FillColor = Color.Red; 
+                     return ShapeList[i];
+                 }
+             }
+             return null;
+         }
+         */
 
         /// <summary>
         /// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
@@ -318,7 +312,7 @@ namespace Draw
         /// <param name="p">Вектор на транслация.</param>
         public void TranslateTo(PointF p)
         {
-            if(Selection.Count == 1)
+            if (Selection.Count == 1)
             {
                 Selection[0].Location = new PointF(Selection[0].Location.X + p.X - lastLocation.X, Selection[0].Location.Y + p.Y - lastLocation.Y);
                 lastLocation = p;
@@ -331,7 +325,7 @@ namespace Draw
                     // lastLocation = p;
                 }
 
-                if(Selection != null)
+                if (Selection != null)
                 {
                     lastLocation = p;
                 }
@@ -390,19 +384,19 @@ namespace Draw
         {
             base.Draw(grfx);
             if (Selection != null)
-            {                
-                foreach(var item in Selection)
+            {
+                foreach (var item in Selection)
                 {
                     grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
                 }
-                 
+
             }
         }
 
         public void GroupSelection() // 
         {
             if (Selection.Count < 2)
-                return; 
+                return;
 
             float minX = float.PositiveInfinity;
             float minY = float.PositiveInfinity;
@@ -427,7 +421,7 @@ namespace Draw
 
             GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
 
-            group.SubShapes = Selection;    
+            group.SubShapes = Selection;
 
             Selection = new List<Shape>();
             Selection.Add(group);
@@ -442,9 +436,9 @@ namespace Draw
 
         public void GroupDeselection()
         {
-            foreach(var item in Selection.ToArray())
+            foreach (var item in Selection.ToArray())
             {
-                if(item.GetType() == typeof(GroupShape))
+                if (item.GetType() == typeof(GroupShape))
                 {
                     GroupShape group = (GroupShape)item;
                     if (group.SubShapes.Count <= 1)
@@ -460,14 +454,14 @@ namespace Draw
                 }
             }
 
-           
+
         }
 
         public void RemoveLast()
         {
             if (ShapeList.Count != 0)
             {
-                foreach(var item in Selection.ToArray())
+                foreach (var item in Selection.ToArray())
                 {
                     if (item == ShapeList[0])
                         Selection.Remove(item);
@@ -478,7 +472,7 @@ namespace Draw
 
         public void RemoveAll()
         {
-            if(ShapeList.Count != 0)
+            if (ShapeList.Count != 0)
             {
                 Selection.Clear();
                 ShapeList.Clear();
@@ -487,11 +481,11 @@ namespace Draw
 
         public void RemoveSelected()
         {
-            if(ShapeList.Count != 0)
+            if (ShapeList.Count != 0)
             {
-                foreach(var item in ShapeList.ToArray())
+                foreach (var item in ShapeList.ToArray())
                 {
-                    if(Selection.Contains(item))
+                    if (Selection.Contains(item))
                     {
                         Selection.Remove(item);
                         ShapeList.Remove(item);
@@ -502,7 +496,7 @@ namespace Draw
 
         public void RemoveSpecific(Shape selected)
         {
-            if(ShapeList.Count != 0)
+            if (ShapeList.Count != 0)
             {
                 Selection.RemoveAll(x => x == selected);
                 ShapeList.RemoveAll(x => x == selected);

@@ -66,12 +66,12 @@ namespace Draw
         {
             // dialogProcessor.ReRotate(sender, e);
             dialogProcessor.ReDraw(sender, e);
-            
+
             // dialogProcessor.ReDrawSelection(e.Graphics);
 
             if (removeButton.Checked)
             {
-                foreach(var item in dialogProcessor.Selection)
+                foreach (var item in dialogProcessor.Selection)
                     dialogProcessor.Remove(sender, e, item);
 
                 statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
@@ -166,13 +166,9 @@ namespace Draw
                 var sel = dialogProcessor.ContainsPoint(e.Location);
                 if (sel == null)
                     return;
-
                 if (dialogProcessor.Selection.Contains(sel))
                 {
-                //    if(dialogProcessor.Selection.Count != 1)
-                //        dialogProcessor.Selection.Remove(sel);
-
-                    if(unselectButton.Checked)
+                    if (unselectButton.Checked)
                     {
                         dialogProcessor.Selection.Remove(sel);
                     }
@@ -181,7 +177,7 @@ namespace Draw
                 {
                     dialogProcessor.Selection.Add(sel);
                 }
-                
+
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)
                 {
@@ -209,7 +205,7 @@ namespace Draw
                     System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Cross;
                     statusBar.Items[0].Text = "Последно действие: Рисуване на примитив";
 
-                    foreach(var item in dialogProcessor.Selection)
+                    foreach (var item in dialogProcessor.Selection)
                     {
                         item.FillColor = dialogProcessor.FillColor;
                         item.BorderColor = dialogProcessor.ColorBorder;
@@ -268,7 +264,7 @@ namespace Draw
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
 
                 var sel = dialogProcessor.ContainsPoint(e.Location);
-                if(sel != null)
+                if (sel != null)
                 {
                     dialogProcessor.RemoveSpecific(dialogProcessor.ContainsPoint(e.Location));
 
@@ -276,9 +272,9 @@ namespace Draw
 
                     viewPort.Invalidate();
                 }
-                
-                   
-                
+
+
+
             }
             if (lineButton.Checked)
             {
@@ -315,12 +311,19 @@ namespace Draw
         /// </summary>
         void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (dialogProcessor.IsDragging)
+            if (dialogProcessor.IsDragging && !removeButton.Checked)
             {
-                if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
+                if (dialogProcessor.Selection != null)
+                    statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
+
                 dialogProcessor.TranslateTo(e.Location);
                 viewPort.Invalidate();
             }
+            else if (dialogProcessor.IsDragging)
+            {
+
+            }
+
         }
 
         /// <summary>
@@ -524,7 +527,7 @@ namespace Draw
         {
             if (dialogProcessor.Selection != null)
             {
-                foreach(var item in dialogProcessor.Selection)
+                foreach (var item in dialogProcessor.Selection)
                     item.Rotation = 90F;
 
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
@@ -541,7 +544,7 @@ namespace Draw
         {
             if (dialogProcessor.Selection != null)
             {
-                foreach(var item in dialogProcessor.Selection)
+                foreach (var item in dialogProcessor.Selection)
                     item.Rotation = 180F;
 
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
@@ -558,7 +561,7 @@ namespace Draw
         {
             if (dialogProcessor.Selection != null)
             {
-                foreach(var item in dialogProcessor.Selection)
+                foreach (var item in dialogProcessor.Selection)
                     item.Rotation = 270F;
 
                 statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
@@ -584,7 +587,7 @@ namespace Draw
             int.TryParse(value, out int height);
 
             if (dialogProcessor.Selection != null)
-                foreach(var item in dialogProcessor.Selection)
+                foreach (var item in dialogProcessor.Selection)
                     item.Size = new Size(width, height);
 
             else if (width == 0 || height == 0)
@@ -652,7 +655,7 @@ namespace Draw
 
         private void toolStripButton1_Click_2(object sender, EventArgs e)
         {
-           
+
         }
 
         private void selectedShapeToolStripMenuItem_Click(object sender, EventArgs e)

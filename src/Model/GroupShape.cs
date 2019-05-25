@@ -41,6 +41,7 @@ namespace Draw
             else
                 return false;
         }
+
         public override bool Contains(PointF[] Polygon, PointF point)
         {
             if (base.Contains(Polygon, point))
