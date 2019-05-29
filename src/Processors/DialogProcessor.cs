@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Draw
@@ -33,13 +34,6 @@ namespace Draw
         {
             get { return selection; }
             set { selection = value; }
-        }
-
-        private Dictionary<Shape, Shape> selectionCheck = new Dictionary<Shape, Shape>();
-        public Dictionary<Shape, Shape> SelectionCheck
-        {
-            get { return selectionCheck; }
-            set { selectionCheck = value; }
         }
 
         private Color borderColor;
@@ -393,7 +387,74 @@ namespace Draw
             }
         }
 
-        public void GroupSelection() // 
+        public void SelectAll()
+        {
+            Selection = new List<Shape>(ShapeList);
+        }
+
+        public void FindByName()
+        {
+            string name = ShowDialog("Find by name", "Find Shapes");
+
+            foreach (var shape in ShapeList)
+            {
+                if (shape.Name == name)
+                {
+                    Selection.Add(shape);
+                }
+            }
+        }
+
+        public void FindByShapeEllipse()
+        {
+            foreach (var shape in ShapeList)
+            {
+                if (shape.GetType() == typeof(EllipseShape))
+                {
+                    Selection.Add(shape);
+                }
+            }
+        }
+
+        public void FindByShapeRectangle()
+        {
+            foreach (var shape in ShapeList)
+            {
+                if (shape.GetType() == typeof(RectangleShape))
+                {
+                    Selection.Add(shape);
+                }
+            }
+        }
+
+        public void FindByShapeCustomShape()
+        {
+            foreach (var shape in ShapeList)
+            {
+                if (shape.GetType() == typeof(CustomShape))
+                {
+                    Selection.Add(shape);
+                }
+            }
+        }
+
+        public void FindByShapeGroupShape()
+        {
+            foreach (var shape in ShapeList)
+            {
+                if (shape.GetType() == typeof(GroupShape))
+                {
+                    Selection.Add(shape);
+                }
+            }
+        }
+
+        public void DeselectAll()
+        {
+            Selection.Clear();
+        }
+
+        public void GroupSelection()
         {
             if (Selection.Count < 2)
                 return;
@@ -500,6 +561,16 @@ namespace Draw
             {
                 Selection.RemoveAll(x => x == selected);
                 ShapeList.RemoveAll(x => x == selected);
+            }
+        }
+
+        public void Rename()
+        {
+            if (Selection.Count != 0)
+            {
+                string name = ShowDialog("Input name", "Shape Name");
+
+                Selection.ForEach(x => x.Name = name);
             }
         }
 

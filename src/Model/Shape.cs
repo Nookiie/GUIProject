@@ -50,6 +50,16 @@ namespace Draw
         #region Properties
 
         /// <summary>
+        /// Име на елемента
+        /// </summary>
+        private string name;
+        public virtual string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        /// <summary>
         /// Обхващащ правоъгълник на елемента.
         /// </summary>
         private RectangleF rectangle;

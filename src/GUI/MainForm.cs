@@ -671,5 +671,67 @@ namespace Draw
 
             viewPort.Invalidate();
         }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.SelectAll();
+
+
+            viewPort.Invalidate();
+        }
+
+        private void deselectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.DeselectAll();
+
+            viewPort.Invalidate();
+        }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.Rename();
+
+            viewPort.Invalidate();
+        }
+
+        private void byNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByName();
+
+            viewPort.Invalidate();
+        }
+
+        private void byShapeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rectangleToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByShapeRectangle();
+
+            viewPort.Invalidate();
+        }
+
+        private void ellipseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByShapeEllipse();
+
+            viewPort.Invalidate();
+        }
+
+        private void customShapeToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByShapeCustomShape();
+
+            viewPort.Invalidate();
+        }
+
+        private void groupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByShapeGroupShape();
+
+            viewPort.Invalidate();
+        }
     }
 }
