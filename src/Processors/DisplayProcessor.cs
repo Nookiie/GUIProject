@@ -45,7 +45,7 @@ namespace Draw
         {
             get { return imageList; }
             set { imageList = value; }
-        }   
+        }
 
         #endregion
 
