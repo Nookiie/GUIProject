@@ -104,7 +104,6 @@ namespace Draw.src.Model
                  point1,
                  point2,
                  point3,
-
              };
             Polygon = curvePoints;
 
