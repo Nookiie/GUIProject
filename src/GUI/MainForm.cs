@@ -108,6 +108,14 @@ namespace Draw
 
             viewPort.Invalidate();
         }
+        private void DrawTriangleSpeedButton_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomTriangle();
+
+            statusBar.Items[0].Text = "Последно действие: Добавяне на триъгълник";
+
+            viewPort.Invalidate();
+        }
 
         /// <summary>
         /// Image Insertion Method
@@ -747,5 +755,7 @@ namespace Draw
         {
 
         }
+
+      
     }
 }
