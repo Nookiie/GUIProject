@@ -36,7 +36,7 @@ namespace Draw
 
         public MainForm()
         {
-            //
+            //  
             // The InitializeComponent() call is required for Windows Forms designer support.
             //
             InitializeComponent();
@@ -166,6 +166,7 @@ namespace Draw
                 var sel = dialogProcessor.ContainsPoint(e.Location);
                 if (sel == null)
                     return;
+
                 if (dialogProcessor.Selection.Contains(sel))
                 {
                     if (unselectButton.Checked)
@@ -188,16 +189,22 @@ namespace Draw
                     viewPort.Invalidate();
                 }
             }
-            if (paintButton.Checked)
+            if(unselectButton.Checked)
             {
                 var sel = dialogProcessor.ContainsPoint(e.Location);
                 if (sel == null)
                     return;
 
-                if (dialogProcessor.Selection.Contains(sel))
+                if(dialogProcessor.Selection.Contains(sel))
+                {
                     dialogProcessor.Selection.Remove(sel);
-                else
-                    dialogProcessor.Selection.Add(sel);
+                }
+            }
+            if (paintButton.Checked)
+            {
+                var sel = dialogProcessor.ContainsPoint(e.Location);
+                if (sel == null)
+                    return;
 
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)
@@ -210,6 +217,9 @@ namespace Draw
                         item.FillColor = dialogProcessor.FillColor;
                         item.BorderColor = dialogProcessor.ColorBorder;
                     }
+                    sel.FillColor = dialogProcessor.FillColor;
+                    sel.BorderColor = dialogProcessor.ColorBorder;
+
                     viewPort.Invalidate();
                 }
             }
@@ -219,9 +229,6 @@ namespace Draw
                 if (sel == null)
                     return;
 
-                if (dialogProcessor.Selection.Contains(sel))
-                    dialogProcessor.Selection.Remove(sel);
-                else
                     dialogProcessor.Selection.Add(sel);
 
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
@@ -260,7 +267,7 @@ namespace Draw
                 else
                     dialogProcessor.Selection.Add(sel);
 
-    */
+                */
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
 
                 var sel = dialogProcessor.ContainsPoint(e.Location);
@@ -268,13 +275,12 @@ namespace Draw
                 {
                     dialogProcessor.RemoveSpecific(dialogProcessor.ContainsPoint(e.Location));
 
+                    dialogProcessor.RemoveSelected();
+
                     statusBar.Items[0].Text = "Последно действие: Изтриване на примитив";
 
                     viewPort.Invalidate();
                 }
-
-
-
             }
             if (lineButton.Checked)
             {
@@ -732,6 +738,11 @@ namespace Draw
             dialogProcessor.FindByShapeGroupShape();
 
             viewPort.Invalidate();
+        }
+
+        private void paintButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

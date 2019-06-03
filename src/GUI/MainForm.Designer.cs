@@ -49,12 +49,26 @@
             this.selectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deselectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rectangleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ellipseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.customShapeToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customShapeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusStrip();
@@ -86,20 +100,6 @@
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customShapeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deselectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.byNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.byShapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rectangleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ellipseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.customShapeToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -146,25 +146,25 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.newToolStripMenuItem.Text = "New";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -282,6 +282,22 @@
             this.removeGroupToolStripMenuItem.Text = "Remove Group";
             this.removeGroupToolStripMenuItem.Click += new System.EventHandler(this.removeGroupToolStripMenuItem_Click);
             // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
+            // deselectAllToolStripMenuItem
+            // 
+            this.deselectAllToolStripMenuItem.Name = "deselectAllToolStripMenuItem";
+            this.deselectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.deselectAllToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.deselectAllToolStripMenuItem.Text = "Deselect All";
+            this.deselectAllToolStripMenuItem.Click += new System.EventHandler(this.deselectAllToolStripMenuItem_Click);
+            // 
             // removeSelectedShapeToolStripMenuItem
             // 
             this.removeSelectedShapeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -317,6 +333,63 @@
             this.selectedShapeToolStripMenuItem.Text = "Selected Shape";
             this.selectedShapeToolStripMenuItem.Click += new System.EventHandler(this.selectedShapeToolStripMenuItem_Click);
             // 
+            // findToolStripMenuItem
+            // 
+            this.findToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.byNameToolStripMenuItem,
+            this.byShapeToolStripMenuItem});
+            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.findToolStripMenuItem.Text = "Find";
+            // 
+            // byNameToolStripMenuItem
+            // 
+            this.byNameToolStripMenuItem.Name = "byNameToolStripMenuItem";
+            this.byNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.byNameToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.byNameToolStripMenuItem.Text = "By Name";
+            this.byNameToolStripMenuItem.Click += new System.EventHandler(this.byNameToolStripMenuItem_Click);
+            // 
+            // byShapeToolStripMenuItem
+            // 
+            this.byShapeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rectangleToolStripMenuItem1,
+            this.ellipseToolStripMenuItem1,
+            this.customShapeToolStripMenuItem2,
+            this.groupToolStripMenuItem});
+            this.byShapeToolStripMenuItem.Name = "byShapeToolStripMenuItem";
+            this.byShapeToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.byShapeToolStripMenuItem.Text = "By Shape";
+            this.byShapeToolStripMenuItem.Click += new System.EventHandler(this.byShapeToolStripMenuItem_Click);
+            // 
+            // rectangleToolStripMenuItem1
+            // 
+            this.rectangleToolStripMenuItem1.Name = "rectangleToolStripMenuItem1";
+            this.rectangleToolStripMenuItem1.Size = new System.Drawing.Size(179, 26);
+            this.rectangleToolStripMenuItem1.Text = "Rectangle";
+            this.rectangleToolStripMenuItem1.Click += new System.EventHandler(this.rectangleToolStripMenuItem1_Click);
+            // 
+            // ellipseToolStripMenuItem1
+            // 
+            this.ellipseToolStripMenuItem1.Name = "ellipseToolStripMenuItem1";
+            this.ellipseToolStripMenuItem1.Size = new System.Drawing.Size(179, 26);
+            this.ellipseToolStripMenuItem1.Text = "Ellipse";
+            this.ellipseToolStripMenuItem1.Click += new System.EventHandler(this.ellipseToolStripMenuItem1_Click);
+            // 
+            // customShapeToolStripMenuItem2
+            // 
+            this.customShapeToolStripMenuItem2.Name = "customShapeToolStripMenuItem2";
+            this.customShapeToolStripMenuItem2.Size = new System.Drawing.Size(179, 26);
+            this.customShapeToolStripMenuItem2.Text = "Custom Shape";
+            this.customShapeToolStripMenuItem2.Click += new System.EventHandler(this.customShapeToolStripMenuItem2_Click);
+            // 
+            // groupToolStripMenuItem
+            // 
+            this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
+            this.groupToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.groupToolStripMenuItem.Text = "Group";
+            this.groupToolStripMenuItem.Click += new System.EventHandler(this.groupToolStripMenuItem_Click);
+            // 
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -334,6 +407,44 @@
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rectangleToolStripMenuItem,
+            this.ellipseToolStripMenuItem,
+            this.customShapeToolStripMenuItem1});
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.addToolStripMenuItem.Text = "Add";
+            // 
+            // rectangleToolStripMenuItem
+            // 
+            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
+            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.rectangleToolStripMenuItem.Text = "Rectangle";
+            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
+            // 
+            // ellipseToolStripMenuItem
+            // 
+            this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
+            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.ellipseToolStripMenuItem.Text = "Ellipse";
+            this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // customShapeToolStripMenuItem1
+            // 
+            this.customShapeToolStripMenuItem1.Name = "customShapeToolStripMenuItem1";
+            this.customShapeToolStripMenuItem1.Size = new System.Drawing.Size(179, 26);
+            this.customShapeToolStripMenuItem1.Text = "Custom Shape";
+            this.customShapeToolStripMenuItem1.Click += new System.EventHandler(this.customShapeToolStripMenuItem_Click);
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.renameToolStripMenuItem.Text = "Rename";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -345,7 +456,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -448,6 +559,7 @@
             this.paintButton.Name = "paintButton";
             this.paintButton.Size = new System.Drawing.Size(24, 24);
             this.paintButton.Text = "Paint";
+            this.paintButton.Click += new System.EventHandler(this.paintButton_Click);
             // 
             // sizeButton
             // 
@@ -627,117 +739,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rectangleToolStripMenuItem,
-            this.ellipseToolStripMenuItem,
-            this.customShapeToolStripMenuItem1});
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.addToolStripMenuItem.Text = "Add";
-            // 
-            // rectangleToolStripMenuItem
-            // 
-            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.rectangleToolStripMenuItem.Text = "Rectangle";
-            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
-            // 
-            // ellipseToolStripMenuItem
-            // 
-            this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
-            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.ellipseToolStripMenuItem.Text = "Ellipse";
-            this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // customShapeToolStripMenuItem1
-            // 
-            this.customShapeToolStripMenuItem1.Name = "customShapeToolStripMenuItem1";
-            this.customShapeToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
-            this.customShapeToolStripMenuItem1.Text = "Custom Shape";
-            this.customShapeToolStripMenuItem1.Click += new System.EventHandler(this.customShapeToolStripMenuItem_Click);
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.selectAllToolStripMenuItem.Text = "Select All";
-            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
-            // 
-            // deselectAllToolStripMenuItem
-            // 
-            this.deselectAllToolStripMenuItem.Name = "deselectAllToolStripMenuItem";
-            this.deselectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deselectAllToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.deselectAllToolStripMenuItem.Text = "Deselect All";
-            this.deselectAllToolStripMenuItem.Click += new System.EventHandler(this.deselectAllToolStripMenuItem_Click);
-            // 
-            // renameToolStripMenuItem
-            // 
-            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.renameToolStripMenuItem.Text = "Rename";
-            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
-            // 
-            // findToolStripMenuItem
-            // 
-            this.findToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.byNameToolStripMenuItem,
-            this.byShapeToolStripMenuItem});
-            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
-            this.findToolStripMenuItem.Text = "Find";
-            // 
-            // byNameToolStripMenuItem
-            // 
-            this.byNameToolStripMenuItem.Name = "byNameToolStripMenuItem";
-            this.byNameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.byNameToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.byNameToolStripMenuItem.Text = "By Name";
-            this.byNameToolStripMenuItem.Click += new System.EventHandler(this.byNameToolStripMenuItem_Click);
-            // 
-            // byShapeToolStripMenuItem
-            // 
-            this.byShapeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rectangleToolStripMenuItem1,
-            this.ellipseToolStripMenuItem1,
-            this.customShapeToolStripMenuItem2,
-            this.groupToolStripMenuItem});
-            this.byShapeToolStripMenuItem.Name = "byShapeToolStripMenuItem";
-            this.byShapeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.byShapeToolStripMenuItem.Text = "By Shape";
-            this.byShapeToolStripMenuItem.Click += new System.EventHandler(this.byShapeToolStripMenuItem_Click);
-            // 
-            // rectangleToolStripMenuItem1
-            // 
-            this.rectangleToolStripMenuItem1.Name = "rectangleToolStripMenuItem1";
-            this.rectangleToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
-            this.rectangleToolStripMenuItem1.Text = "Rectangle";
-            this.rectangleToolStripMenuItem1.Click += new System.EventHandler(this.rectangleToolStripMenuItem1_Click);
-            // 
-            // ellipseToolStripMenuItem1
-            // 
-            this.ellipseToolStripMenuItem1.Name = "ellipseToolStripMenuItem1";
-            this.ellipseToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
-            this.ellipseToolStripMenuItem1.Text = "Ellipse";
-            this.ellipseToolStripMenuItem1.Click += new System.EventHandler(this.ellipseToolStripMenuItem1_Click);
-            // 
-            // customShapeToolStripMenuItem2
-            // 
-            this.customShapeToolStripMenuItem2.Name = "customShapeToolStripMenuItem2";
-            this.customShapeToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
-            this.customShapeToolStripMenuItem2.Text = "Custom Shape";
-            this.customShapeToolStripMenuItem2.Click += new System.EventHandler(this.customShapeToolStripMenuItem2_Click);
-            // 
-            // groupToolStripMenuItem
-            // 
-            this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
-            this.groupToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.groupToolStripMenuItem.Text = "Group";
-            this.groupToolStripMenuItem.Click += new System.EventHandler(this.groupToolStripMenuItem_Click);
-            // 
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -766,7 +767,7 @@
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Draw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
