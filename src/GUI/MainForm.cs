@@ -189,15 +189,18 @@ namespace Draw
                     viewPort.Invalidate();
                 }
             }
-            if(unselectButton.Checked)
+            if (unselectButton.Checked)
             {
                 var sel = dialogProcessor.ContainsPoint(e.Location);
                 if (sel == null)
                     return;
 
-                if(dialogProcessor.Selection.Contains(sel))
+                if(dialogProcessor.Selection != null)
                 {
-                    dialogProcessor.Selection.Remove(sel);
+                    if (dialogProcessor.Selection.Contains(sel))
+                    {
+                        dialogProcessor.Selection.Remove(sel);
+                    }
                 }
             }
             if (paintButton.Checked)
@@ -229,7 +232,7 @@ namespace Draw
                 if (sel == null)
                     return;
 
-                    dialogProcessor.Selection.Add(sel);
+                dialogProcessor.Selection.Add(sel);
 
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.No;
                 if (dialogProcessor.Selection != null)

@@ -14,7 +14,6 @@ namespace Draw.src.Model
         {
 
         }
-
         public Image(Bitmap image) : base(image)
         {
 
