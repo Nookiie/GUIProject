@@ -231,6 +231,73 @@ namespace Draw
 
         }
 
+        public void AddRandomTriangle()
+        {
+            Random rnd = new Random();
+
+            int x = rnd.Next(100, 1000);    //Generate random position for the rectangle
+            int y = rnd.Next(100, 600);
+            float p1x = 0;              //Left most x in the rectangle
+            //////    float p1y = 100;  //Manually  
+            //////    float p2x = 150;  //Manually
+            //////    float p2y = 100;             // the top most Y edge of the rectangle
+            float p2x = 150;
+
+            float p3x = (p2x + p1x) / 2;
+            float p3y = 0;
+
+            float p1y = (float)Math.Sqrt(p2x * p2x - (p2x / 2) * (p2x / 2));
+
+            //////    float p2y = 100;  //Manually
+            float p2y = (float)Math.Sqrt(p2x * p2x - (p2x / 2) * (p2x / 2));
+
+            float[] edges = new float[3];
+
+            edges[0] = p1x;
+            edges[1] = p2x;
+            edges[2] = p3x;
+
+            int x1 = 10000;//leftmost x Unused
+            int x2 = 0;//rightmost x
+            for (int i = 0; i < edges.Length; i++)
+            {
+                if (edges[i] < x1)
+                {
+                    x1 = (Int32)edges[i];
+                }
+                if (edges[i] > x2)
+                {
+                    x2 = (Int32)edges[i];
+                }
+            }
+
+            edges[0] = p1y;
+            edges[1] = p2y;
+            edges[2] = p3y;
+
+            int y1 = 10000;//top y Unused
+            int y2 = 0;//bottom y
+            for (int i = 0; i < edges.Length; i++)
+            {
+                if (edges[i] < y1)
+                {
+                    y1 = (Int32)edges[i];
+                }
+                if (edges[i] > y2)
+                {
+                    y2 = (Int32)edges[i];
+                }
+            }
+            TriangleShape triangle = new TriangleShape(new Rectangle(x, y, x2, y2));
+            triangle.edges(p1x, p1y, p2x, p2y, p3x, p3y);
+
+            triangle.FillColor = ColorFill;
+            triangle.Rotation = Rotation;
+            triangle.BorderColor = ColorBorder;
+
+            ShapeList.Add(triangle);
+        }
+
         public void RotateSelection(Graphics grfx)
         {
             foreach (var item in Selection)
