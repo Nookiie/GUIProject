@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Draw.src.Model
 {
+	[Serializable]
     public class CustomShape : Shape
     {
         #region Constructor

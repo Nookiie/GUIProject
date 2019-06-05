@@ -8,6 +8,7 @@ namespace Draw
     /// <summary>
     /// Класът ... е основен примитив, който е наследник на базовия Shape.
     /// </summary>
+	[Serializable]
     public class EllipseShape : Shape
     {
         #region Constructor

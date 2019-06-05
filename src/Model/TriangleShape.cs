@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Draw.src.Model
 {
+	[Serializable]
     public class TriangleShape : Shape
     {
         #region Constructor
@@ -26,7 +27,7 @@ namespace Draw.src.Model
 
         }
 
-        #endregion
+		#endregion
 
         #region Methods
 

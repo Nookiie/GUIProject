@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 
@@ -19,10 +20,11 @@ namespace Draw.src.Processors
 
         public override void DrawShape(Graphics grfx, Shape item)
         {
-            // grfx.Transform = new Matrix(), item.Matrix()...
-            // grfx.Transform = new System.Drawing.Drawing2D.Matrix();
-            // grfx.Transform.RotateAt(20, new PointF(item.Location.X + item.Width / 2, item.Location.Y + item.Height / 2)); // From the Center
-            item.Rotate(grfx);
+			grfx.Transform = new Matrix();
+           // grfx.Transform = new System.Drawing.Drawing2D.Matrix();
+           // grfx.Transform.RotateAt(20, new PointF(item.Location.X + item.Width / 2, item.Location.Y + item.Height / 2)); // From the Center
+			item.Rotate(grfx);
+			grfx.RotateTransform(item.Rotation);
 
             base.DrawShape(grfx, item);
 

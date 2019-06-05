@@ -7,6 +7,7 @@ namespace Draw
     /// <summary>
     /// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
     /// </summary>
+	[Serializable]
     public abstract class Shape
     {
         #region Constructors
@@ -170,8 +171,10 @@ namespace Draw
         /// <param name="grfx">Къде да бъде визуализиран елемента.</param>
         public virtual void DrawSelf(Graphics grfx)
         {
-            // shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
-            grfx.RotateTransform(Rotation); // From the Center)); // From the Center)
+			// shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
+			grfx.Transform = new Matrix();
+            grfx.RotateTransform(Rotation); // From the Center;
+
         }
 
         public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)
