@@ -331,8 +331,8 @@ namespace Draw
 		{
 			if (dialogProcessor.IsDragging && !removeButton.Checked)
 			{
-				if (dialogProcessor.Selection != null)
-					statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
+                if (dialogProcessor.Selection != null)
+                    statusBar.Items[0].Text = "Последно действие: Влачене (" + e.X + " " + e.Y + " )";
 
 				dialogProcessor.TranslateTo(e.Location);
 				viewPort.Invalidate();
@@ -527,7 +527,7 @@ namespace Draw
 
 				foreach (var item in dialogProcessor.Selection)
 				{
-					item.Rotation = rotation;
+                    item.Rotation = rotation;
 				}
 
 				statusBar.Items[0].Text = "Последно действие: Ротация на избрана фигура";
@@ -783,5 +783,15 @@ namespace Draw
 
 			viewPort.Invalidate();
 		}
-	}
+
+        private void rotateBy10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

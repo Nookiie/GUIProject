@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Draw.src.Processors
 {
-    public class GeometricProcessor : DialogProcessor
+    public class GeometricProcessor : DisplayProcessor
     {
         #region Constructor
 
@@ -20,12 +20,17 @@ namespace Draw.src.Processors
 
         public override void DrawShape(Graphics grfx, Shape item)
         {
-			grfx.Transform = new Matrix();
-           // grfx.Transform = new System.Drawing.Drawing2D.Matrix();
-           // grfx.Transform.RotateAt(20, new PointF(item.Location.X + item.Width / 2, item.Location.Y + item.Height / 2)); // From the Center
-			item.Rotate(grfx);
-			grfx.RotateTransform(item.Rotation);
+            // grfx.Transform = new System.Drawing.Drawing2D.Matrix();
+            grfx.Transform = new Matrix();
+            grfx.Transform.RotateAt(item.Rotation, new PointF(item.Location.X + item.Width / 2, item.Location.Y + item.Height / 2)); // From the Center
+            // item.Rotate(grfx);
+            // grfx.RotateTransform(item.Rotation);
 
+            /*
+            grfx.TranslateTransform(item.Location.X, item.Location.Y);
+            grfx.RotateTransform(item.Rotation);
+            grfx.TranslateTransform(-item.Location.X, -item.Location.Y);
+            */
             base.DrawShape(grfx, item);
 
         }

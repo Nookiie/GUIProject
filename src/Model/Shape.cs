@@ -60,6 +60,14 @@ namespace Draw
             set { name = value; }
         }
 
+        private Matrix rotationMatix;
+        public virtual Matrix RotationMatrix
+        {
+            get { return rotationMatix; }
+            set { rotationMatix = value; }
+        }
+
+
         /// <summary>
         /// Обхващащ правоъгълник на елемента.
         /// </summary>
@@ -171,10 +179,10 @@ namespace Draw
         /// <param name="grfx">Къде да бъде визуализиран елемента.</param>
         public virtual void DrawSelf(Graphics grfx)
         {
-			// shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
-			grfx.Transform = new Matrix();
-            grfx.RotateTransform(Rotation); // From the Center;
+		   //  shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 
+			 grfx.Transform = new Matrix();
+             grfx.RotateTransform(Rotation); // From the Center;
         }
 
         public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)

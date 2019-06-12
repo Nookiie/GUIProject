@@ -1,4 +1,5 @@
 ﻿using Draw.src.Model;
+using Draw.src.Processors;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +14,7 @@ namespace Draw
 	/// <summary>
 	/// Класът, който ще бъде използван при управляване на диалога.
 	/// </summary>
-	public class DialogProcessor : DisplayProcessor
+	public class DialogProcessor : GeometricProcessor
 	{
 		#region Constructor
 
@@ -448,15 +449,14 @@ namespace Draw
 
 		public override void Draw(Graphics grfx)
 		{
-			base.Draw(grfx);
 			if (Selection != null)
 			{
 				foreach (var item in Selection)
 				{
 					grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
 				}
-
-			}
+                base.Draw(grfx);
+            }
 		}
 
 		public void SelectAll()

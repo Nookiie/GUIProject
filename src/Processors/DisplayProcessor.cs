@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Draw.src.Model;
+using Draw.src.Processors;
 
 namespace Draw
 {
@@ -66,11 +67,11 @@ namespace Draw
             Remove(e.Graphics, item);
         }
 
-        public void ReRotate(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Rotate(e.Graphics);
-        }
+        /*  public void ReRotate(object sender, PaintEventArgs e)
+          {
+              e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+              Rotate(e.Graphics);
+          }*/
 
         /// <summary>
         /// Визуализация.
@@ -120,18 +121,18 @@ namespace Draw
             item.DrawSelf(grfx, pt1, pt2);
         }
 
-        public virtual void Rotate(Graphics grfx)
-        {
-            foreach (Shape item in selectionGroup)
-            {
-                RotateShape(grfx, item);
-            }
-        }
-
-        public virtual void RotateShape(Graphics grfx, Shape item)
+        /* public virtual void Rotate(Graphics grfx)
+         {
+             foreach (Shape item in selectionGroup)
+             {
+                 RotateShape(grfx, item);
+             }
+         }
+         */
+        /*public virtual void RotateShape(Graphics grfx, Shape item)
         {
             item.Rotate(grfx);
-        }
+        }*/
 
         public virtual void Paint(Color color, Shape item)
         {
