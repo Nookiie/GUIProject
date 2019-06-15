@@ -60,7 +60,6 @@ namespace Draw
             set { name = value; }
         }
 
-
         /// <summary>
         /// ВНИМАНИЕ: ТОЗИ АТРИБУТ ИМА ПРОБЛЕМИ СЪС СЕРИАЛИЗАЦИЯТА
         /// Ротационна матрица, която е ползвана за правилната ротация на примитив и неговият hitbox
@@ -78,21 +77,21 @@ namespace Draw
         /// Обхващащ правоъгълник на елемента.
         /// </summary>
         private RectangleF rectangle;
-        public virtual RectangleF Rectangle
+        public RectangleF Rectangle
         {
             get { return rectangle; }
             set { rectangle = value; }
         }
 
         private PointF point1;
-        public virtual PointF Point1
+        public PointF Point1
         {
             get { return point1; }
             set { point1 = value; }
         }
 
         private PointF point2;
-        public virtual PointF Point2
+        public PointF Point2
         {
             get { return point2; }
             set { point2 = value; }
@@ -101,7 +100,7 @@ namespace Draw
         /// <summary>
         /// Широчина на елемента.
         /// </summary>
-        public virtual float Width
+        public float Width
         {
             get { return Rectangle.Width; }
             set { rectangle.Width = value; }
@@ -110,7 +109,7 @@ namespace Draw
         /// <summary>
         /// Височина на елемента.
         /// </summary>
-        public virtual float Height
+        public float Height
         {
             get { return Rectangle.Height; }
             set { rectangle.Height = value; }
