@@ -74,7 +74,6 @@
     <Compile Include="src\Model\CustomShape.cs" />
     <Compile Include="src\Model\EllipseShape.cs" />
     <Compile Include="src\Model\GroupShape.cs" />
-    <Compile Include="src\Model\Image.cs" />
     <Compile Include="src\Model\LineShape.cs" />
     <Compile Include="src\Model\RectangleShape.cs" />
     <Compile Include="src\Model\Shape.cs" />

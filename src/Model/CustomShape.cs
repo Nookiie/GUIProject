@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Draw.src.Model
 {
-	[Serializable]
+    [Serializable]
     public class CustomShape : Shape
     {
         #region Constructor
@@ -54,22 +54,14 @@ namespace Draw.src.Model
 
         public PointF[] Polygon { get; set; }
 
-        float x1;
-        float x2;
-        float x3;
-        float x4;
-        float x5;
-        float x6;
-        float x7;
+        float x1, x2, x3, x4, x5, x6, x7;
+        float y1, y2, y3, y4, y5, y6, y7;
 
-        float y1;
-        float y2;
-        float y3;
-        float y4;
-        float y5;
-        float y6;
-        float y7;
+        static int numberOfPoints = 7;
+        float[] x = new float[numberOfPoints];
+        float[] y = new float[numberOfPoints];
 
+        PointF[] points = new PointF[numberOfPoints];
         #region Methods
         /// <summary>
         /// Проверка за принадлежност на точка point към правоъгълника.
@@ -101,7 +93,7 @@ namespace Draw.src.Model
         /*public void edges(PointF pt1, PointF pt2, PointF pt3, PointF pt4, PointF pt5,
             PointF pt6, PointF pt7)*/
 
-        public void edges(float x1, float y1, float x2, float y2, float x3,
+        public void Edges(float x1, float y1, float x2, float y2, float x3,
             float y3, float x4, float y4, float x5, float y5, float x6, float y6, float x7, float y7)
         {
             this.x1 = x1;   //Place value from dialogProcessor AddRandomCustomShape                           
@@ -128,6 +120,17 @@ namespace Draw.src.Model
             point6 = new PointF(Rectangle.X + x6, Rectangle.Y + y6);
             point7 = new PointF(Rectangle.X + x7, Rectangle.Y + y7);*/
         }
+
+        /// <summary>
+        /// Възможност за оптимизация на алгоритъма с по-лесно добавяне на повече точки
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void EdgesOptimised(float[] x, float[] y)
+        {
+            this.x = x;
+            this.y = y;
+        }
         public override void DrawSelf(Graphics grfx)
         {
             // Create points that define polygon.
@@ -147,6 +150,12 @@ namespace Draw.src.Model
             PointF point5 = new PointF(Rectangle.X + x5, Rectangle.Y + y5);
             PointF point6 = new PointF(Rectangle.X + x6, Rectangle.Y + y6);
             PointF point7 = new PointF(Rectangle.X + x7, Rectangle.Y + y7);
+
+            for (int i = 0; i < numberOfPoints; i++)
+            {
+                points[i].X = Rectangle.X + x.ElementAt(i);
+                points[i].Y = Rectangle.Y + y.ElementAt(i);
+            }
 
             /*
              PointF point1 = new PointF(Rectangle.X + 10, Rectangle.Y + 10);   //Would work for
@@ -176,18 +185,16 @@ namespace Draw.src.Model
                  point6,
                  point7
              };
+
             Polygon = curvePoints;
 
             grfx.DrawPolygon(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), curvePoints);
             grfx.FillPolygon(new SolidBrush(FillColor), curvePoints);
-
         }
-
         public override void Remove(Graphics grfx)
         {
             base.Remove(grfx);
         }
-
         public override void Rotate(Graphics grfx)
         {
             base.Rotate(grfx);

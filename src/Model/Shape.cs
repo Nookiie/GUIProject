@@ -60,13 +60,19 @@ namespace Draw
             set { name = value; }
         }
 
+
+        /// <summary>
+        /// ВНИМАНИЕ: ТОЗИ АТРИБУТ ИМА ПРОБЛЕМИ СЪС СЕРИАЛИЗАЦИЯТА
+        /// Ротационна матрица, която е ползвана за правилната ротация на примитив и неговият hitbox
+        /// </summary>
+        /*
         private Matrix rotationMatix;
         public virtual Matrix RotationMatrix
         {
             get { return rotationMatix; }
             set { rotationMatix = value; }
         }
-
+        */
 
         /// <summary>
         /// Обхващащ правоъгълник на елемента.
@@ -179,10 +185,10 @@ namespace Draw
         /// <param name="grfx">Къде да бъде визуализиран елемента.</param>
         public virtual void DrawSelf(Graphics grfx)
         {
-		   //  shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
+            //  shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 
-			 grfx.Transform = new Matrix();
-             grfx.RotateTransform(Rotation); // From the Center;
+            grfx.Transform = new Matrix();
+            grfx.RotateTransform(Rotation); // From the Center;
         }
 
         public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)
