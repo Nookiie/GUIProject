@@ -355,7 +355,7 @@ namespace Draw
                     x2 = (Int32)edges[i].X;
                 }
             }
-            
+
             int y1 = 10000;//top y Unused
             int y2 = 0;//bottom y
             for (int i = 0; i < edges.Length; i++)
@@ -370,7 +370,7 @@ namespace Draw
                 }
             }
             TrapezoidShape triangle = new TrapezoidShape(new Rectangle(x, y, x2, y2));
-            triangle.Edges(p1,p2,p3,p4);
+            triangle.Edges(p1, p2, p3, p4);
 
             triangle.FillColor = ColorFill;
             triangle.Rotation = Rotation;
@@ -515,6 +515,50 @@ namespace Draw
             return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
 
+        public void ShowPanelInfo(string caption, string[] infoText)
+        {
+            /*
+            Form prompt = new Form()
+            {
+                Width = 500,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+            */
+            Form prompt = new Form()
+            {
+                Width = 250,
+                Height = 250,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            List<Label> listLabel = new List<Label>();
+            for (int i = 0; i < infoText.Length; i++)
+                listLabel.Add(new Label() { Text = infoText[i] });
+
+            Button confirm = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirm.Click += (sender, e) => { prompt.Close(); };
+
+            foreach (var label in listLabel)
+                prompt.Controls.Add(label);
+
+            prompt.Controls.Add(confirm);
+            prompt.AcceptButton = confirm;
+            prompt.ShowDialog();
+        }
+
         public void SelectBorderColor(Color color)
         {
             if (color != null)
@@ -538,6 +582,14 @@ namespace Draw
                     }
                 }
                 base.Draw(grfx);
+            }
+        }
+
+        public void SpawnByPanel(List<Shape> shapePanel)
+        {
+            foreach (var item in shapePanel)
+            {
+                ShapeList.Add(item);
             }
         }
 
@@ -597,6 +649,17 @@ namespace Draw
             foreach (var shape in ShapeList)
             {
                 if (shape.GetType() == typeof(GroupShape))
+                {
+                    Selection.Add(shape);
+                }
+            }
+        }
+
+        public void FindByPanel(List<Shape> shapePanel)
+        {
+            foreach (var shape in ShapeList)
+            {
+                if (shapePanel.Contains(shape))
                 {
                     Selection.Add(shape);
                 }
@@ -683,7 +746,7 @@ namespace Draw
                 }
                 ShapeList.RemoveAt(0);
             }
-        }
+        } 
 
         public void RemoveAll()
         {
@@ -766,6 +829,15 @@ namespace Draw
 
             bf.Serialize(fs, ShapeList);
             fs.Close();
+        }
+
+        public void PopulatePanel(List<Shape> shapePanel)
+        {
+            shapePanel.Clear();
+            foreach(var item in ShapeList.ToList())
+            {
+                shapePanel.Add(item);
+            }
         }
         #endregion
     }

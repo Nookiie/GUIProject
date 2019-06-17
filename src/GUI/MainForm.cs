@@ -829,5 +829,100 @@ namespace Draw
             viewPort.Invalidate();
 
         }
+
+        private void SaveToPanel1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewPort.Invalidate();
+        }
+
+        private void SaveToPanel2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.ShapePanel2 = dialogProcessor.ShapeList;
+
+            viewPort.Invalidate();
+        }
+
+        private void SaveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.PopulatePanel(dialogProcessor.ShapePanel1);
+
+            viewPort.Invalidate();
+        }
+
+        private void RemoveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.ShapePanel2.Clear();
+
+            viewPort.Invalidate();
+        }
+
+        private void CombineAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in dialogProcessor.ShapePanel2)
+            {
+                dialogProcessor.ShapePanel1.Add(item);
+            }
+            viewPort.Invalidate();
+        }
+
+        private void SaveToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.PopulatePanel(dialogProcessor.ShapePanel2);
+
+            viewPort.Invalidate();
+        }
+
+        private void RemoveAllToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.ShapePanel2.Clear();
+
+            viewPort.Invalidate();
+        }
+
+        private void CombineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in dialogProcessor.ShapePanel1)
+            {
+                dialogProcessor.ShapePanel2.Add(item);
+            }
+            viewPort.Invalidate();
+        }
+       
+        private void InfoToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string[] infoText = { "Shapes:" + dialogProcessor.ShapeList.Count().ToString() };
+
+            dialogProcessor.ShowPanelInfo("Default Panel Info", infoText);
+
+            viewPort.Invalidate();
+        }
+
+        private void SelectAllToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByPanel(dialogProcessor.ShapePanel1);
+
+            viewPort.Invalidate();
+        }
+
+        private void SpawnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.SpawnByPanel(dialogProcessor.ShapePanel1);
+
+            viewPort.Invalidate();
+        }
+
+        private void SelectAllToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByPanel(dialogProcessor.ShapePanel2);
+
+            viewPort.Invalidate();
+        }
+
+        private void SpawnToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.SpawnByPanel(dialogProcessor.ShapePanel2);
+
+            viewPort.Invalidate();
+        }
     }
 }

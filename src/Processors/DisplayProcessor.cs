@@ -34,6 +34,20 @@ namespace Draw
             set { shapeList = value; }
         }
 
+        private List<Shape> shapePanel1 = new List<Shape>();
+        public List<Shape> ShapePanel1
+        {
+            get { return shapePanel1; }
+            set { shapePanel1 = value; }
+        }
+
+        private List<Shape> shapePanel2 = new List<Shape>();
+        public List<Shape> ShapePanel2
+        {
+            get { return shapePanel2; }
+            set { shapePanel2 = value; }
+        }
+
         private List<Shape> selectionGroup = new List<Shape>();
         public List<Shape> SelectionGroup
         {
