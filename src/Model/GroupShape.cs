@@ -8,7 +8,7 @@ namespace Draw
     /// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
     /// </summary>
 	[Serializable]
-    public class GroupShape : Shape // SelectionList needs to be replaced by Selection when Selection is of List<Shape> Type
+    public class GroupShape : Shape 
     {
         #region Constructor
 

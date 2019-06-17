@@ -11,7 +11,6 @@ namespace Draw
     public abstract class Shape
     {
         #region Constructors
-
         public Shape()
         {
 
@@ -72,7 +71,6 @@ namespace Draw
             set { rotationMatix = value; }
         }
         */
-
         /// <summary>
         /// Обхващащ правоъгълник на елемента.
         /// </summary>
@@ -186,8 +184,8 @@ namespace Draw
         {
             //  shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 
-            grfx.Transform = new Matrix();
-            grfx.RotateTransform(Rotation); // From the Center;
+            // grfx.Transform = new Matrix();
+            // grfx.RotateTransform(Rotation); // From the Center;
         }
 
         public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)

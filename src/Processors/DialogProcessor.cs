@@ -257,8 +257,6 @@ namespace Draw
                                         //////    float p2y = 100;             // the top most Y edge of the rectangle
             float p2x = 150; // Changes size
 
-
-
             float p3x = (p2x + p1x) / 2;
             float p3y = 0;
 
