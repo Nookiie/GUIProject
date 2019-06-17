@@ -462,7 +462,13 @@ namespace Draw
             {
                 foreach (var item in Selection)
                 {
-                    grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
+                    using(Matrix m = new Matrix())
+                    {
+                        m.RotateAt(item.Rotation, new PointF(item.Rectangle.Left + (item.Rectangle.Width / 2), item.Rectangle.Top + (item.Rectangle.Height / 2)));
+                        grfx.Transform = m;
+
+                        grfx.DrawRectangle(new Pen(ColorBorder == Color.Empty ? Color.Black : ColorBorder), item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6);
+                    }
                 }
                 base.Draw(grfx);
             }

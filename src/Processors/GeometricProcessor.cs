@@ -33,11 +33,12 @@ namespace Draw.src.Processors
 
             using (Matrix m = new Matrix())
             {
-                m.RotateAt(item.Rotation, new PointF(item.Rectangle.Left + (item.Width / 2),
-                             item.Rectangle.Top + (item.Height / 2)));
+                m.RotateAt(item.Rotation, new PointF(item.Rectangle.Left + (item.Rectangle.Width / 2), item.Rectangle.Top + (item.Rectangle.Height / 2)));
                 grfx.Transform = m;
                 base.DrawShape(grfx, item);
                 grfx.ResetTransform();
+
+                // item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6
             }
         }
         /// <summary>

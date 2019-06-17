@@ -38,12 +38,7 @@ namespace Draw.src.Model
         PointF point3 { get; set; }
         public PointF[] Polygon { get; set; }
 
-        float x1;
-        float x2;
-        float x3;
-        float y1;
-        float y2;
-        float y3;
+        float x1,x2,x3,y1,y2,y3;
         /* public override GraphicsPath GetPath(Rectangle bounds)
          {
              GraphicsPath path = new GraphicsPath();
