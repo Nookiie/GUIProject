@@ -302,8 +302,75 @@ namespace Draw
                     y2 = (Int32)edges[i];
                 }
             }
-            TriangleShape triangle = new TriangleShape(new Rectangle(x, y, x2, y2));
-            triangle.edges(p1x, p1y, p2x, p2y, p3x, p3y);
+            TriangleShape trape = new TriangleShape(new Rectangle(x, y, x2, y2));
+            trape.edges(p1x, p1y, p2x, p2y, p3x, p3y);
+
+            trape.FillColor = ColorFill;
+            trape.Rotation = Rotation;
+            trape.BorderColor = ColorBorder;
+            // triangle.Size = p2x;
+
+            ShapeList.Add(trape);
+        }
+
+        public void AddRandomTrape()
+        {
+            Random rnd = new Random();
+
+            int x = rnd.Next(100, 1000);    //Generate random position for the rectangle
+            int y = rnd.Next(100, 600);
+
+            PointF p1 = new PointF();
+            PointF p2 = new PointF();
+            PointF p3 = new PointF();
+            PointF p4 = new PointF();
+
+            p1.X = 200;
+            p1.Y = 100;
+            p2.X = 50;
+            p2.Y = 100;
+            p3.X = 0;
+            p3.Y = 250;
+            p4.X = 250;
+            p4.Y = 250;
+
+            PointF[] edges = new PointF[4];
+
+            edges[0] = p1;
+            edges[1] = p2;
+            edges[2] = p3;
+            edges[3] = p4;
+
+            int x1 = 10000; //leftmost x Unused
+            int x2 = 0; //rightmost x
+
+            for (int i = 0; i < edges.Length; i++)
+            {
+                if (edges[i].X < x1)
+                {
+                    x1 = (Int32)edges[i].X;
+                }
+                if (edges[i].X > x2)
+                {
+                    x2 = (Int32)edges[i].X;
+                }
+            }
+            
+            int y1 = 10000;//top y Unused
+            int y2 = 0;//bottom y
+            for (int i = 0; i < edges.Length; i++)
+            {
+                if (edges[i].Y < y1)
+                {
+                    y1 = (Int32)edges[i].Y;
+                }
+                if (edges[i].Y > y2)
+                {
+                    y2 = (Int32)edges[i].Y;
+                }
+            }
+            TrapezoidShape triangle = new TrapezoidShape(new Rectangle(x, y, x2, y2));
+            triangle.Edges(p1,p2,p3,p4);
 
             triangle.FillColor = ColorFill;
             triangle.Rotation = Rotation;
@@ -462,7 +529,7 @@ namespace Draw
             {
                 foreach (var item in Selection)
                 {
-                    using(Matrix m = new Matrix())
+                    using (Matrix m = new Matrix())
                     {
                         m.RotateAt(item.Rotation, new PointF(item.Rectangle.Left + (item.Rectangle.Width / 2), item.Rectangle.Top + (item.Rectangle.Height / 2)));
                         grfx.Transform = m;

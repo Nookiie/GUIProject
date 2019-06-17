@@ -71,6 +71,7 @@ namespace Draw
             set { rotationMatix = value; }
         }
         */
+
         /// <summary>
         /// Обхващащ правоъгълник на елемента.
         /// </summary>

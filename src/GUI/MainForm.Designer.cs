@@ -105,6 +105,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.trapezoidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -202,6 +203,7 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // selectColorToolStripMenuItem
             // 
@@ -231,7 +233,8 @@
             this.addShapeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRectangleToolStripMenuItem,
             this.addEllipseToolStripMenuItem,
-            this.customShapeToolStripMenuItem});
+            this.customShapeToolStripMenuItem,
+            this.trapezoidToolStripMenuItem});
             this.addShapeToolStripMenuItem.Name = "addShapeToolStripMenuItem";
             this.addShapeToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
             this.addShapeToolStripMenuItem.Text = "Add Shape";
@@ -791,6 +794,13 @@
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
+            // trapezoidToolStripMenuItem
+            // 
+            this.trapezoidToolStripMenuItem.Name = "trapezoidToolStripMenuItem";
+            this.trapezoidToolStripMenuItem.Size = new System.Drawing.Size(277, 26);
+            this.trapezoidToolStripMenuItem.Text = "Trapezoid";
+            this.trapezoidToolStripMenuItem.Click += new System.EventHandler(this.TrapezoidToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -906,5 +916,6 @@
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem rotateBy10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trapezoidToolStripMenuItem;
     }
 }

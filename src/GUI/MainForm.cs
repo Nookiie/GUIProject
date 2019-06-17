@@ -574,6 +574,11 @@ namespace Draw
             value = dialogProcessor.ShowDialog("Please input height: ", "Changing Height");
             int.TryParse(value, out int height);
 
+            if (width == 0 || height == 0)
+            {
+                MessageBox.Show("Width AND / OR Height are invalid", "Error");
+                return;
+            }
             if (dialogProcessor.Selection != null)
                 foreach (var item in dialogProcessor.Selection)
                 {
@@ -584,10 +589,6 @@ namespace Draw
 
                     }
                 }
-
-            else if (width == 0 || height == 0)
-                MessageBox.Show("Width AND / OR Height are invalid", "Error");
-
             viewPort.Invalidate();
         }
 
@@ -749,7 +750,9 @@ namespace Draw
 
         private void rotateBy10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dialogProcessor.Selection.ForEach(x => x.Rotation += 10);
 
+            viewPort.Invalidate();
         }
 
         private void imageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -814,5 +817,17 @@ namespace Draw
             }
         }
 
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TrapezoidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomTrape();
+
+            viewPort.Invalidate();
+
+        }
     }
 }

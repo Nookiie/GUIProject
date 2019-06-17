@@ -37,8 +37,6 @@ namespace Draw.src.Processors
                 grfx.Transform = m;
                 base.DrawShape(grfx, item);
                 grfx.ResetTransform();
-
-                // item.Location.X - 3, item.Location.Y - 3, item.Width + 6, item.Height + 6
             }
         }
         /// <summary>
