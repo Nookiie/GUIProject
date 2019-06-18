@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Numerics;
 
 namespace Draw
 {
@@ -8,10 +9,9 @@ namespace Draw
     /// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
     /// </summary>
 	[Serializable]
-    public class GroupShape : Shape 
+    public class GroupShape : Shape
     {
         #region Constructor
-
         public GroupShape(RectangleF rect) : base(rect)
         {
 

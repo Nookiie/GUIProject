@@ -731,8 +731,6 @@ namespace Draw
                     ShapeList.Remove(item);
                 }
             }
-
-
         }
 
         public void RemoveLast()
@@ -746,7 +744,7 @@ namespace Draw
                 }
                 ShapeList.RemoveAt(0);
             }
-        } 
+        }
 
         public void RemoveAll()
         {
@@ -834,7 +832,7 @@ namespace Draw
         public void PopulatePanel(List<Shape> shapePanel)
         {
             shapePanel.Clear();
-            foreach(var item in ShapeList.ToList())
+            foreach (var item in ShapeList.ToList())
             {
                 shapePanel.Add(item);
             }

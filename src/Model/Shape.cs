@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Numerics;
 
 namespace Draw
 {
@@ -151,7 +152,6 @@ namespace Draw
         #endregion
 
         #region Methods
-
         /// <summary>
         /// Проверка дали точка point принадлежи на елемента.
         /// </summary>
@@ -160,15 +160,41 @@ namespace Draw
         /// false, ако не пренадлежи</returns>
         public virtual bool Contains(PointF point)
         {
-            return Rectangle.Contains(point.X, point.Y); // Drawable
+            if (Rotation != 0)
+            {
+                double radians = Rotation * Math.PI / 180;
+                PointF center = new PointF(Rectangle.Left + Rectangle.Width / 2, Rectangle.Top + Rectangle.Height / 2);
+
+                float newPointX = point.X - center.X;
+                float newPointY = point.Y - center.Y;
+                double rotationPointX = newPointX * Math.Cos(-radians) - newPointY * Math.Sin(-radians);
+                double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
+                PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+
+                return Rectangle.Contains(translatedPoint);
+            }
+            return Rectangle.Contains(point); // Drawable
         }
 
         public virtual bool Contains(PointF[] Polygon, PointF point)
         {
+            if (Rotation != 0)
+            {
+                double radians = Rotation * Math.PI / 180;
+                PointF center = new PointF(Rectangle.Left + Rectangle.Width / 2, Rectangle.Top + Rectangle.Height / 2);
+
+                float newPointX = point.X - center.X;
+                float newPointY = point.Y - center.Y;
+                double rotationPointX = newPointX * Math.Cos(-radians) - newPointY * Math.Sin(-radians);
+                double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
+
+                PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+            }
+
             bool isInside = false;
             for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
             {
-                if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&
+                if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&   
                 (point.X < (Polygon[j].X - Polygon[i].X) * (point.Y - Polygon[i].Y) / (Polygon[j].Y - Polygon[i].Y) + Polygon[i].X))
                 {
                     isInside = !isInside;

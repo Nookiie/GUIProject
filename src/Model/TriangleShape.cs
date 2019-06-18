@@ -34,8 +34,11 @@ namespace Draw.src.Model
         public HashSet<int> hash = new HashSet<int>();
 
         PointF point1 { get; set; }
+
         PointF point2 { get; set; }
+
         PointF point3 { get; set; }
+
         public PointF[] Polygon { get; set; }
 
         float x1,x2,x3,y1,y2,y3;

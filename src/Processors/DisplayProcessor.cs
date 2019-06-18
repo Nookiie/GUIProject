@@ -34,7 +34,7 @@ namespace Draw
             set { shapeList = value; }
         }
 
-        private List<Shape> shapePanel1 = new List<Shape>();
+        private List<Shape> shapePanel1 = new List<Shape>();    
         public List<Shape> ShapePanel1
         {
             get { return shapePanel1; }

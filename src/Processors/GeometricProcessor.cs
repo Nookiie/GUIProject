@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 
 namespace Draw.src.Processors
@@ -33,7 +34,8 @@ namespace Draw.src.Processors
 
             using (Matrix m = new Matrix())
             {
-                m.RotateAt(item.Rotation, new PointF(item.Rectangle.Left + (item.Rectangle.Width / 2), item.Rectangle.Top + (item.Rectangle.Height / 2)));
+                m.RotateAt(item.Rotation, new PointF(item.Location.X + (item.Width / 2), item.Location.Y + (item.Height / 2)));
+
                 grfx.Transform = m;
                 base.DrawShape(grfx, item);
                 grfx.ResetTransform();
@@ -43,6 +45,7 @@ namespace Draw.src.Processors
         /// Where the Changes are configured for the Rotation Matrix
         /// </summary>
         /// <param name="grfx"></param> 
+
         public override void Draw(Graphics grfx)
         {
             base.Draw(grfx);
