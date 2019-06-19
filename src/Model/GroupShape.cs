@@ -30,11 +30,22 @@ namespace Draw
 
         public override bool Contains(PointF point)
         {
-            if (base.Contains(point))
+            double radians = Rotation * Math.PI / 180;
+            PointF center = new PointF(Rectangle.Left + Rectangle.Width / 2, Rectangle.Top + Rectangle.Height / 2);
+
+            float newPointX = point.X - center.X;
+            float newPointY = point.Y - center.Y;
+            double rotationPointX = newPointX * Math.Cos(-radians) - newPointY * Math.Sin(-radians);
+            double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
+
+            PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+
+            if (base.Contains(translatedPoint))
             {
                 foreach (var item in SubShapes)
                 {
-                    if (item.Contains(point))
+                    item.Rotation = this.Rotation;
+                    if (item.Contains(translatedPoint))
                         return true;
                 }
                 return false;
@@ -115,7 +126,7 @@ namespace Draw
                 }
             }
         }
-
+        
         public override float Rotation
         {
             set

@@ -717,28 +717,28 @@ namespace Draw
 
         private void rectangleToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            dialogProcessor.FindByShapeRectangle();
+            dialogProcessor.FindByShape(typeof(RectangleShape));
 
             viewPort.Invalidate();
         }
 
         private void ellipseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            dialogProcessor.FindByShapeEllipse();
+            dialogProcessor.FindByShape(typeof(EllipseShape));
 
             viewPort.Invalidate();
         }
 
         private void customShapeToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            dialogProcessor.FindByShapeCustomShape();
+            dialogProcessor.FindByShape(typeof(CustomShape));
 
             viewPort.Invalidate();
         }
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dialogProcessor.FindByShapeGroupShape();
+            dialogProcessor.FindByShape(typeof(GroupShape));
 
             viewPort.Invalidate();
         }
@@ -837,8 +837,6 @@ namespace Draw
 
         private void SaveToPanel2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dialogProcessor.ShapePanel2 = dialogProcessor.ShapeList;
-
             viewPort.Invalidate();
         }
 
@@ -887,7 +885,7 @@ namespace Draw
             }
             viewPort.Invalidate();
         }
-       
+
         private void InfoToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             string[] infoText = { "Shapes:" + dialogProcessor.ShapeList.Count().ToString() };
@@ -921,6 +919,13 @@ namespace Draw
         private void SpawnToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             dialogProcessor.SpawnByPanel(dialogProcessor.ShapePanel2);
+
+            viewPort.Invalidate();
+        }
+
+        private void TriangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.FindByShape(typeof(TriangleShape));
 
             viewPort.Invalidate();
         }

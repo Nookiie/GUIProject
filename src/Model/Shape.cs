@@ -178,6 +178,7 @@ namespace Draw
 
         public virtual bool Contains(PointF[] Polygon, PointF point)
         {
+            bool isInside = false;
             if (Rotation != 0)
             {
                 double radians = Rotation * Math.PI / 180;
@@ -189,9 +190,19 @@ namespace Draw
                 double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
 
                 PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+                
+                for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
+                {
+                    if (((Polygon[i].Y > translatedPoint.Y) != (Polygon[j].Y > translatedPoint.Y)) &&
+                    (translatedPoint.X < (Polygon[j].X - Polygon[i].X) * (translatedPoint.Y - Polygon[i].Y) / (Polygon[j].Y - Polygon[i].Y) + Polygon[i].X))
+                    {
+                        isInside = !isInside;
+                    }
+                }
+                return isInside;
             }
 
-            bool isInside = false;
+            isInside = false;
             for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
             {
                 if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&   

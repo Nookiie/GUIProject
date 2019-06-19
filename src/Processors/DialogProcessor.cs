@@ -448,6 +448,62 @@ namespace Draw
              return null;
          }
          */
+        /*
+ public void FindByShapeEllipse()
+ {
+     foreach (var shape in ShapeList)
+     {
+         if (shape.GetType() == typeof(EllipseShape))
+         {
+             Selection.Add(shape);
+         }
+     }
+ }
+
+ public void FindByShapeRectangle()
+ {
+     foreach (var shape in ShapeList)
+     {
+         if (shape.GetType() == typeof(RectangleShape))
+         {
+             Selection.Add(shape);
+         }
+     }
+ }
+
+ public void FindByShapeTriangle()
+ {
+     foreach (var item in ShapeList)
+     {
+         if (item.GetType() == typeof(TriangleShape))
+         {
+             Selection.Add(item);
+         }
+     }
+ }
+
+ public void FindByShapeCustomShape()
+ {
+     foreach (var shape in ShapeList)
+     {
+         if (shape.GetType() == typeof(CustomShape))
+         {
+             Selection.Add(shape);
+         }
+     }
+ }
+
+ public void FindByShapeGroupShape()
+ {
+     foreach (var shape in ShapeList)
+     {
+         if (shape.GetType() == typeof(GroupShape))
+         {
+             Selection.Add(shape);
+         }
+     }
+ }
+ */
 
         /// <summary>
         /// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
@@ -611,46 +667,13 @@ namespace Draw
             }
         }
 
-        public void FindByShapeEllipse()
+        public void FindByShape(Type type)
         {
-            foreach (var shape in ShapeList)
+            foreach (var item in ShapeList)
             {
-                if (shape.GetType() == typeof(EllipseShape))
+                if (item.GetType() == type)
                 {
-                    Selection.Add(shape);
-                }
-            }
-        }
-
-        public void FindByShapeRectangle()
-        {
-            foreach (var shape in ShapeList)
-            {
-                if (shape.GetType() == typeof(RectangleShape))
-                {
-                    Selection.Add(shape);
-                }
-            }
-        }
-
-        public void FindByShapeCustomShape()
-        {
-            foreach (var shape in ShapeList)
-            {
-                if (shape.GetType() == typeof(CustomShape))
-                {
-                    Selection.Add(shape);
-                }
-            }
-        }
-
-        public void FindByShapeGroupShape()
-        {
-            foreach (var shape in ShapeList)
-            {
-                if (shape.GetType() == typeof(GroupShape))
-                {
-                    Selection.Add(shape);
+                    Selection.Add(item);
                 }
             }
         }
@@ -693,10 +716,9 @@ namespace Draw
                 if (maxX < item.Location.X + item.Width)
                     maxX = item.Location.X + item.Width;
 
-                if (maxY < item.Location.Y + item.Width)
-                    maxY = item.Location.Y + item.Width;
+                if (maxY < item.Location.Y + item.Height)
+                    maxY = item.Location.Y + item.Height;
             }
-
             GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
 
             group.SubShapes = Selection;
@@ -837,6 +859,7 @@ namespace Draw
                 shapePanel.Add(item);
             }
         }
+
         #endregion
     }
 }

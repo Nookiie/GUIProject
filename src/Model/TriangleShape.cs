@@ -61,12 +61,22 @@ namespace Draw.src.Model
 
         public override bool Contains(PointF point)
         {
+            double radians = Rotation * Math.PI / 180;
+            PointF center = new PointF(Rectangle.Left + Rectangle.Width / 2, Rectangle.Top + Rectangle.Height / 2);
+
+            float newPointX = point.X - center.X;
+            float newPointY = point.Y - center.Y;
+            double rotationPointX = newPointX * Math.Cos(-radians) - newPointY * Math.Sin(-radians);
+            double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
+
+            PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+
             PointF[] polygon = Polygon;
             bool isInside = false;
             for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
             {
-                if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&
-                (point.X < (Polygon[j].X - Polygon[i].X) * (point.Y - Polygon[i].Y) / (Polygon[j].Y - Polygon[i].Y) + Polygon[i].X))
+                if (((Polygon[i].Y > translatedPoint.Y) != (Polygon[j].Y > translatedPoint.Y)) &&
+                (translatedPoint.X < (Polygon[j].X - Polygon[i].X) * (translatedPoint.Y - Polygon[i].Y) / (Polygon[j].Y - Polygon[i].Y) + Polygon[i].X))
                 {
                     isInside = !isInside;
                 }
