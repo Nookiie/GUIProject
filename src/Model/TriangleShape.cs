@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Draw.src.Model
 {
-	[Serializable]
+    [Serializable]
     public class TriangleShape : Shape
     {
         #region Constructor
@@ -27,7 +27,7 @@ namespace Draw.src.Model
 
         }
 
-		#endregion
+        #endregion
 
         #region Methods
 
@@ -41,7 +41,7 @@ namespace Draw.src.Model
 
         public PointF[] Polygon { get; set; }
 
-        float x1,x2,x3,y1,y2,y3;
+        float x1, x2, x3, y1, y2, y3;
         /* public override GraphicsPath GetPath(Rectangle bounds)
          {
              GraphicsPath path = new GraphicsPath();
@@ -58,6 +58,8 @@ namespace Draw.src.Model
              });
              return path;
          }*/
+
+
 
         public override bool Contains(PointF point)
         {
@@ -104,6 +106,12 @@ namespace Draw.src.Model
         { // Create points that define polygon.
             base.DrawSelf(grfx);
 
+            x2 = TriangleSize;
+            x3 = (x2 + x1) / 2;
+            y1 = (float)Math.Sqrt(x2 * x2 - (x2 / 2) * (x2 / 2));
+            y2 = (float)Math.Sqrt(x2 * x2 - (x2 / 2) * (x2 / 2));
+
+            Size = new SizeF(x2, y1);
             PointF point1 = new PointF(Rectangle.X + x1, Rectangle.Y + y1);
             PointF point2 = new PointF(Rectangle.X + x2, Rectangle.Y + y2);
             PointF point3 = new PointF(Rectangle.X + x3, Rectangle.Y + y3);

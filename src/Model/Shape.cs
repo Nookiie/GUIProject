@@ -115,6 +115,10 @@ namespace Draw
             set { rectangle.Height = value; }
         }
 
+        public float TriangleSize { get; set; }
+
+        public float TrapeSize { get; set; }
+
         public virtual SizeF Size
         {
             get { return Rectangle.Size; }

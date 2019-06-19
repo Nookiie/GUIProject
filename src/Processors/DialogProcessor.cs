@@ -302,15 +302,15 @@ namespace Draw
                     y2 = (Int32)edges[i];
                 }
             }
-            TriangleShape trape = new TriangleShape(new Rectangle(x, y, x2, y2));
-            trape.edges(p1x, p1y, p2x, p2y, p3x, p3y);
+            TriangleShape triangle = new TriangleShape(new Rectangle(x, y, x2, y2));
+            triangle.edges(p1x, p1y, p2x, p2y, p3x, p3y);
 
-            trape.FillColor = ColorFill;
-            trape.Rotation = Rotation;
-            trape.BorderColor = ColorBorder;
-            // triangle.Size = p2x;
+            triangle.TriangleSize = p2x;
+            triangle.FillColor = ColorFill;
+            triangle.Rotation = Rotation;
+            triangle.BorderColor = ColorBorder;
 
-            ShapeList.Add(trape);
+            ShapeList.Add(triangle);
         }
 
         public void AddRandomTrape()
