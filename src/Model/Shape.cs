@@ -125,7 +125,13 @@ namespace Draw
             set { rectangle.Size = value; }
         }
 
-        public virtual float Rotation { get; set; } // Needs to be set correctly later on
+        public virtual float percentX { get; set; }
+
+        public virtual float percentY { get; set; }
+
+        public virtual bool isBeingResized { get; set; }
+
+        public virtual float Rotation { get; set; } 
 
         /// <summary>
         /// Горен ляв ъгъл на елемента.

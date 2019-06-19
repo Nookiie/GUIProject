@@ -566,64 +566,68 @@ namespace Draw
 
         private void resizeSelectedShapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                string value;
-                bool isTriangle = false;
+            string value;
+            bool isTriangle = false;
+            if (dialogProcessor.Selection != null)
+                foreach (var item in dialogProcessor.Selection)
+                {
+                    if (item.GetType() == typeof(TriangleShape))
+                    {
+                        isTriangle = true;
+                    }
+                }
+            if (isTriangle == true)
+            {
+                value = dialogProcessor.ShowDialog("Please input triangle side length: ", "Changing Length");
+                int.TryParse(value, out int sideLength);
+
+                if (sideLength == 0)
+                {
+                    MessageBox.Show("Length is invalid", "Error");
+                    return;
+                }
                 if (dialogProcessor.Selection != null)
                     foreach (var item in dialogProcessor.Selection)
                     {
-                        if (item.GetType() == typeof(TriangleShape))
+                        if (item.GetType() == typeof(TriangleShape)) // Change the variable X of Triangle to change shape
                         {
-                            isTriangle = true;
+                            item.TriangleSize = sideLength;
+                            int height = (Int32)Math.Sqrt(sideLength * sideLength - (sideLength / 2) * (sideLength / 2));
+                            item.Size = new Size(sideLength, height);
                         }
                     }
-                if (isTriangle == true)
+            }
+            else
+            {
+                value = dialogProcessor.ShowDialog("Please input width: ", "Changing Width");
+                int.TryParse(value, out int width);
+
+                value = dialogProcessor.ShowDialog("Please input height: ", "Changing Height");
+                int.TryParse(value, out int height);
+
+                if (width == 0 || height == 0)
                 {
-                    value = dialogProcessor.ShowDialog("Please input triangle side length: ", "Changing Length");
-                    int.TryParse(value, out int sideLength);
-
-                    if (sideLength == 0)
-                    {
-                        MessageBox.Show("Length is invalid", "Error");
-                        return;
-                    }
-                    if (dialogProcessor.Selection != null)
-                        foreach (var item in dialogProcessor.Selection)
-                        {
-                            if (item.GetType() == typeof(TriangleShape)) // Change the variable X of Triangle to change shape
-                            {
-                                item.TriangleSize = sideLength;
-                                int height = (Int32)Math.Sqrt(sideLength * sideLength - (sideLength / 2) * (sideLength / 2));
-                                item.Size = new Size(sideLength, height);
-                            }
-                        }
+                    MessageBox.Show("Width AND / OR Height are invalid", "Error");
+                    return;
                 }
-                else
-                {
-                    value = dialogProcessor.ShowDialog("Please input width: ", "Changing Width");
-                    int.TryParse(value, out int width);
 
-                    value = dialogProcessor.ShowDialog("Please input height: ", "Changing Height");
-                    int.TryParse(value, out int height);
-
-                    if (width == 0 || height == 0)
+                if (dialogProcessor.Selection != null)
+                    foreach (var item in dialogProcessor.Selection)
                     {
-                        MessageBox.Show("Width AND / OR Height are invalid", "Error");
-                        return;
+                        item.isBeingResized = true;
+                        item.percentX = width / item.Size.Width;
+                        item.percentY = height / item.Size.Height;
+
+                        item.Size = new Size(width, height);
+
+                        /* if (item.GetType() == typeof(TriangleShape)) // Change the variable X of Triangle to change shape
+                         {
+                             item.TriangleSize = width;
+                         }*/
                     }
-
-                    if (dialogProcessor.Selection != null)
-                        foreach (var item in dialogProcessor.Selection)
-                        {
-                            item.Size = new Size(width, height);
-
-                            /* if (item.GetType() == typeof(TriangleShape)) // Change the variable X of Triangle to change shape
-                             {
-                                 item.TriangleSize = width;
-                             }*/
-                        }
-                }
-                isTriangle = false;
-                viewPort.Invalidate();
+            }
+            isTriangle = false;
+            viewPort.Invalidate();
         }
 
         private void speedMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

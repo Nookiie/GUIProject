@@ -59,8 +59,6 @@ namespace Draw.src.Model
              return path;
          }*/
 
-
-
         public override bool Contains(PointF point)
         {
             double radians = Rotation * Math.PI / 180;
@@ -91,7 +89,7 @@ namespace Draw.src.Model
             base.Rotate(grfx);
         }
 
-        public void edges(float x1, float y1, float x2, float y2, float x3,
+        public void Edges(float x1, float y1, float x2, float y2, float x3,
            float y3)
         {
             this.x1 = x1;   //Place value from dialogProcessor AddRandomTriangle                          
@@ -112,16 +110,28 @@ namespace Draw.src.Model
             y2 = (float)Math.Sqrt(x2 * x2 - (x2 / 2) * (x2 / 2));
 
             Size = new SizeF(x2, y1);
+
+            if(isBeingResized)
+            {
+                x1 *= percentX;
+                x2 *= percentX;
+                x3 *= percentX;
+
+                y1 *= percentY;
+                y2 *= percentY;
+                y3 *= percentY;
+            }
+            isBeingResized = false;
             PointF point1 = new PointF(Rectangle.X + x1, Rectangle.Y + y1);
             PointF point2 = new PointF(Rectangle.X + x2, Rectangle.Y + y2);
             PointF point3 = new PointF(Rectangle.X + x3, Rectangle.Y + y3);
 
             PointF[] curvePoints =
-                     {
+            {
                  point1,
                  point2,
                  point3,
-             };
+            };
             Polygon = curvePoints;
 
             grfx.DrawPolygon(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), curvePoints);

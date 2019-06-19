@@ -303,7 +303,7 @@ namespace Draw
                 }
             }
             TriangleShape triangle = new TriangleShape(new Rectangle(x, y, x2, y2));
-            triangle.edges(p1x, p1y, p2x, p2y, p3x, p3y);
+            triangle.Edges(p1x, p1y, p2x, p2y, p3x, p3y);
 
             triangle.TriangleSize = p2x;
             triangle.FillColor = ColorFill;
@@ -622,7 +622,7 @@ namespace Draw
             if (color == Color.White)
                 ColorBorder = Color.Black;
         }
-
+        
         public override void Draw(Graphics grfx)
         {
             if (Selection != null)
