@@ -131,6 +131,7 @@ namespace Draw.src.Model
             this.x = x;
             this.y = y;
         }
+
         public override void DrawSelf(Graphics grfx)
         {
             // Create points that define polygon.
@@ -189,12 +190,14 @@ namespace Draw.src.Model
             Polygon = curvePoints;
 
             grfx.DrawPolygon(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), curvePoints);
-            grfx.FillPolygon(new SolidBrush(FillColor), curvePoints);
+            grfx.FillPolygon(new SolidBrush(Color.FromArgb(Transparency, FillColor.R, FillColor.G, FillColor.B)), curvePoints);
         }
+
         public override void Remove(Graphics grfx)
         {
             base.Remove(grfx);
         }
+
         public override void Rotate(Graphics grfx)
         {
             base.Rotate(grfx);

@@ -97,7 +97,7 @@ namespace Draw
         {
             foreach (Shape item in ShapeList)
             {
-                DrawShape(grfx, item);
+                DrawShape(grfx, item);  
             }
         }
 

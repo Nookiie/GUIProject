@@ -130,7 +130,7 @@ namespace Draw.src.Model
             Polygon = curvePoints;
 
             grfx.DrawPolygon(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), curvePoints);
-            grfx.FillPolygon(new SolidBrush(FillColor), curvePoints);
+            grfx.FillPolygon(new SolidBrush(Color.FromArgb(Transparency, FillColor.R, FillColor.G, FillColor.B)), curvePoints);
         }
         #endregion
     }

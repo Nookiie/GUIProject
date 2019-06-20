@@ -21,6 +21,7 @@ namespace Draw
         {
 
         }
+
         public LineShape(RectangleF rect) : base(rect)
         {
 

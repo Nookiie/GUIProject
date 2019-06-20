@@ -34,7 +34,7 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
-          
+
             if (base.Contains(point))
                 // Проверка дали е в обекта само, ако точката е в обхващащия правоъгълник.
                 // В случая на правоъгълник - директно връщаме true
@@ -51,7 +51,7 @@ namespace Draw
         {
             base.DrawSelf(grfx);
 
-            grfx.FillRectangle(new SolidBrush(FillColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            grfx.FillRectangle(new SolidBrush(Color.FromArgb(Transparency, FillColor.R, FillColor.G, FillColor.B)), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
             grfx.DrawRectangle(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
         }
 

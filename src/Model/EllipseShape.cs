@@ -82,7 +82,7 @@ namespace Draw
             base.DrawSelf(grfx);
 
             grfx.DrawEllipse(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-            grfx.FillEllipse(new SolidBrush(FillColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            grfx.FillEllipse(new SolidBrush(Color.FromArgb(Transparency, FillColor.R, FillColor.G, FillColor.B)), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
         }
 
         public override void Remove(Graphics grfx)

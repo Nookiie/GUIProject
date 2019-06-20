@@ -1081,5 +1081,12 @@ namespace Draw
 
             viewPort.Invalidate();
         }
+
+        private void TransparencyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.Transparency();
+
+            viewPort.Invalidate();
+        }
     }
 }

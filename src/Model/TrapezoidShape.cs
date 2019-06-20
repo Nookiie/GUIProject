@@ -35,7 +35,7 @@ namespace Draw.src.Model
         PointF point2 { get; set; }
         PointF point3 { get; set; }
 
-        PointF a,b,c,d;
+        PointF a, b, c, d;
 
         public override bool Contains(PointF point)
         {
@@ -95,7 +95,7 @@ namespace Draw.src.Model
             Polygon = curvePoints;
 
             grfx.DrawPolygon(new Pen(BorderColor == Color.Empty ? Color.Black : BorderColor), curvePoints);
-            grfx.FillPolygon(new SolidBrush(FillColor), curvePoints);
+            grfx.FillPolygon(new SolidBrush(Color.FromArgb(Transparency, FillColor.R, FillColor.G, FillColor.B)), curvePoints);
         }
         #endregion
     }

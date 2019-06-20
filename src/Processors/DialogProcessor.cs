@@ -1017,6 +1017,12 @@ namespace Draw
                 }
             }
         }
+        public void Transparency()
+        {
+            int trans = Int32.Parse(ShowDialog("Enter A Value:", "Transparency"));
+
+            Selection.ForEach(x => x.Transparency = trans);
+        }
 
         #endregion
     }

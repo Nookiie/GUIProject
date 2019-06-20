@@ -163,6 +163,13 @@ namespace Draw
             set { borderColor = value; }
         }
 
+        private int transparency = 255;
+        public virtual int Transparency
+        {
+            get { return transparency; }
+            set { transparency = value; }
+        }
+
         #endregion
 
         #region Methods
@@ -204,7 +211,7 @@ namespace Draw
                 double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
 
                 PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
-                
+
                 for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
                 {
                     if (((Polygon[i].Y > translatedPoint.Y) != (Polygon[j].Y > translatedPoint.Y)) &&
@@ -219,7 +226,7 @@ namespace Draw
             isInside = false;
             for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
             {
-                if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&   
+                if (((Polygon[i].Y > point.Y) != (Polygon[j].Y > point.Y)) &&
                 (point.X < (Polygon[j].X - Polygon[i].X) * (point.Y - Polygon[i].Y) / (Polygon[j].Y - Polygon[i].Y) + Polygon[i].X))
                 {
                     isInside = !isInside;
@@ -238,6 +245,7 @@ namespace Draw
 
             // grfx.Transform = new Matrix();
             // grfx.RotateTransform(Rotation); // From the Center;
+
         }
 
         public virtual void DrawSelf(Graphics grfx, PointF pt1, PointF pt2)
