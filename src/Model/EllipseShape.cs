@@ -42,6 +42,17 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
+            double radians = Rotation * Math.PI / 180;
+            PointF center = new PointF(Rectangle.Left + Rectangle.Width / 2, Rectangle.Top + Rectangle.Height / 2);
+
+            float newPointX = point.X - center.X;
+            float newPointY = point.Y - center.Y;
+            double rotationPointX = newPointX * Math.Cos(-radians) - newPointY * Math.Sin(-radians);
+            double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
+            PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+
+            point = translatedPoint;
+
             float a = Rectangle.Width / 2;
             float b = Rectangle.Height / 2;
 

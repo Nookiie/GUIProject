@@ -124,6 +124,7 @@ namespace Draw
             get { return Rectangle.Size; }
             set { rectangle.Size = value; }
         }
+        public virtual float LineSize { get; set; }
 
         public virtual float percentX { get; set; }
 

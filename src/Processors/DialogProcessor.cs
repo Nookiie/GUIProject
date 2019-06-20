@@ -109,7 +109,7 @@ namespace Draw
         /// <summary>
         /// Добавя примитив - правоъгълник на произволно място върху клиентската област.
         /// </summary>
-        public void AddRandomRectangle()
+        public void AddRandomRectangle(SizeF size)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -121,9 +121,13 @@ namespace Draw
             rect.BorderColor = ColorBorder;
 
             ShapeList.Add(rect);
+            if (size.Width!= 0|| size.Height != 0)
+            {
+                rect.Size = size;
+            }
         }
 
-        public void AddRandomEllipse()
+        public void AddRandomEllipse(SizeF size)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -136,17 +140,52 @@ namespace Draw
             ellipse.BorderColor = ColorBorder;
 
             ShapeList.Add(ellipse);
+            if (size.Width != 0 || size.Height != 0)
+            {
+                ellipse.Size = size;
+            }
         }
 
-        public void AddRandomLine()
+        public void AddRandomLine(SizeF size)
         {
-            // Random rnd = new Random();
 
-            LineShape line = new LineShape(PointStart, PointEnd);
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+            float x1 = 7;              //Left most x in the rectangle
+            float x2 = 7;
+            float y1 = 0;
+            float y2 = 150;            //Height
 
-            line.BorderColor = ColorBorder;
+            int width = (Int32)(14);      //Width of Rect=10 pixels to the right of start
+                                          //  int p1y = (Int32)(y1 - 5);
+            int height = (Int32)(y2);      //HeightOfRectangle
+            float pointStartX = x1;
+            float pointEndX = x2;
+
+            float pointStartY = 0;
+            float pointEndY = y2; //150=height-5        
+
+            float[] edges = new float[4];
+
+            LineShape line = new LineShape(new Rectangle(x, y, width, height));
+            line.edges(pointStartX, pointStartY, pointEndX, pointEndY);
+
+            //LineShape line = new LineShape(PointStart, PointEnd);
+            line.percentY = 1;
+            if (size.Height != 0)
+            {
+                line.isBeingResized = true;
+                line.LineSize = size.Height;
+                line.percentY = size.Height / line.Size.Height;
+                line.Size = new SizeF(line.Size.Width, size.Height);
+            }
 
             ShapeList.Add(line);
+            line.FillColor = ColorFill;
+            line.Rotation = Rotation;
+            line.BorderColor = ColorBorder;
+           
         }
 
         public void AddRandomImage()
@@ -245,7 +284,7 @@ namespace Draw
 
         }
 
-        public void AddRandomTriangle()
+        public void AddRandomTriangle(SizeF size)
         {
             Random rnd = new Random();
 
@@ -304,13 +343,16 @@ namespace Draw
             }
             TriangleShape triangle = new TriangleShape(new Rectangle(x, y, x2, y2));
             triangle.Edges(p1x, p1y, p2x, p2y, p3x, p3y);
-
             triangle.TriangleSize = p2x;
             triangle.FillColor = ColorFill;
             triangle.Rotation = Rotation;
             triangle.BorderColor = ColorBorder;
 
             ShapeList.Add(triangle);
+            if (size.Width != 0 || size.Height != 0)
+            {
+                triangle.Size = size;
+            }
         }
 
         public void AddRandomTrape()
@@ -369,15 +411,15 @@ namespace Draw
                     y2 = (Int32)edges[i].Y;
                 }
             }
-            TrapezoidShape triangle = new TrapezoidShape(new Rectangle(x, y, x2, y2));
-            triangle.Edges(p1, p2, p3, p4);
+            TrapezoidShape trape = new TrapezoidShape(new Rectangle(x, y, x2, y2));
+            trape.Edges(p1, p2, p3, p4);
 
-            triangle.FillColor = ColorFill;
-            triangle.Rotation = Rotation;
-            triangle.BorderColor = ColorBorder;
+            trape.FillColor = ColorFill;
+            trape.Rotation = Rotation;
+            trape.BorderColor = ColorBorder;
             // triangle.Size = p2x;
 
-            ShapeList.Add(triangle);
+            ShapeList.Add(trape);
         }
 
         public void RotateSelection(Graphics grfx)
