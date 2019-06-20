@@ -52,10 +52,8 @@ namespace Draw.src.Model
         PointF point6 { get; set; }
         PointF point7 { get; set; }
 
-        public PointF[] Polygon { get; set; }
-
-        float x1, x2, x3, x4, x5, x6, x7;
-        float y1, y2, y3, y4, y5, y6, y7;
+        float  x4, x5, x6, x7;
+        float  y4, y5, y6, y7;
 
         static int numberOfPoints = 7;
         float[] x = new float[numberOfPoints];

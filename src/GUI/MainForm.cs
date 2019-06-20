@@ -26,8 +26,6 @@ namespace Draw
         bool isMoving = false;
         Pen pen;
 
-        int generalCounter = 1;
-
         /// <summary>
         /// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
         /// </summary>

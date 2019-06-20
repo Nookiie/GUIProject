@@ -161,7 +161,7 @@ namespace Draw
             int y = rnd.Next(100, 600);
             float x1 = 7;              //Left most x in the rectangle
             float x2 = 7;
-            float y1 = 0;
+            // float y1 = 0;
             float y2 = 150;            //Height
 
             int width = (Int32)(14);      //Width of Rect=10 pixels to the right of start
