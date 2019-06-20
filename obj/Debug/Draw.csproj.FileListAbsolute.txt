@@ -39,6 +39,3 @@ C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.csproj.CoreCompileInputs
 C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.exe
 C:\Users\fmi\Downloads\GUIProject-master\obj\Debug\Draw.pdb
 D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\bin\Debug\Draw.exe.config
-D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\bin\Debug\System.Numerics.Vectors.dll
-D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\bin\Debug\System.Numerics.Vectors.xml
-D:\Education Stuff\Student Materials\Uni Course Wisecracks\C#\CGProject\1701321027\trunk\CGProject\obj\Debug\Draw.csproj.CopyComplete

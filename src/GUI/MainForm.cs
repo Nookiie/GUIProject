@@ -114,6 +114,7 @@ namespace Draw
 
             viewPort.Invalidate();
         }
+
         private void DrawTriangleSpeedButton_Click(object sender, EventArgs e)
         {
             SizeF size = new Size(0, 0);
