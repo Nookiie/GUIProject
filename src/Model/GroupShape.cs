@@ -56,27 +56,39 @@ namespace Draw
 
         public override bool Contains(PointF[] Polygon, PointF point)
         {
-            if (base.Contains(Polygon, point))
+            double radians = Rotation * Math.PI / 180;
+            PointF center = new PointF(Rectangle.Left + Rectangle.Width / 2, Rectangle.Top + Rectangle.Height / 2);
+
+            float newPointX = point.X - center.X;
+            float newPointY = point.Y - center.Y;
+            double rotationPointX = newPointX * Math.Cos(-radians) - newPointY * Math.Sin(-radians);
+            double rotationPointY = newPointY * Math.Cos(-radians) + newPointX * Math.Sin(-radians);
+
+            PointF translatedPoint = new PointF((float)(rotationPointX + center.X), (float)(rotationPointY + center.Y));
+
+            if (base.Contains(Polygon, translatedPoint))
             {
                 foreach (var item in SubShapes)
                 {
-                    if (item.Contains(Polygon, point))
+                    if (item.Contains(Polygon, translatedPoint))
                         return true;
                 }
                 return false;
             }
             else
                 return false;
+
         }
 
         public override void DrawSelf(Graphics grfx)
         {
-            base.DrawSelf(grfx);
-
             foreach (var item in SubShapes)
             {
+                item.Rotation = this.Rotation;
+                item.Rotate(grfx);
                 item.DrawSelf(grfx);
             }
+            base.DrawSelf(grfx);
         }
 
         public override void Rotate(Graphics grfx)
@@ -126,7 +138,7 @@ namespace Draw
                 }
             }
         }
-        
+
         public override float Rotation
         {
             set
@@ -136,8 +148,8 @@ namespace Draw
                     item.Rotation = value;
                 }
             }
-        }
 
+        }
         #endregion
     }
 }

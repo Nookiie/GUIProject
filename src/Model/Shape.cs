@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Model;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Numerics;
@@ -9,7 +10,7 @@ namespace Draw
     /// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
     /// </summary>
 	[Serializable]
-    public abstract class Shape
+    public abstract class Shape : IShape
     {
         #region Constructors
         public Shape()
@@ -125,11 +126,11 @@ namespace Draw
             set { rectangle.Size = value; }
         }
 
-        public virtual float percentX { get; set; }
+        public virtual float PercentX { get; set; }
 
-        public virtual float percentY { get; set; }
+        public virtual float PercentY { get; set; }
 
-        public virtual bool isBeingResized { get; set; }
+        public virtual bool IsBeingResized { get; set; }
 
         public virtual float Rotation { get; set; } 
 
@@ -252,7 +253,14 @@ namespace Draw
 
         public virtual void Rotate(Graphics grfx)
         {
-            grfx.Transform.Rotate(Rotation); // From the Center
+            using (Matrix m = new Matrix())
+            {
+                m.RotateAt(Rotation, new PointF(Location.X + (Width / 2), Location.Y + (Height / 2)));
+
+                grfx.Transform = m;
+                DrawSelf(grfx);
+                grfx.ResetTransform();
+            }
         }
 
         public virtual GraphicsPath GetPath(Rectangle bounds)

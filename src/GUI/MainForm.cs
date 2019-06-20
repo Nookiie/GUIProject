@@ -614,9 +614,9 @@ namespace Draw
                 if (dialogProcessor.Selection != null)
                     foreach (var item in dialogProcessor.Selection)
                     {
-                        item.isBeingResized = true;
-                        item.percentX = width / item.Size.Width;
-                        item.percentY = height / item.Size.Height;
+                        item.IsBeingResized = true;
+                        item.PercentX = width / item.Size.Width;
+                        item.PercentY = height / item.Size.Height;
 
                         item.Size = new Size(width, height);
 
@@ -964,6 +964,20 @@ namespace Draw
         private void TriangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dialogProcessor.FindByShape(typeof(TriangleShape));
+
+            viewPort.Invalidate();
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.Copy();
+
+            viewPort.Invalidate();
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.Paste();
 
             viewPort.Invalidate();
         }

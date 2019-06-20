@@ -104,6 +104,7 @@ namespace Draw.src.Model
         { // Create points that define polygon.
             base.DrawSelf(grfx);
 
+            
             x2 = TriangleSize;
             x3 = (x2 + x1) / 2;
             y1 = (float)Math.Sqrt(x2 * x2 - (x2 / 2) * (x2 / 2));
@@ -111,17 +112,18 @@ namespace Draw.src.Model
 
             Size = new SizeF(x2, y1);
 
-            if(isBeingResized)
+            if (IsBeingResized)
             {
-                x1 *= percentX;
-                x2 *= percentX;
-                x3 *= percentX;
+                x1 *= PercentX;
+                x2 *= PercentX;
+                x3 *= PercentX;
 
-                y1 *= percentY;
-                y2 *= percentY;
-                y3 *= percentY;
+                y1 *= PercentY;
+                y2 *= PercentY;
+                y3 *= PercentY;
             }
-            isBeingResized = false;
+            IsBeingResized = false;
+
             PointF point1 = new PointF(Rectangle.X + x1, Rectangle.Y + y1);
             PointF point2 = new PointF(Rectangle.X + x2, Rectangle.Y + y2);
             PointF point3 = new PointF(Rectangle.X + x3, Rectangle.Y + y3);

@@ -18,6 +18,7 @@ namespace Draw.src.Processors
         }
 
         #endregion
+
         public override void DrawShape(Graphics grfx, Shape item)
         {
             // grfx.Transform = new System.Drawing.Drawing2D.Matrix();
@@ -41,10 +42,21 @@ namespace Draw.src.Processors
                 grfx.ResetTransform();
             }
         }
-        /// <summary>
-        /// Where the Changes are configured for the Rotation Matrix
-        /// </summary>
-        /// <param name="grfx"></param> 
+
+        public override void DrawShape(Graphics grfx, GroupShape item)
+        {
+            using (Matrix m = new Matrix())
+            {
+                foreach(var shape in item.SubShapes)
+                {
+                    m.RotateAt(shape.Rotation, new PointF(shape.Location.X + (shape.Width / 2), shape.Location.Y + (shape.Height / 2)));
+
+                    grfx.Transform = m;
+                    base.DrawShape(grfx, shape);
+                    grfx.ResetTransform();
+                }
+            }
+        }
 
         public override void Draw(Graphics grfx)
         {

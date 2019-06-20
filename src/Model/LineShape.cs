@@ -25,6 +25,7 @@ namespace Draw
         #endregion
 
         #region Properties
+
         #endregion
 
         #region Methods

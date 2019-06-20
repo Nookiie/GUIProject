@@ -39,6 +39,13 @@ namespace Draw
             set { selection = value; }
         }
 
+        private List<Shape> copyData = new List<Shape>();
+        public List<Shape> CopyData
+        {
+            get { return copyData; }
+            set { copyData = value; }
+        }
+
         private string fileName;
         public virtual string FileName
         {
@@ -622,7 +629,7 @@ namespace Draw
             if (color == Color.White)
                 ColorBorder = Color.Black;
         }
-        
+
         public override void Draw(Graphics grfx)
         {
             if (Selection != null)
@@ -719,6 +726,7 @@ namespace Draw
                 if (maxY < item.Location.Y + item.Height)
                     maxY = item.Location.Y + item.Height;
             }
+
             GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
 
             group.SubShapes = Selection;
@@ -857,6 +865,76 @@ namespace Draw
             foreach (var item in ShapeList.ToList())
             {
                 shapePanel.Add(item);
+            }
+        }
+
+        public void Copy()
+        {
+            CopyData.Clear();
+            foreach (var item in Selection.ToList())
+            {
+                CopyData.Add(item);
+            }
+        }
+
+        public void Paste()
+        {
+            foreach (var item in CopyData.ToList())
+            {
+
+                if (item.GetType() == typeof(RectangleShape))
+                {
+                    RectangleShape rect = new RectangleShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
+                    {
+                        BorderColor = item.BorderColor,
+                        FillColor = item.FillColor,
+                        Height = item.Height,
+                        Width = item.Width,
+                        Rotation = item.Rotation
+                    };
+                    ShapeList.Add(rect);
+                }
+
+                else if (item.GetType() == typeof(EllipseShape))
+                {
+                    EllipseShape ellipse = new EllipseShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
+                    {
+                        BorderColor = item.BorderColor,
+                        FillColor = item.FillColor,
+                        Height = item.Height,
+                        Width = item.Width,
+                        Rotation = item.Rotation
+                    };
+                    ShapeList.Add(ellipse);
+                }
+
+                else if (item.GetType() == typeof(TriangleShape))
+                {
+                    TriangleShape triangle = new TriangleShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
+                    {
+                        TriangleSize = item.TriangleSize,
+                        BorderColor = item.BorderColor,
+                        FillColor = item.FillColor,
+                        Height = item.Height,
+                        Width = item.Width,
+                        Rotation = item.Rotation
+                    };
+                    ShapeList.Add(triangle);
+                }
+
+                else if (item.GetType() == typeof(TrapezoidShape))
+                {
+                    TrapezoidShape trape = new TrapezoidShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
+                    {
+                        TriangleSize = item.TriangleSize,
+                        BorderColor = item.BorderColor,
+                        FillColor = item.FillColor,
+                        Height = item.Height,
+                        Width = item.Width,
+                        Rotation = item.Rotation
+                    };
+                    ShapeList.Add(trape);
+                }
             }
         }
 
