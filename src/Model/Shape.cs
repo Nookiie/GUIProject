@@ -10,7 +10,7 @@ namespace Draw
     /// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
     /// </summary>
 	[Serializable]
-    public abstract class Shape : IShape
+    public abstract class Shape
     {
         #region Constructors
         public Shape()
