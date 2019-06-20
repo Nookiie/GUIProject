@@ -18,6 +18,7 @@ namespace Draw
 
         public DisplayProcessor()
         {
+
         }
 
         #endregion
