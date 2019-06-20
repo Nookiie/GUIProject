@@ -34,9 +34,13 @@ namespace Draw
         /// </summary>
         public override bool Contains(PointF point)
         {
+          
             if (base.Contains(point))
+                // Проверка дали е в обекта само, ако точката е в обхващащия правоъгълник.
+                // В случая на правоъгълник - директно връщаме true
                 return true;
             else
+                // Ако не е в обхващащия правоъгълник, то неможе да е в обекта и => false
                 return false;
         }
 

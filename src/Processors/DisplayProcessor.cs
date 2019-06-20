@@ -130,10 +130,7 @@ namespace Draw
             item.DrawSelf(grfx);
             item.DrawSelf(grfx, item.Point1, item.Point2);
         }
-        public virtual void DrawShape(Graphics grfx, GroupShape item)
-        {
-            item.DrawSelf(grfx);
-        }
+
         public virtual void DrawShape(Graphics grfx, Shape item, PointF pt1, PointF pt2)
         {
             item.DrawSelf(grfx, pt1, pt2);

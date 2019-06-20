@@ -34,7 +34,6 @@ namespace Draw.src.Model
         PointF point1 { get; set; }
         PointF point2 { get; set; }
         PointF point3 { get; set; }
-        public PointF[] Polygon { get; set; }
 
         PointF a,b,c,d;
 

@@ -116,7 +116,7 @@ namespace Draw
         /// <summary>
         /// Добавя примитив - правоъгълник на произволно място върху клиентската област.
         /// </summary>
-        public void AddRandomRectangle()
+        public void AddRandomRectangle(SizeF size)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -128,9 +128,13 @@ namespace Draw
             rect.BorderColor = ColorBorder;
 
             ShapeList.Add(rect);
+            if (size.Width != 0 || size.Height != 0)
+            {
+                rect.Size = size;
+            }
         }
 
-        public void AddRandomEllipse()
+        public void AddRandomEllipse(SizeF size)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -143,17 +147,52 @@ namespace Draw
             ellipse.BorderColor = ColorBorder;
 
             ShapeList.Add(ellipse);
+            if (size.Width != 0 || size.Height != 0)
+            {
+                ellipse.Size = size;
+            }
         }
 
-        public void AddRandomLine()
+        public void AddRandomLine(SizeF size)
         {
-            // Random rnd = new Random();
 
-            LineShape line = new LineShape(PointStart, PointEnd);
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+            float x1 = 7;              //Left most x in the rectangle
+            float x2 = 7;
+            float y1 = 0;
+            float y2 = 150;            //Height
 
-            line.BorderColor = ColorBorder;
+            int width = (Int32)(14);      //Width of Rect=10 pixels to the right of start
+                                          //  int p1y = (Int32)(y1 - 5);
+            int height = (Int32)(y2);      //HeightOfRectangle
+            float pointStartX = x1;
+            float pointEndX = x2;
+
+            float pointStartY = 0;
+            float pointEndY = y2; //150=height-5        
+
+            float[] edges = new float[4];
+
+            LineShape line = new LineShape(new Rectangle(x, y, width, height));
+            line.edges(pointStartX, pointStartY, pointEndX, pointEndY);
+
+            //LineShape line = new LineShape(PointStart, PointEnd);
+            line.PercentY = 1;
+            if (size.Height != 0)
+            {
+                line.IsBeingResized = true;
+                line.LineSize = size.Height;
+                line.PercentY = size.Height / line.Size.Height;
+                line.Size = new SizeF(line.Size.Width, size.Height);
+            }
 
             ShapeList.Add(line);
+            line.FillColor = ColorFill;
+            line.Rotation = Rotation;
+            line.BorderColor = ColorBorder;
+
         }
 
         public void AddRandomImage()
@@ -252,7 +291,7 @@ namespace Draw
 
         }
 
-        public void AddRandomTriangle()
+        public void AddRandomTriangle(SizeF size)
         {
             Random rnd = new Random();
 
@@ -318,6 +357,10 @@ namespace Draw
             triangle.BorderColor = ColorBorder;
 
             ShapeList.Add(triangle);
+            if (size.Width != 0 || size.Height != 0)
+            {
+                triangle.Size = size;
+            }
         }
 
         public void AddRandomTrape()
@@ -376,15 +419,15 @@ namespace Draw
                     y2 = (Int32)edges[i].Y;
                 }
             }
-            TrapezoidShape triangle = new TrapezoidShape(new Rectangle(x, y, x2, y2));
-            triangle.Edges(p1, p2, p3, p4);
+            TrapezoidShape trape = new TrapezoidShape(new Rectangle(x, y, x2, y2));
+            trape.Edges(p1, p2, p3, p4);
 
-            triangle.FillColor = ColorFill;
-            triangle.Rotation = Rotation;
-            triangle.BorderColor = ColorBorder;
+            trape.FillColor = ColorFill;
+            trape.Rotation = Rotation;
+            trape.BorderColor = ColorBorder;
             // triangle.Size = p2x;
 
-            ShapeList.Add(triangle);
+            ShapeList.Add(trape);
         }
 
         public void RotateSelection(Graphics grfx)
@@ -726,7 +769,6 @@ namespace Draw
                 if (maxY < item.Location.Y + item.Height)
                     maxY = item.Location.Y + item.Height;
             }
-
             GroupShape group = new GroupShape(new RectangleF(minX, minY, maxX - minX, maxY - minY));
 
             group.SubShapes = Selection;
@@ -881,7 +923,6 @@ namespace Draw
         {
             foreach (var item in CopyData.ToList())
             {
-
                 if (item.GetType() == typeof(RectangleShape))
                 {
                     RectangleShape rect = new RectangleShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
@@ -912,6 +953,20 @@ namespace Draw
                 {
                     TriangleShape triangle = new TriangleShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
                     {
+                        PercentX = item.PercentX,
+                        PercentY = item.PercentY,
+                        IsBeingResized = item.IsBeingResized,
+                        Point1 = item.Point1,
+                        Point2 = item.Point2,
+
+                        x1 = item.x1,
+                        x2 = item.x2,
+                        x3 = item.x3,
+                        y1 = item.y1,
+                        y2 = item.y2,
+                        y3 = item.y3,
+
+                        Polygon = item.Polygon,
                         TriangleSize = item.TriangleSize,
                         BorderColor = item.BorderColor,
                         FillColor = item.FillColor,
@@ -922,10 +977,35 @@ namespace Draw
                     ShapeList.Add(triangle);
                 }
 
+                else if (item.GetType() == typeof(LineShape))
+                {
+                    LineShape line = new LineShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
+                    {
+                        x1 = item.x2,
+                        x2 = item.x2,
+                        y1 = item.y1,
+                        y2 = item.y2,
+                        LineSize = item.LineSize,
+                        Point1 = item.Point1,
+                        Point2 = item.Point2,
+                        IsBeingResized = item.IsBeingResized,
+                        Polygon = item.Polygon,
+                        TriangleSize = item.TriangleSize,
+                        BorderColor = item.BorderColor,
+                        FillColor = item.FillColor,
+                        Height = item.Height,
+                        Width = item.Width,
+                        Rotation = item.Rotation
+                    };
+                    ShapeList.Add(line);
+                }
+
                 else if (item.GetType() == typeof(TrapezoidShape))
                 {
                     TrapezoidShape trape = new TrapezoidShape(new Rectangle((int)item.Location.X + 200, (int)item.Location.Y, 100, 200))
                     {
+                        LineSize = item.LineSize,
+                        Polygon = item.Polygon,
                         TriangleSize = item.TriangleSize,
                         BorderColor = item.BorderColor,
                         FillColor = item.FillColor,

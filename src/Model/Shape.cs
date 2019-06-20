@@ -1,5 +1,4 @@
-﻿using Draw.src.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Numerics;
@@ -119,12 +118,14 @@ namespace Draw
         public float TriangleSize { get; set; }
 
         public float TrapeSize { get; set; }
+        public virtual PointF[] Polygon { get; set; }
 
         public virtual SizeF Size
         {
             get { return Rectangle.Size; }
             set { rectangle.Size = value; }
         }
+        public virtual float LineSize { get; set; }
 
         public virtual float PercentX { get; set; }
 
@@ -132,7 +133,9 @@ namespace Draw
 
         public virtual bool IsBeingResized { get; set; }
 
-        public virtual float Rotation { get; set; } 
+        public virtual float Rotation { get; set; }
+
+        public float x1, x2, x3, y1, y2, y3;
 
         /// <summary>
         /// Горен ляв ъгъл на елемента.
@@ -253,14 +256,7 @@ namespace Draw
 
         public virtual void Rotate(Graphics grfx)
         {
-            using (Matrix m = new Matrix())
-            {
-                m.RotateAt(Rotation, new PointF(Location.X + (Width / 2), Location.Y + (Height / 2)));
-
-                grfx.Transform = m;
-                DrawSelf(grfx);
-                grfx.ResetTransform();
-            }
+            grfx.Transform.Rotate(Rotation); // From the Center
         }
 
         public virtual GraphicsPath GetPath(Rectangle bounds)

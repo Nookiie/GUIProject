@@ -86,7 +86,8 @@ namespace Draw
         /// </summary>
         void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomRectangle();
+            SizeF size = new Size(0,0) ;
+            dialogProcessor.AddRandomRectangle(size);
 
             statusBar.Items[0].Text = "Последно действие: Добавяне на правоъгълник";
 
@@ -95,7 +96,9 @@ namespace Draw
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomEllipse();
+            SizeF size = new Size(0, 0);
+
+            dialogProcessor.AddRandomEllipse(size);
 
             statusBar.Items[0].Text = "Последно действие: Добавяне на елипса";
 
@@ -105,13 +108,18 @@ namespace Draw
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
+            SizeF size = new SizeF(0,0);
+
+            dialogProcessor.AddRandomLine(size);
+
             statusBar.Items[0].Text = "Последно действие: Добавяне на линия";
 
             viewPort.Invalidate();
         }
         private void DrawTriangleSpeedButton_Click(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomTriangle();
+            SizeF size = new Size(0, 0);
+            dialogProcessor.AddRandomTriangle(size);
 
             statusBar.Items[0].Text = "Последно действие: Добавяне на триъгълник";
 
@@ -264,7 +272,7 @@ namespace Draw
                     viewPort.Invalidate();
                 }
             }
-            if (lineButton.Checked)
+           /* if (lineButton.Checked)
             {
                 generalCounter++;
 
@@ -283,7 +291,7 @@ namespace Draw
                     viewPort.Invalidate();
                 }
 
-            }
+            }*/
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -466,7 +474,13 @@ namespace Draw
             {
                 dialogProcessor.SelectFillColor(colorDialog1.Color);
                 statusBar.Items[0].Text = "Последно действие: Избиране на цвят на фигура";
-                viewPort.Invalidate();
+                if (dialogProcessor.Selection != null)
+                    foreach (var item in dialogProcessor.Selection)
+                    {
+
+                        item.FillColor = colorDialog1.Color;
+                        viewPort.Invalidate();
+                    }
             }
         }
 
@@ -567,21 +581,21 @@ namespace Draw
         private void resizeSelectedShapeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string value;
-            bool isTriangle = false;
+            bool isLine = false;
             if (dialogProcessor.Selection != null)
                 foreach (var item in dialogProcessor.Selection)
                 {
-                    if (item.GetType() == typeof(TriangleShape))
+
+                    if (item.GetType() == typeof(LineShape))
                     {
-                        isTriangle = true;
+                        isLine = true;
                     }
                 }
-            if (isTriangle == true)
+            if (isLine == true)
             {
-                value = dialogProcessor.ShowDialog("Please input triangle side length: ", "Changing Length");
-                int.TryParse(value, out int sideLength);
-
-                if (sideLength == 0)
+                value = dialogProcessor.ShowDialog("Please input line length: ", "Changing Length");
+                int.TryParse(value, out int length);
+                if (length == 0)
                 {
                     MessageBox.Show("Length is invalid", "Error");
                     return;
@@ -589,13 +603,14 @@ namespace Draw
                 if (dialogProcessor.Selection != null)
                     foreach (var item in dialogProcessor.Selection)
                     {
-                        if (item.GetType() == typeof(TriangleShape)) // Change the variable X of Triangle to change shape
+                        if (item.GetType() == typeof(LineShape))
                         {
-                            item.TriangleSize = sideLength;
-                            int height = (Int32)Math.Sqrt(sideLength * sideLength - (sideLength / 2) * (sideLength / 2));
-                            item.Size = new Size(sideLength, height);
+                            item.IsBeingResized = true;
+                            item.PercentY = length / item.Size.Height;
+                            item.Size = new SizeF(item.Size.Width, length);
                         }
                     }
+
             }
             else
             {
@@ -617,16 +632,11 @@ namespace Draw
                         item.IsBeingResized = true;
                         item.PercentX = width / item.Size.Width;
                         item.PercentY = height / item.Size.Height;
-
                         item.Size = new Size(width, height);
 
-                        /* if (item.GetType() == typeof(TriangleShape)) // Change the variable X of Triangle to change shape
-                         {
-                             item.TriangleSize = width;
-                         }*/
                     }
             }
-            isTriangle = false;
+            isLine = false;
             viewPort.Invalidate();
         }
 
@@ -964,6 +974,96 @@ namespace Draw
         private void TriangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dialogProcessor.FindByShape(typeof(TriangleShape));
+
+            viewPort.Invalidate();
+        }
+
+        private void RectangleToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string value;
+
+            value = dialogProcessor.ShowDialog("Въведете ширина на примитив: ", "Задаване на размер");
+            int.TryParse(value, out int width);
+
+            value = dialogProcessor.ShowDialog("Въведете височина на примитив", "Задаване на размер");
+            int.TryParse(value, out int height);
+            
+             
+            SizeF size= new Size(width, height);
+            if (width == 0 || height == 0)
+            {
+                MessageBox.Show("Височина или Ширина имат грешни стойности", "Грешка");
+            }
+
+            dialogProcessor.AddRandomRectangle(size);
+
+            statusBar.Items[0].Text = "Последно действие: Добавяне на произволен правоъгълник";
+
+            viewPort.Invalidate();
+        }
+
+        private void EllipseToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+            string value;
+
+            value = dialogProcessor.ShowDialog("Въведете ширина на примитив: ", "Задаване на размер");
+            int.TryParse(value, out int width);
+
+            value = dialogProcessor.ShowDialog("Въведете височина на примитив", "Задаване на размер");
+            int.TryParse(value, out int height);
+
+
+            SizeF size = new Size(width, height);
+            if (width == 0 || height == 0)
+            {
+                MessageBox.Show("Височина или Ширина имат грешни стойности", "Грешка");
+            }
+            dialogProcessor.AddRandomEllipse(size);
+
+            statusBar.Items[0].Text = "Последно действие: Добавяне на произволна елипса";
+
+            viewPort.Invalidate();
+        }
+
+        private void TriangleToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            string value;
+
+            value = dialogProcessor.ShowDialog("Въведете ширина на примитив: ", "Задаване на размер");
+            int.TryParse(value, out int width);
+
+            value = dialogProcessor.ShowDialog("Въведете височина на примитив", "Задаване на размер");
+            int.TryParse(value, out int height);
+
+
+            SizeF size = new Size(width, height);
+            if (width == 0 || height == 0)
+            {
+                MessageBox.Show("Височина или Ширина имат грешни стойности", "Грешка");
+            }
+            dialogProcessor.AddRandomTriangle(size);
+
+            statusBar.Items[0].Text = "Последно действие: Добавяне на произволен триъгълник";
+
+            viewPort.Invalidate();
+        }
+
+        private void LineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string value;
+            value = dialogProcessor.ShowDialog("въведете дължина на линията: ", "Задаване на дължина");
+            int.TryParse(value, out int length);
+            SizeF size = new SizeF(0, length);
+
+            if (size.Height==0)
+            {
+                MessageBox.Show("Дължината има грешна стойност", "Грешка");
+            }
+            dialogProcessor.AddRandomLine(size);
+
+            statusBar.Items[0].Text = "Последно действие: Добавяне на произволна линия";
 
             viewPort.Invalidate();
         }
